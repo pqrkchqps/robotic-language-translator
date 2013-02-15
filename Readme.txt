@@ -1,0 +1,1 @@
+This directory will contain the source C++ files for the course project.
