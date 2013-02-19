@@ -1,6 +1,6 @@
 /* Robotics DSL based on state machines.
 
-   Authors: Eric Van Wyk
+   Authors: Eric Van Wyk, John A Creps, Thuy Nguyen
 
    This file contains the main function that controls the execution of
    the translator.
