@@ -22,6 +22,7 @@ int main(int argc, char **argv) {
     /* Each of you should separately add a line to print your name,
        following the instructions for the lab. */
     cout << "John A Creps" << endl;
+    cout << "Thuy Nguyen" << endl; 
   
 
     /* P1: change "program" to "application" 
