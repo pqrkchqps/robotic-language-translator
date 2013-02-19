@@ -29,5 +29,5 @@ int main(int argc, char **argv) {
 
     /* P1: change "program" to "application" 
        P2: remove the word "program". */
-    cout << "Thanks for using the translator ." << endl ;
+    cout << "Thanks for using the translator app." << endl ;
 }
