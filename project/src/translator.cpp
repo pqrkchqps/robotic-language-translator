@@ -15,6 +15,8 @@
 
 using namespace std ;
 
+//this is a comment
+
 int main(int argc, char **argv) {
 
     cout << "Getting started with the translator project." << endl ;
