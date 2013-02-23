@@ -1,0 +1,21 @@
+Work Done:
+Jointly modified the scanner.h file to include a new class with methods and fields required for its implementation.
+
+creps002 has maintained responsibility for updating the iteration1_work.txt file.
+
+
+
+Requirements (To Do): 
+Write Test Cases:
+*Test Scanner:
+	1)write tokenMaker function to allow test_TokenMaker_leftCurly to execute
+	2)write one test case for each terminal symbol
+	3)Ensure the following requirements are being tested for:
+	*All lists returned by the scanner end with a token object whose terminal is enOfFile
+	*All list should only contain one token obejct whose terminal is endOfFile
+	*When a lexical error occurs, the scanner creates a token with a single-character lexeme and lexicalError as the terminal.
+	
+
+
+Write Code:
+	1)scanner.cpp
