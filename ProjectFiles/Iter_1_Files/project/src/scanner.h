@@ -4,31 +4,20 @@
 #include <regex.h>
 #include <string>
 
-class Token {
-public:
-//fields
-	tokenType terminal;
-	string lexeme;
-	Token* next;
-
-//methods
-	
-};
-
-class Scanner {
-public:
-//methods
-	Token *scan(const char *);
-	
-};
-
 /* This enumerated type is used to keep track of what kind of
    construct was matched. 
 */
+
+//create a new exception 
+class InvalidToken : public runtime_error{
+	public:
+	InvalidToken(const char* m) : runtime_error(m) {}
+}
+using namespace std; 
 enum tokenEnumType { 
 
     // Keywords
-    nameKwd, platformKwd, initialKwd, stateKwd, 
+    nameKwd = 1, platformKwd, initialKwd, stateKwd, 
     gotoKwd, whenKwd, performingKwd, exitKwd,
 
     intKwd, floatKwd, booleanKwd, stringKwd, charKwd,
@@ -59,6 +48,28 @@ enum tokenEnumType {
 typedef enum tokenEnumType tokenType ;
 
 // Below you need to write your class definitions for Token and Scanner.
+
+
+class Token {
+public:
+//fields
+	tokenType terminal;
+	string lexeme;
+	Token* next;
+
+//constructor for Token 
+	Token (tokenType terminal, string lexeme);
+
+};
+
+class Scanner {
+public:
+//methods
+	Token *scan(const char *);
+	
+};
+
+
 
 
 #endif /* SCANNER_H */
