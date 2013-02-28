@@ -1,9 +1,9 @@
 #include <cxxtest/TestSuite.h>
-
 #include "readInput.h"
 #include "scanner.h"
 
 using namespace std ;
+
 
 class ScannerTestSuite : public CxxTest::TestSuite 
 {
