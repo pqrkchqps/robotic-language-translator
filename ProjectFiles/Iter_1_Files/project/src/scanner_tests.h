@@ -202,7 +202,7 @@ public:
     
     
         //booleanKwd   
-    void xtest_TokenMaker_boolean( ) {
+    void test_TokenMaker_boolean( ) {
      	Token *tk = new Token(booleanKwd, "boolean");
     	TS_ASSERT (tk->terminal == booleanKwd);  
     }
@@ -319,8 +319,6 @@ public:
     	TS_ASSERT (!strcmp(ex.what(),  ("lexeme is not the stringConst")));  
     	}
     }
-    
-    
       
         //charConst   
     void test_TokenMaker_charConst ( ) {
@@ -335,8 +333,6 @@ public:
     	TS_ASSERT (!strcmp(ex.what(),  ("lexeme is not the charConst")));  
     	}
     }
-    
-    
      
     //variableName   
     void test_TokenMaker_variableName ( ) {
@@ -353,11 +349,11 @@ public:
     }
     
     //leftParen   
-    void xtest_TokenMaker_leftParen ( ) {
-     	Token *tk = new Token(leftParen, "\(");
+    void test_TokenMaker_leftParen ( ) {
+     	Token *tk = new Token(leftParen, "(");
     	TS_ASSERT (tk->terminal == leftParen);  
     }
-    void xtest_TokenMaker_leftParen_bad_lexeme ( ) {
+    void test_TokenMaker_leftParen_bad_lexeme ( ) {
     try{
      	Token *tk = new Token(leftParen, "notleftParen");
      	}
@@ -368,11 +364,11 @@ public:
     
     
     //rightParen   
-    void xtest_TokenMaker_rightParen ( ) {
+    void test_TokenMaker_rightParen ( ) {
      	Token *tk = new Token(rightParen, ")");
     	TS_ASSERT (tk->terminal == rightParen);  
     }
-    void xtest_TokenMaker_rightParen_bad_lexeme ( ) {
+    void test_TokenMaker_rightParen_bad_lexeme ( ) {
     try{
      	Token *tk = new Token(rightParen, "notrightParen");
      	}
@@ -442,7 +438,7 @@ public:
 
  // colon
     void test_TokenMaker_colon ( ) {
-		Token *tk = new Token(colon, ",");
+		Token *tk = new Token(colon, ":");
 		TS_ASSERT(tk->terminal == colon);
     }
 	void test_TokenMaker_colon_bad_lexeme ( ) {
@@ -455,10 +451,10 @@ public:
     }
 
 
- // leftAngle
+ // comma
     void test_TokenMaker_comma ( ) {
 		Token *tk = new Token(comma, ",");
-		TS_ASSERT(tk->terminal == leftAngle);
+		TS_ASSERT(tk->terminal == comma);
     }
 	void test_TokenMaker_comma_bad_lexeme ( ) {
     try{

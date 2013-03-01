@@ -90,33 +90,33 @@ Token::Token (tokenType terminal, string lexeme) {
     regex_t *variableName;
     variableName = makeRegex("^([a-zA-Z]+)");
     regex_t *leftParen;
-    leftParen = makeRegex("^(");
+    leftParen = makeRegex("^[(]");
     regex_t *rightParen;
-    rightParen = makeRegex("^)");
+    rightParen = makeRegex("^[)]");
     regex_t *leftCurly;
-    leftCurly = makeRegex("^{");
+    leftCurly = makeRegex("^[{]");
     regex_t *rightCurly;
-    rightCurly = makeRegex("^}");
+    rightCurly = makeRegex("^[}]");
     regex_t *leftAngle;
-    leftAngle = makeRegex("^<");
+    leftAngle = makeRegex("^[<]");
     regex_t *rightAngle;
-    rightAngle = makeRegex("^>");
+    rightAngle = makeRegex("^[>]");
     regex_t *colon;
-    colon = makeRegex("^:");
+    colon = makeRegex("^[:]");
     regex_t *comma;
-    comma = makeRegex("^,");
+    comma = makeRegex("^[,]");
     regex_t *semiColon;
-    semiColon = makeRegex("^;");
+    semiColon = makeRegex("^[;]");
     regex_t *assign;
-    assign = makeRegex("^=");
+    assign = makeRegex("^[=]");
     regex_t *plusSign;
-    plusSign = makeRegex("^+");
+    plusSign = makeRegex("^[+]");
     regex_t *star;
-    star = makeRegex("^*");
+    star = makeRegex("^[*]");
     regex_t *dash;
-    dash = makeRegex("^-");
+    dash = makeRegex("^[-]");
    	regex_t *forwardSlash;
-    forwardSlash = makeRegex("^/");
+    forwardSlash = makeRegex("^[/]");
     regex_t *equalsEquals;
     equalsEquals = makeRegex("^==");
     regex_t *lessThanEquals;
@@ -538,47 +538,47 @@ Token *Scanner::scan(const char *text) {
     
     //Punctuation    
     regex_t *rleftParen;
-    rleftParen = makeRegex("^(");
+    rleftParen = makeRegex("^[(]");
     
     regex_t *rrightParen;
-    rrightParen = makeRegex("^)");
+    rrightParen = makeRegex("^[)]");
     
     regex_t *rleftCurly;
-    rleftCurly = makeRegex("^{");
+    rleftCurly = makeRegex("^[{]");
     
     regex_t *rrightCurly;
-    rrightCurly = makeRegex("^}");
+    rrightCurly = makeRegex("^[}]");
     
     regex_t *rleftAngle;
-    rleftAngle = makeRegex("^<");
+    rleftAngle = makeRegex("^[<]");
     
     regex_t *rrightAngle;
-    rrightAngle = makeRegex("^>");
+    rrightAngle = makeRegex("^[>]");
     
     regex_t *rcolon;
-    rcolon = makeRegex("^:");
+    rcolon = makeRegex("^[:]");
     
     regex_t *rcomma;
-    rcomma = makeRegex("^,");
+    rcomma = makeRegex("^[,]");
     
     regex_t *rsemiColon;
-    rsemiColon = makeRegex("^;");
+    rsemiColon = makeRegex("^[;]");
     
     regex_t *rassign;
-    rassign = makeRegex("^=");
+    rassign = makeRegex("^[=]");
     
     regex_t *rplusSign;
-    rplusSign = makeRegex("^+");
+    rplusSign = makeRegex("^[+]");
     
     regex_t *rstar;
-    rstar = makeRegex("^*");
+    rstar = makeRegex("^[*]");
     
     regex_t *rdash;
-    rdash = makeRegex("^-");
+    rdash = makeRegex("^[-]");
     
     
    	regex_t *rforwardSlash;
-    rforwardSlash = makeRegex("^/");
+    rforwardSlash = makeRegex("^[/]");
     
     regex_t *requalsEquals;
     requalsEquals = makeRegex("^==");

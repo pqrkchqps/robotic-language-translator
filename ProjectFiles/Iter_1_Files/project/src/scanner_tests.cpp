@@ -131,6 +131,12 @@ public:
  void runTest() { suite_ScannerTestSuite.test_TokenMaker_int(); }
 } testDescription_ScannerTestSuite_test_TokenMaker_int;
 
+static class TestDescription_ScannerTestSuite_test_TokenMaker_boolean : public CxxTest::RealTestDescription {
+public:
+ TestDescription_ScannerTestSuite_test_TokenMaker_boolean() : CxxTest::RealTestDescription( Tests_ScannerTestSuite, suiteDescription_ScannerTestSuite, 205, "test_TokenMaker_boolean" ) {}
+ void runTest() { suite_ScannerTestSuite.test_TokenMaker_boolean(); }
+} testDescription_ScannerTestSuite_test_TokenMaker_boolean;
+
 static class TestDescription_ScannerTestSuite_test_TokenMaker_boolean_bad_lexeme : public CxxTest::RealTestDescription {
 public:
  TestDescription_ScannerTestSuite_test_TokenMaker_boolean_bad_lexeme() : CxxTest::RealTestDescription( Tests_ScannerTestSuite, suiteDescription_ScannerTestSuite, 209, "test_TokenMaker_boolean_bad_lexeme" ) {}
@@ -223,217 +229,241 @@ public:
 
 static class TestDescription_ScannerTestSuite_test_TokenMaker_charConst : public CxxTest::RealTestDescription {
 public:
- TestDescription_ScannerTestSuite_test_TokenMaker_charConst() : CxxTest::RealTestDescription( Tests_ScannerTestSuite, suiteDescription_ScannerTestSuite, 326, "test_TokenMaker_charConst" ) {}
+ TestDescription_ScannerTestSuite_test_TokenMaker_charConst() : CxxTest::RealTestDescription( Tests_ScannerTestSuite, suiteDescription_ScannerTestSuite, 324, "test_TokenMaker_charConst" ) {}
  void runTest() { suite_ScannerTestSuite.test_TokenMaker_charConst(); }
 } testDescription_ScannerTestSuite_test_TokenMaker_charConst;
 
 static class TestDescription_ScannerTestSuite_test_TokenMaker_charConst_bad_lexeme : public CxxTest::RealTestDescription {
 public:
- TestDescription_ScannerTestSuite_test_TokenMaker_charConst_bad_lexeme() : CxxTest::RealTestDescription( Tests_ScannerTestSuite, suiteDescription_ScannerTestSuite, 330, "test_TokenMaker_charConst_bad_lexeme" ) {}
+ TestDescription_ScannerTestSuite_test_TokenMaker_charConst_bad_lexeme() : CxxTest::RealTestDescription( Tests_ScannerTestSuite, suiteDescription_ScannerTestSuite, 328, "test_TokenMaker_charConst_bad_lexeme" ) {}
  void runTest() { suite_ScannerTestSuite.test_TokenMaker_charConst_bad_lexeme(); }
 } testDescription_ScannerTestSuite_test_TokenMaker_charConst_bad_lexeme;
 
 static class TestDescription_ScannerTestSuite_test_TokenMaker_variableName : public CxxTest::RealTestDescription {
 public:
- TestDescription_ScannerTestSuite_test_TokenMaker_variableName() : CxxTest::RealTestDescription( Tests_ScannerTestSuite, suiteDescription_ScannerTestSuite, 342, "test_TokenMaker_variableName" ) {}
+ TestDescription_ScannerTestSuite_test_TokenMaker_variableName() : CxxTest::RealTestDescription( Tests_ScannerTestSuite, suiteDescription_ScannerTestSuite, 338, "test_TokenMaker_variableName" ) {}
  void runTest() { suite_ScannerTestSuite.test_TokenMaker_variableName(); }
 } testDescription_ScannerTestSuite_test_TokenMaker_variableName;
 
 static class TestDescription_ScannerTestSuite_test_TokenMaker_variableName_bad_lexeme : public CxxTest::RealTestDescription {
 public:
- TestDescription_ScannerTestSuite_test_TokenMaker_variableName_bad_lexeme() : CxxTest::RealTestDescription( Tests_ScannerTestSuite, suiteDescription_ScannerTestSuite, 346, "test_TokenMaker_variableName_bad_lexeme" ) {}
+ TestDescription_ScannerTestSuite_test_TokenMaker_variableName_bad_lexeme() : CxxTest::RealTestDescription( Tests_ScannerTestSuite, suiteDescription_ScannerTestSuite, 342, "test_TokenMaker_variableName_bad_lexeme" ) {}
  void runTest() { suite_ScannerTestSuite.test_TokenMaker_variableName_bad_lexeme(); }
 } testDescription_ScannerTestSuite_test_TokenMaker_variableName_bad_lexeme;
 
+static class TestDescription_ScannerTestSuite_test_TokenMaker_leftParen : public CxxTest::RealTestDescription {
+public:
+ TestDescription_ScannerTestSuite_test_TokenMaker_leftParen() : CxxTest::RealTestDescription( Tests_ScannerTestSuite, suiteDescription_ScannerTestSuite, 352, "test_TokenMaker_leftParen" ) {}
+ void runTest() { suite_ScannerTestSuite.test_TokenMaker_leftParen(); }
+} testDescription_ScannerTestSuite_test_TokenMaker_leftParen;
+
+static class TestDescription_ScannerTestSuite_test_TokenMaker_leftParen_bad_lexeme : public CxxTest::RealTestDescription {
+public:
+ TestDescription_ScannerTestSuite_test_TokenMaker_leftParen_bad_lexeme() : CxxTest::RealTestDescription( Tests_ScannerTestSuite, suiteDescription_ScannerTestSuite, 356, "test_TokenMaker_leftParen_bad_lexeme" ) {}
+ void runTest() { suite_ScannerTestSuite.test_TokenMaker_leftParen_bad_lexeme(); }
+} testDescription_ScannerTestSuite_test_TokenMaker_leftParen_bad_lexeme;
+
+static class TestDescription_ScannerTestSuite_test_TokenMaker_rightParen : public CxxTest::RealTestDescription {
+public:
+ TestDescription_ScannerTestSuite_test_TokenMaker_rightParen() : CxxTest::RealTestDescription( Tests_ScannerTestSuite, suiteDescription_ScannerTestSuite, 367, "test_TokenMaker_rightParen" ) {}
+ void runTest() { suite_ScannerTestSuite.test_TokenMaker_rightParen(); }
+} testDescription_ScannerTestSuite_test_TokenMaker_rightParen;
+
+static class TestDescription_ScannerTestSuite_test_TokenMaker_rightParen_bad_lexeme : public CxxTest::RealTestDescription {
+public:
+ TestDescription_ScannerTestSuite_test_TokenMaker_rightParen_bad_lexeme() : CxxTest::RealTestDescription( Tests_ScannerTestSuite, suiteDescription_ScannerTestSuite, 371, "test_TokenMaker_rightParen_bad_lexeme" ) {}
+ void runTest() { suite_ScannerTestSuite.test_TokenMaker_rightParen_bad_lexeme(); }
+} testDescription_ScannerTestSuite_test_TokenMaker_rightParen_bad_lexeme;
+
 static class TestDescription_ScannerTestSuite_test_TokenMaker_leftCurly : public CxxTest::RealTestDescription {
 public:
- TestDescription_ScannerTestSuite_test_TokenMaker_leftCurly() : CxxTest::RealTestDescription( Tests_ScannerTestSuite, suiteDescription_ScannerTestSuite, 386, "test_TokenMaker_leftCurly" ) {}
+ TestDescription_ScannerTestSuite_test_TokenMaker_leftCurly() : CxxTest::RealTestDescription( Tests_ScannerTestSuite, suiteDescription_ScannerTestSuite, 382, "test_TokenMaker_leftCurly" ) {}
  void runTest() { suite_ScannerTestSuite.test_TokenMaker_leftCurly(); }
 } testDescription_ScannerTestSuite_test_TokenMaker_leftCurly;
 
 static class TestDescription_ScannerTestSuite_test_TokenMaker_leftCurly_bad_lexeme : public CxxTest::RealTestDescription {
 public:
- TestDescription_ScannerTestSuite_test_TokenMaker_leftCurly_bad_lexeme() : CxxTest::RealTestDescription( Tests_ScannerTestSuite, suiteDescription_ScannerTestSuite, 390, "test_TokenMaker_leftCurly_bad_lexeme" ) {}
+ TestDescription_ScannerTestSuite_test_TokenMaker_leftCurly_bad_lexeme() : CxxTest::RealTestDescription( Tests_ScannerTestSuite, suiteDescription_ScannerTestSuite, 386, "test_TokenMaker_leftCurly_bad_lexeme" ) {}
  void runTest() { suite_ScannerTestSuite.test_TokenMaker_leftCurly_bad_lexeme(); }
 } testDescription_ScannerTestSuite_test_TokenMaker_leftCurly_bad_lexeme;
 
 static class TestDescription_ScannerTestSuite_test_TokenMaker_rightCurly : public CxxTest::RealTestDescription {
 public:
- TestDescription_ScannerTestSuite_test_TokenMaker_rightCurly() : CxxTest::RealTestDescription( Tests_ScannerTestSuite, suiteDescription_ScannerTestSuite, 400, "test_TokenMaker_rightCurly" ) {}
+ TestDescription_ScannerTestSuite_test_TokenMaker_rightCurly() : CxxTest::RealTestDescription( Tests_ScannerTestSuite, suiteDescription_ScannerTestSuite, 396, "test_TokenMaker_rightCurly" ) {}
  void runTest() { suite_ScannerTestSuite.test_TokenMaker_rightCurly(); }
 } testDescription_ScannerTestSuite_test_TokenMaker_rightCurly;
 
 static class TestDescription_ScannerTestSuite_test_TokenMaker_rightCurly_bad_lexeme : public CxxTest::RealTestDescription {
 public:
- TestDescription_ScannerTestSuite_test_TokenMaker_rightCurly_bad_lexeme() : CxxTest::RealTestDescription( Tests_ScannerTestSuite, suiteDescription_ScannerTestSuite, 404, "test_TokenMaker_rightCurly_bad_lexeme" ) {}
+ TestDescription_ScannerTestSuite_test_TokenMaker_rightCurly_bad_lexeme() : CxxTest::RealTestDescription( Tests_ScannerTestSuite, suiteDescription_ScannerTestSuite, 400, "test_TokenMaker_rightCurly_bad_lexeme" ) {}
  void runTest() { suite_ScannerTestSuite.test_TokenMaker_rightCurly_bad_lexeme(); }
 } testDescription_ScannerTestSuite_test_TokenMaker_rightCurly_bad_lexeme;
 
 static class TestDescription_ScannerTestSuite_test_TokenMaker_leftAngle : public CxxTest::RealTestDescription {
 public:
- TestDescription_ScannerTestSuite_test_TokenMaker_leftAngle() : CxxTest::RealTestDescription( Tests_ScannerTestSuite, suiteDescription_ScannerTestSuite, 415, "test_TokenMaker_leftAngle" ) {}
+ TestDescription_ScannerTestSuite_test_TokenMaker_leftAngle() : CxxTest::RealTestDescription( Tests_ScannerTestSuite, suiteDescription_ScannerTestSuite, 411, "test_TokenMaker_leftAngle" ) {}
  void runTest() { suite_ScannerTestSuite.test_TokenMaker_leftAngle(); }
 } testDescription_ScannerTestSuite_test_TokenMaker_leftAngle;
 
 static class TestDescription_ScannerTestSuite_test_TokenMaker_leftAngle_bad_lexeme : public CxxTest::RealTestDescription {
 public:
- TestDescription_ScannerTestSuite_test_TokenMaker_leftAngle_bad_lexeme() : CxxTest::RealTestDescription( Tests_ScannerTestSuite, suiteDescription_ScannerTestSuite, 419, "test_TokenMaker_leftAngle_bad_lexeme" ) {}
+ TestDescription_ScannerTestSuite_test_TokenMaker_leftAngle_bad_lexeme() : CxxTest::RealTestDescription( Tests_ScannerTestSuite, suiteDescription_ScannerTestSuite, 415, "test_TokenMaker_leftAngle_bad_lexeme" ) {}
  void runTest() { suite_ScannerTestSuite.test_TokenMaker_leftAngle_bad_lexeme(); }
 } testDescription_ScannerTestSuite_test_TokenMaker_leftAngle_bad_lexeme;
 
 static class TestDescription_ScannerTestSuite_test_TokenMaker_rightAngle : public CxxTest::RealTestDescription {
 public:
- TestDescription_ScannerTestSuite_test_TokenMaker_rightAngle() : CxxTest::RealTestDescription( Tests_ScannerTestSuite, suiteDescription_ScannerTestSuite, 429, "test_TokenMaker_rightAngle" ) {}
+ TestDescription_ScannerTestSuite_test_TokenMaker_rightAngle() : CxxTest::RealTestDescription( Tests_ScannerTestSuite, suiteDescription_ScannerTestSuite, 425, "test_TokenMaker_rightAngle" ) {}
  void runTest() { suite_ScannerTestSuite.test_TokenMaker_rightAngle(); }
 } testDescription_ScannerTestSuite_test_TokenMaker_rightAngle;
 
 static class TestDescription_ScannerTestSuite_test_TokenMaker_rightAngle_bad_lexeme : public CxxTest::RealTestDescription {
 public:
- TestDescription_ScannerTestSuite_test_TokenMaker_rightAngle_bad_lexeme() : CxxTest::RealTestDescription( Tests_ScannerTestSuite, suiteDescription_ScannerTestSuite, 433, "test_TokenMaker_rightAngle_bad_lexeme" ) {}
+ TestDescription_ScannerTestSuite_test_TokenMaker_rightAngle_bad_lexeme() : CxxTest::RealTestDescription( Tests_ScannerTestSuite, suiteDescription_ScannerTestSuite, 429, "test_TokenMaker_rightAngle_bad_lexeme" ) {}
  void runTest() { suite_ScannerTestSuite.test_TokenMaker_rightAngle_bad_lexeme(); }
 } testDescription_ScannerTestSuite_test_TokenMaker_rightAngle_bad_lexeme;
 
 static class TestDescription_ScannerTestSuite_test_TokenMaker_colon : public CxxTest::RealTestDescription {
 public:
- TestDescription_ScannerTestSuite_test_TokenMaker_colon() : CxxTest::RealTestDescription( Tests_ScannerTestSuite, suiteDescription_ScannerTestSuite, 444, "test_TokenMaker_colon" ) {}
+ TestDescription_ScannerTestSuite_test_TokenMaker_colon() : CxxTest::RealTestDescription( Tests_ScannerTestSuite, suiteDescription_ScannerTestSuite, 440, "test_TokenMaker_colon" ) {}
  void runTest() { suite_ScannerTestSuite.test_TokenMaker_colon(); }
 } testDescription_ScannerTestSuite_test_TokenMaker_colon;
 
 static class TestDescription_ScannerTestSuite_test_TokenMaker_colon_bad_lexeme : public CxxTest::RealTestDescription {
 public:
- TestDescription_ScannerTestSuite_test_TokenMaker_colon_bad_lexeme() : CxxTest::RealTestDescription( Tests_ScannerTestSuite, suiteDescription_ScannerTestSuite, 448, "test_TokenMaker_colon_bad_lexeme" ) {}
+ TestDescription_ScannerTestSuite_test_TokenMaker_colon_bad_lexeme() : CxxTest::RealTestDescription( Tests_ScannerTestSuite, suiteDescription_ScannerTestSuite, 444, "test_TokenMaker_colon_bad_lexeme" ) {}
  void runTest() { suite_ScannerTestSuite.test_TokenMaker_colon_bad_lexeme(); }
 } testDescription_ScannerTestSuite_test_TokenMaker_colon_bad_lexeme;
 
 static class TestDescription_ScannerTestSuite_test_TokenMaker_comma : public CxxTest::RealTestDescription {
 public:
- TestDescription_ScannerTestSuite_test_TokenMaker_comma() : CxxTest::RealTestDescription( Tests_ScannerTestSuite, suiteDescription_ScannerTestSuite, 459, "test_TokenMaker_comma" ) {}
+ TestDescription_ScannerTestSuite_test_TokenMaker_comma() : CxxTest::RealTestDescription( Tests_ScannerTestSuite, suiteDescription_ScannerTestSuite, 455, "test_TokenMaker_comma" ) {}
  void runTest() { suite_ScannerTestSuite.test_TokenMaker_comma(); }
 } testDescription_ScannerTestSuite_test_TokenMaker_comma;
 
 static class TestDescription_ScannerTestSuite_test_TokenMaker_comma_bad_lexeme : public CxxTest::RealTestDescription {
 public:
- TestDescription_ScannerTestSuite_test_TokenMaker_comma_bad_lexeme() : CxxTest::RealTestDescription( Tests_ScannerTestSuite, suiteDescription_ScannerTestSuite, 463, "test_TokenMaker_comma_bad_lexeme" ) {}
+ TestDescription_ScannerTestSuite_test_TokenMaker_comma_bad_lexeme() : CxxTest::RealTestDescription( Tests_ScannerTestSuite, suiteDescription_ScannerTestSuite, 459, "test_TokenMaker_comma_bad_lexeme" ) {}
  void runTest() { suite_ScannerTestSuite.test_TokenMaker_comma_bad_lexeme(); }
 } testDescription_ScannerTestSuite_test_TokenMaker_comma_bad_lexeme;
 
 static class TestDescription_ScannerTestSuite_test_TokenMaker_semiColon : public CxxTest::RealTestDescription {
 public:
- TestDescription_ScannerTestSuite_test_TokenMaker_semiColon() : CxxTest::RealTestDescription( Tests_ScannerTestSuite, suiteDescription_ScannerTestSuite, 474, "test_TokenMaker_semiColon" ) {}
+ TestDescription_ScannerTestSuite_test_TokenMaker_semiColon() : CxxTest::RealTestDescription( Tests_ScannerTestSuite, suiteDescription_ScannerTestSuite, 470, "test_TokenMaker_semiColon" ) {}
  void runTest() { suite_ScannerTestSuite.test_TokenMaker_semiColon(); }
 } testDescription_ScannerTestSuite_test_TokenMaker_semiColon;
 
 static class TestDescription_ScannerTestSuite_test_TokenMaker_semiColon_bad_lexeme : public CxxTest::RealTestDescription {
 public:
- TestDescription_ScannerTestSuite_test_TokenMaker_semiColon_bad_lexeme() : CxxTest::RealTestDescription( Tests_ScannerTestSuite, suiteDescription_ScannerTestSuite, 478, "test_TokenMaker_semiColon_bad_lexeme" ) {}
+ TestDescription_ScannerTestSuite_test_TokenMaker_semiColon_bad_lexeme() : CxxTest::RealTestDescription( Tests_ScannerTestSuite, suiteDescription_ScannerTestSuite, 474, "test_TokenMaker_semiColon_bad_lexeme" ) {}
  void runTest() { suite_ScannerTestSuite.test_TokenMaker_semiColon_bad_lexeme(); }
 } testDescription_ScannerTestSuite_test_TokenMaker_semiColon_bad_lexeme;
 
 static class TestDescription_ScannerTestSuite_test_TokenMaker_assign : public CxxTest::RealTestDescription {
 public:
- TestDescription_ScannerTestSuite_test_TokenMaker_assign() : CxxTest::RealTestDescription( Tests_ScannerTestSuite, suiteDescription_ScannerTestSuite, 489, "test_TokenMaker_assign" ) {}
+ TestDescription_ScannerTestSuite_test_TokenMaker_assign() : CxxTest::RealTestDescription( Tests_ScannerTestSuite, suiteDescription_ScannerTestSuite, 485, "test_TokenMaker_assign" ) {}
  void runTest() { suite_ScannerTestSuite.test_TokenMaker_assign(); }
 } testDescription_ScannerTestSuite_test_TokenMaker_assign;
 
 static class TestDescription_ScannerTestSuite_test_TokenMaker_assign_bad_lexeme : public CxxTest::RealTestDescription {
 public:
- TestDescription_ScannerTestSuite_test_TokenMaker_assign_bad_lexeme() : CxxTest::RealTestDescription( Tests_ScannerTestSuite, suiteDescription_ScannerTestSuite, 493, "test_TokenMaker_assign_bad_lexeme" ) {}
+ TestDescription_ScannerTestSuite_test_TokenMaker_assign_bad_lexeme() : CxxTest::RealTestDescription( Tests_ScannerTestSuite, suiteDescription_ScannerTestSuite, 489, "test_TokenMaker_assign_bad_lexeme" ) {}
  void runTest() { suite_ScannerTestSuite.test_TokenMaker_assign_bad_lexeme(); }
 } testDescription_ScannerTestSuite_test_TokenMaker_assign_bad_lexeme;
 
 static class TestDescription_ScannerTestSuite_test_TokenMaker_plusSign : public CxxTest::RealTestDescription {
 public:
- TestDescription_ScannerTestSuite_test_TokenMaker_plusSign() : CxxTest::RealTestDescription( Tests_ScannerTestSuite, suiteDescription_ScannerTestSuite, 503, "test_TokenMaker_plusSign" ) {}
+ TestDescription_ScannerTestSuite_test_TokenMaker_plusSign() : CxxTest::RealTestDescription( Tests_ScannerTestSuite, suiteDescription_ScannerTestSuite, 499, "test_TokenMaker_plusSign" ) {}
  void runTest() { suite_ScannerTestSuite.test_TokenMaker_plusSign(); }
 } testDescription_ScannerTestSuite_test_TokenMaker_plusSign;
 
 static class TestDescription_ScannerTestSuite_test_TokenMaker_plusSign_bad_lexeme : public CxxTest::RealTestDescription {
 public:
- TestDescription_ScannerTestSuite_test_TokenMaker_plusSign_bad_lexeme() : CxxTest::RealTestDescription( Tests_ScannerTestSuite, suiteDescription_ScannerTestSuite, 507, "test_TokenMaker_plusSign_bad_lexeme" ) {}
+ TestDescription_ScannerTestSuite_test_TokenMaker_plusSign_bad_lexeme() : CxxTest::RealTestDescription( Tests_ScannerTestSuite, suiteDescription_ScannerTestSuite, 503, "test_TokenMaker_plusSign_bad_lexeme" ) {}
  void runTest() { suite_ScannerTestSuite.test_TokenMaker_plusSign_bad_lexeme(); }
 } testDescription_ScannerTestSuite_test_TokenMaker_plusSign_bad_lexeme;
 
 static class TestDescription_ScannerTestSuite_test_TokenMaker_star : public CxxTest::RealTestDescription {
 public:
- TestDescription_ScannerTestSuite_test_TokenMaker_star() : CxxTest::RealTestDescription( Tests_ScannerTestSuite, suiteDescription_ScannerTestSuite, 518, "test_TokenMaker_star" ) {}
+ TestDescription_ScannerTestSuite_test_TokenMaker_star() : CxxTest::RealTestDescription( Tests_ScannerTestSuite, suiteDescription_ScannerTestSuite, 514, "test_TokenMaker_star" ) {}
  void runTest() { suite_ScannerTestSuite.test_TokenMaker_star(); }
 } testDescription_ScannerTestSuite_test_TokenMaker_star;
 
 static class TestDescription_ScannerTestSuite_test_TokenMaker_star_bad_lexeme : public CxxTest::RealTestDescription {
 public:
- TestDescription_ScannerTestSuite_test_TokenMaker_star_bad_lexeme() : CxxTest::RealTestDescription( Tests_ScannerTestSuite, suiteDescription_ScannerTestSuite, 522, "test_TokenMaker_star_bad_lexeme" ) {}
+ TestDescription_ScannerTestSuite_test_TokenMaker_star_bad_lexeme() : CxxTest::RealTestDescription( Tests_ScannerTestSuite, suiteDescription_ScannerTestSuite, 518, "test_TokenMaker_star_bad_lexeme" ) {}
  void runTest() { suite_ScannerTestSuite.test_TokenMaker_star_bad_lexeme(); }
 } testDescription_ScannerTestSuite_test_TokenMaker_star_bad_lexeme;
 
 static class TestDescription_ScannerTestSuite_test_TokenMaker_dash : public CxxTest::RealTestDescription {
 public:
- TestDescription_ScannerTestSuite_test_TokenMaker_dash() : CxxTest::RealTestDescription( Tests_ScannerTestSuite, suiteDescription_ScannerTestSuite, 533, "test_TokenMaker_dash" ) {}
+ TestDescription_ScannerTestSuite_test_TokenMaker_dash() : CxxTest::RealTestDescription( Tests_ScannerTestSuite, suiteDescription_ScannerTestSuite, 529, "test_TokenMaker_dash" ) {}
  void runTest() { suite_ScannerTestSuite.test_TokenMaker_dash(); }
 } testDescription_ScannerTestSuite_test_TokenMaker_dash;
 
 static class TestDescription_ScannerTestSuite_test_TokenMaker_dash_bad_lexeme : public CxxTest::RealTestDescription {
 public:
- TestDescription_ScannerTestSuite_test_TokenMaker_dash_bad_lexeme() : CxxTest::RealTestDescription( Tests_ScannerTestSuite, suiteDescription_ScannerTestSuite, 537, "test_TokenMaker_dash_bad_lexeme" ) {}
+ TestDescription_ScannerTestSuite_test_TokenMaker_dash_bad_lexeme() : CxxTest::RealTestDescription( Tests_ScannerTestSuite, suiteDescription_ScannerTestSuite, 533, "test_TokenMaker_dash_bad_lexeme" ) {}
  void runTest() { suite_ScannerTestSuite.test_TokenMaker_dash_bad_lexeme(); }
 } testDescription_ScannerTestSuite_test_TokenMaker_dash_bad_lexeme;
 
 static class TestDescription_ScannerTestSuite_test_TokenMaker_forwardSlash : public CxxTest::RealTestDescription {
 public:
- TestDescription_ScannerTestSuite_test_TokenMaker_forwardSlash() : CxxTest::RealTestDescription( Tests_ScannerTestSuite, suiteDescription_ScannerTestSuite, 548, "test_TokenMaker_forwardSlash" ) {}
+ TestDescription_ScannerTestSuite_test_TokenMaker_forwardSlash() : CxxTest::RealTestDescription( Tests_ScannerTestSuite, suiteDescription_ScannerTestSuite, 544, "test_TokenMaker_forwardSlash" ) {}
  void runTest() { suite_ScannerTestSuite.test_TokenMaker_forwardSlash(); }
 } testDescription_ScannerTestSuite_test_TokenMaker_forwardSlash;
 
 static class TestDescription_ScannerTestSuite_test_TokenMaker_forwardSlash_bad_lexeme : public CxxTest::RealTestDescription {
 public:
- TestDescription_ScannerTestSuite_test_TokenMaker_forwardSlash_bad_lexeme() : CxxTest::RealTestDescription( Tests_ScannerTestSuite, suiteDescription_ScannerTestSuite, 552, "test_TokenMaker_forwardSlash_bad_lexeme" ) {}
+ TestDescription_ScannerTestSuite_test_TokenMaker_forwardSlash_bad_lexeme() : CxxTest::RealTestDescription( Tests_ScannerTestSuite, suiteDescription_ScannerTestSuite, 548, "test_TokenMaker_forwardSlash_bad_lexeme" ) {}
  void runTest() { suite_ScannerTestSuite.test_TokenMaker_forwardSlash_bad_lexeme(); }
 } testDescription_ScannerTestSuite_test_TokenMaker_forwardSlash_bad_lexeme;
 
 static class TestDescription_ScannerTestSuite_test_TokenMaker_equalsEquals : public CxxTest::RealTestDescription {
 public:
- TestDescription_ScannerTestSuite_test_TokenMaker_equalsEquals() : CxxTest::RealTestDescription( Tests_ScannerTestSuite, suiteDescription_ScannerTestSuite, 563, "test_TokenMaker_equalsEquals" ) {}
+ TestDescription_ScannerTestSuite_test_TokenMaker_equalsEquals() : CxxTest::RealTestDescription( Tests_ScannerTestSuite, suiteDescription_ScannerTestSuite, 559, "test_TokenMaker_equalsEquals" ) {}
  void runTest() { suite_ScannerTestSuite.test_TokenMaker_equalsEquals(); }
 } testDescription_ScannerTestSuite_test_TokenMaker_equalsEquals;
 
 static class TestDescription_ScannerTestSuite_test_TokenMaker_equalsEquals_bad_lexeme : public CxxTest::RealTestDescription {
 public:
- TestDescription_ScannerTestSuite_test_TokenMaker_equalsEquals_bad_lexeme() : CxxTest::RealTestDescription( Tests_ScannerTestSuite, suiteDescription_ScannerTestSuite, 567, "test_TokenMaker_equalsEquals_bad_lexeme" ) {}
+ TestDescription_ScannerTestSuite_test_TokenMaker_equalsEquals_bad_lexeme() : CxxTest::RealTestDescription( Tests_ScannerTestSuite, suiteDescription_ScannerTestSuite, 563, "test_TokenMaker_equalsEquals_bad_lexeme" ) {}
  void runTest() { suite_ScannerTestSuite.test_TokenMaker_equalsEquals_bad_lexeme(); }
 } testDescription_ScannerTestSuite_test_TokenMaker_equalsEquals_bad_lexeme;
 
 static class TestDescription_ScannerTestSuite_test_TokenMaker_lessThanEquals : public CxxTest::RealTestDescription {
 public:
- TestDescription_ScannerTestSuite_test_TokenMaker_lessThanEquals() : CxxTest::RealTestDescription( Tests_ScannerTestSuite, suiteDescription_ScannerTestSuite, 578, "test_TokenMaker_lessThanEquals" ) {}
+ TestDescription_ScannerTestSuite_test_TokenMaker_lessThanEquals() : CxxTest::RealTestDescription( Tests_ScannerTestSuite, suiteDescription_ScannerTestSuite, 574, "test_TokenMaker_lessThanEquals" ) {}
  void runTest() { suite_ScannerTestSuite.test_TokenMaker_lessThanEquals(); }
 } testDescription_ScannerTestSuite_test_TokenMaker_lessThanEquals;
 
 static class TestDescription_ScannerTestSuite_test_TokenMaker_lessThanEquals_bad_lexeme : public CxxTest::RealTestDescription {
 public:
- TestDescription_ScannerTestSuite_test_TokenMaker_lessThanEquals_bad_lexeme() : CxxTest::RealTestDescription( Tests_ScannerTestSuite, suiteDescription_ScannerTestSuite, 582, "test_TokenMaker_lessThanEquals_bad_lexeme" ) {}
+ TestDescription_ScannerTestSuite_test_TokenMaker_lessThanEquals_bad_lexeme() : CxxTest::RealTestDescription( Tests_ScannerTestSuite, suiteDescription_ScannerTestSuite, 578, "test_TokenMaker_lessThanEquals_bad_lexeme" ) {}
  void runTest() { suite_ScannerTestSuite.test_TokenMaker_lessThanEquals_bad_lexeme(); }
 } testDescription_ScannerTestSuite_test_TokenMaker_lessThanEquals_bad_lexeme;
 
 static class TestDescription_ScannerTestSuite_test_TokenMaker_greaterThanEquals : public CxxTest::RealTestDescription {
 public:
- TestDescription_ScannerTestSuite_test_TokenMaker_greaterThanEquals() : CxxTest::RealTestDescription( Tests_ScannerTestSuite, suiteDescription_ScannerTestSuite, 592, "test_TokenMaker_greaterThanEquals" ) {}
+ TestDescription_ScannerTestSuite_test_TokenMaker_greaterThanEquals() : CxxTest::RealTestDescription( Tests_ScannerTestSuite, suiteDescription_ScannerTestSuite, 588, "test_TokenMaker_greaterThanEquals" ) {}
  void runTest() { suite_ScannerTestSuite.test_TokenMaker_greaterThanEquals(); }
 } testDescription_ScannerTestSuite_test_TokenMaker_greaterThanEquals;
 
 static class TestDescription_ScannerTestSuite_test_TokenMaker_greaterThanEquals_bad_lexeme : public CxxTest::RealTestDescription {
 public:
- TestDescription_ScannerTestSuite_test_TokenMaker_greaterThanEquals_bad_lexeme() : CxxTest::RealTestDescription( Tests_ScannerTestSuite, suiteDescription_ScannerTestSuite, 596, "test_TokenMaker_greaterThanEquals_bad_lexeme" ) {}
+ TestDescription_ScannerTestSuite_test_TokenMaker_greaterThanEquals_bad_lexeme() : CxxTest::RealTestDescription( Tests_ScannerTestSuite, suiteDescription_ScannerTestSuite, 592, "test_TokenMaker_greaterThanEquals_bad_lexeme" ) {}
  void runTest() { suite_ScannerTestSuite.test_TokenMaker_greaterThanEquals_bad_lexeme(); }
 } testDescription_ScannerTestSuite_test_TokenMaker_greaterThanEquals_bad_lexeme;
 
 static class TestDescription_ScannerTestSuite_test_TokenMaker_notEquals : public CxxTest::RealTestDescription {
 public:
- TestDescription_ScannerTestSuite_test_TokenMaker_notEquals() : CxxTest::RealTestDescription( Tests_ScannerTestSuite, suiteDescription_ScannerTestSuite, 607, "test_TokenMaker_notEquals" ) {}
+ TestDescription_ScannerTestSuite_test_TokenMaker_notEquals() : CxxTest::RealTestDescription( Tests_ScannerTestSuite, suiteDescription_ScannerTestSuite, 603, "test_TokenMaker_notEquals" ) {}
  void runTest() { suite_ScannerTestSuite.test_TokenMaker_notEquals(); }
 } testDescription_ScannerTestSuite_test_TokenMaker_notEquals;
 
 static class TestDescription_ScannerTestSuite_test_TokenMaker_notEquals_bad_lexeme : public CxxTest::RealTestDescription {
 public:
- TestDescription_ScannerTestSuite_test_TokenMaker_notEquals_bad_lexeme() : CxxTest::RealTestDescription( Tests_ScannerTestSuite, suiteDescription_ScannerTestSuite, 611, "test_TokenMaker_notEquals_bad_lexeme" ) {}
+ TestDescription_ScannerTestSuite_test_TokenMaker_notEquals_bad_lexeme() : CxxTest::RealTestDescription( Tests_ScannerTestSuite, suiteDescription_ScannerTestSuite, 607, "test_TokenMaker_notEquals_bad_lexeme" ) {}
  void runTest() { suite_ScannerTestSuite.test_TokenMaker_notEquals_bad_lexeme(); }
 } testDescription_ScannerTestSuite_test_TokenMaker_notEquals_bad_lexeme;
 

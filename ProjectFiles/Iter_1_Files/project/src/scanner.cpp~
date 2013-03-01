@@ -90,33 +90,33 @@ Token::Token (tokenType terminal, string lexeme) {
     regex_t *variableName;
     variableName = makeRegex("^([a-zA-Z]+)");
     regex_t *leftParen;
-    leftParen = makeRegex("^(");
+    leftParen = makeRegex("^[(]");
     regex_t *rightParen;
-    rightParen = makeRegex("^)");
+    rightParen = makeRegex("^[)]");
     regex_t *leftCurly;
-    leftCurly = makeRegex("^{");
+    leftCurly = makeRegex("^[{]");
     regex_t *rightCurly;
-    rightCurly = makeRegex("^}");
+    rightCurly = makeRegex("^[}]");
     regex_t *leftAngle;
-    leftAngle = makeRegex("^<");
+    leftAngle = makeRegex("^[<]");
     regex_t *rightAngle;
-    rightAngle = makeRegex("^>");
+    rightAngle = makeRegex("^[>]");
     regex_t *colon;
-    colon = makeRegex("^:");
+    colon = makeRegex("^[:]");
     regex_t *comma;
-    comma = makeRegex("^,");
+    comma = makeRegex("^[,]");
     regex_t *semiColon;
-    semiColon = makeRegex("^;");
+    semiColon = makeRegex("^[;]");
     regex_t *assign;
-    assign = makeRegex("^=");
+    assign = makeRegex("^[=]");
     regex_t *plusSign;
-    plusSign = makeRegex("^+");
+    plusSign = makeRegex("^[+]");
     regex_t *star;
-    star = makeRegex("^*");
+    star = makeRegex("^[*]");
     regex_t *dash;
-    dash = makeRegex("^-");
+    dash = makeRegex("^[-]");
    	regex_t *forwardSlash;
-    forwardSlash = makeRegex("^/");
+    forwardSlash = makeRegex("^[/]");
     regex_t *equalsEquals;
     equalsEquals = makeRegex("^==");
     regex_t *lessThanEquals;
@@ -291,7 +291,7 @@ Token::Token (tokenType terminal, string lexeme) {
 		    }
 		   
 		case 21: //leftParen:
-			numMatchedChars = matchRegex (leftParen, cstring);
+			numMatchedChars = matchRegex (leftParen, cstring); 
 		    if (numMatchedChars == 1) 
 		    	break; 
 	    	else {	
@@ -538,7 +538,7 @@ Token *Scanner::scan(const char *text) {
     
     //Punctuation    
     regex_t *rleftParen;
-    rleftParen = makeRegex("^(");
+    rleftParen = makeRegex("^[(]");
     
     regex_t *rrightParen;
     rrightParen = makeRegex("^)");
