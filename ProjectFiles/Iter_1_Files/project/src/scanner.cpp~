@@ -291,7 +291,7 @@ Token::Token (tokenType terminal, string lexeme) {
 		    }
 		   
 		case 21: //leftParen:
-			numMatchedChars = matchRegex (leftParen, cstring); 
+			numMatchedChars = matchRegex (leftParen, cstring);
 		    if (numMatchedChars == 1) 
 		    	break; 
 	    	else {	

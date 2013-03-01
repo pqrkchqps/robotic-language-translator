@@ -368,11 +368,11 @@ public:
     
     
     //rightParen   
-    void xtest_TokenMaker_rightParen ( ) {
+    void test_TokenMaker_rightParen ( ) {
      	Token *tk = new Token(rightParen, ")");
     	TS_ASSERT (tk->terminal == rightParen);  
     }
-    void xtest_TokenMaker_rightParen_bad_lexeme ( ) {
+    void test_TokenMaker_rightParen_bad_lexeme ( ) {
     try{
      	Token *tk = new Token(rightParen, "notrightParen");
      	}
