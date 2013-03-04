@@ -6,6 +6,10 @@
 #include <stdexcept>
 using namespace std;
 
+
+//this is a comment
+
+
 /* This enumerated type is used to keep track of what kind of
    construct was matched. 
 */
