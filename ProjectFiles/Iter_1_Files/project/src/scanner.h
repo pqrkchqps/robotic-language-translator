@@ -8,7 +8,7 @@ using namespace std;
 
 
 //this is a comment
-
+/* A small meaningless comment...*/
 
 /* This enumerated type is used to keep track of what kind of
    construct was matched. 
