@@ -43,7 +43,3 @@ goto when exit performing
    Additional new terminal symbols may be added as well.
  */
 int float boolean string char
-
-
-
-// need to check : blockcomment, line comment, "", :=, keywords

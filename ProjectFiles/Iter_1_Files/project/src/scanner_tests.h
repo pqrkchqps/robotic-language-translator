@@ -428,7 +428,7 @@ public:
     }
 	void test_TokenMaker_rightAngle_bad_lexeme ( ) {
     try{
-     	Token *tk = new Token(leftAngle, "notrightAngle");
+     	Token *tk = new Token(rightAngle, "notrightAngle");
      	}
    	catch (const InvalidToken& ex){
     	TS_ASSERT (!strcmp(ex.what(),  ("lexeme is not the rightAngle")));  
@@ -542,7 +542,7 @@ public:
 
  // forwardSlash
     void test_TokenMaker_forwardSlash ( ) {
-		Token *tk = new Token(forwardSlash, "\\");
+		Token *tk = new Token(forwardSlash, "/");
 		TS_ASSERT(tk->terminal == forwardSlash);
     }
 	void test_TokenMaker_forwardSlash_bad_lexeme ( ) {
@@ -614,6 +614,66 @@ public:
     }
 
 
+	/*
+	other tests
+	
+	//block comment 
+    void test_blockComment_notEquals ( ) {
+		Token *tk = new Token(notEquals, "^/\\*([^\\*]|\\*+[^\\*/])*\\*+/");
+		TS_ASSERT(tk->terminal == blockComment);
+    }
+	void test_TokenMaker_blockComment_bad_lexeme ( ) {
+    try{
+     	Token *tk = new Token(blockCommment, "notblockCommment");
+     	}
+   	catch (const InvalidToken& ex){
+    	TS_ASSERT (!strcmp(ex.what(),  ("lexeme is not the blockCommment")));  
+    	}
+    }
+
+	//line comment 
+    void test_lineComment_notEquals ( ) {
+		Token *tk = new Token(notEquals, "^\\");
+		TS_ASSERT(tk->terminal == lineComment);
+    }
+	void test_TokenMaker_lineComment_bad_lexeme ( ) {
+    try{
+     	Token *tk = new Token(lineCommment, "notlineCommment");
+     	}
+   	catch (const InvalidToken& ex){
+    	TS_ASSERT (!strcmp(ex.what(),  ("lexeme is not the lineCommment")));  
+    	}
+    }
+    
+    	// empty string  
+    void test_emptystring_notEquals ( ) {
+		Token *tk = new Token(notEquals, "^""");
+		TS_ASSERT(tk->terminal == emptystring);
+    }
+	void test_TokenMaker_blockComment_bad_lexeme ( ) {
+    try{
+     	Token *tk = new Token(emptystring, "notemptystring");
+     	}
+   	catch (const InvalidToken& ex){
+    	TS_ASSERT (!strcmp(ex.what(),  ("lexeme is not the emptystring")));  
+    	}
+    }
+    
+     	// := ?????????? 
+    void test_emptystring_notEquals ( ) {
+		Token *tk = new Token(notEquals, "^""");
+		TS_ASSERT(tk->terminal == emptystring);
+    }
+	void test_TokenMaker_blockComment_bad_lexeme ( ) {
+    try{
+     	Token *tk = new Token(emptystring, "notemptystring");
+     	}
+   	catch (const InvalidToken& ex){
+    	TS_ASSERT (!strcmp(ex.what(),  ("lexeme is not the emptystring")));  
+    	}
+    }
+    
+	*/ 
 
 
     // Tests for components and functions used by "scan"

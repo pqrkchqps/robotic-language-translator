@@ -467,4 +467,52 @@ public:
  void runTest() { suite_ScannerTestSuite.test_TokenMaker_notEquals_bad_lexeme(); }
 } testDescription_ScannerTestSuite_test_TokenMaker_notEquals_bad_lexeme;
 
+static class TestDescription_ScannerTestSuite_test_blockComment_notEquals : public CxxTest::RealTestDescription {
+public:
+ TestDescription_ScannerTestSuite_test_blockComment_notEquals() : CxxTest::RealTestDescription( Tests_ScannerTestSuite, suiteDescription_ScannerTestSuite, 620, "test_blockComment_notEquals" ) {}
+ void runTest() { suite_ScannerTestSuite.test_blockComment_notEquals(); }
+} testDescription_ScannerTestSuite_test_blockComment_notEquals;
+
+static class TestDescription_ScannerTestSuite_test_TokenMaker_blockComment_bad_lexeme : public CxxTest::RealTestDescription {
+public:
+ TestDescription_ScannerTestSuite_test_TokenMaker_blockComment_bad_lexeme() : CxxTest::RealTestDescription( Tests_ScannerTestSuite, suiteDescription_ScannerTestSuite, 624, "test_TokenMaker_blockComment_bad_lexeme" ) {}
+ void runTest() { suite_ScannerTestSuite.test_TokenMaker_blockComment_bad_lexeme(); }
+} testDescription_ScannerTestSuite_test_TokenMaker_blockComment_bad_lexeme;
+
+static class TestDescription_ScannerTestSuite_test_lineComment_notEquals : public CxxTest::RealTestDescription {
+public:
+ TestDescription_ScannerTestSuite_test_lineComment_notEquals() : CxxTest::RealTestDescription( Tests_ScannerTestSuite, suiteDescription_ScannerTestSuite, 634, "test_lineComment_notEquals" ) {}
+ void runTest() { suite_ScannerTestSuite.test_lineComment_notEquals(); }
+} testDescription_ScannerTestSuite_test_lineComment_notEquals;
+
+static class TestDescription_ScannerTestSuite_test_TokenMaker_lineComment_bad_lexeme : public CxxTest::RealTestDescription {
+public:
+ TestDescription_ScannerTestSuite_test_TokenMaker_lineComment_bad_lexeme() : CxxTest::RealTestDescription( Tests_ScannerTestSuite, suiteDescription_ScannerTestSuite, 638, "test_TokenMaker_lineComment_bad_lexeme" ) {}
+ void runTest() { suite_ScannerTestSuite.test_TokenMaker_lineComment_bad_lexeme(); }
+} testDescription_ScannerTestSuite_test_TokenMaker_lineComment_bad_lexeme;
+
+static class TestDescription_ScannerTestSuite_test_emptystring_notEquals : public CxxTest::RealTestDescription {
+public:
+ TestDescription_ScannerTestSuite_test_emptystring_notEquals() : CxxTest::RealTestDescription( Tests_ScannerTestSuite, suiteDescription_ScannerTestSuite, 648, "test_emptystring_notEquals" ) {}
+ void runTest() { suite_ScannerTestSuite.test_emptystring_notEquals(); }
+} testDescription_ScannerTestSuite_test_emptystring_notEquals;
+
+static class TestDescription_ScannerTestSuite_test_TokenMaker_blockComment_bad_lexeme : public CxxTest::RealTestDescription {
+public:
+ TestDescription_ScannerTestSuite_test_TokenMaker_blockComment_bad_lexeme() : CxxTest::RealTestDescription( Tests_ScannerTestSuite, suiteDescription_ScannerTestSuite, 652, "test_TokenMaker_blockComment_bad_lexeme" ) {}
+ void runTest() { suite_ScannerTestSuite.test_TokenMaker_blockComment_bad_lexeme(); }
+} testDescription_ScannerTestSuite_test_TokenMaker_blockComment_bad_lexeme;
+
+static class TestDescription_ScannerTestSuite_test_emptystring_notEquals : public CxxTest::RealTestDescription {
+public:
+ TestDescription_ScannerTestSuite_test_emptystring_notEquals() : CxxTest::RealTestDescription( Tests_ScannerTestSuite, suiteDescription_ScannerTestSuite, 662, "test_emptystring_notEquals" ) {}
+ void runTest() { suite_ScannerTestSuite.test_emptystring_notEquals(); }
+} testDescription_ScannerTestSuite_test_emptystring_notEquals;
+
+static class TestDescription_ScannerTestSuite_test_TokenMaker_blockComment_bad_lexeme : public CxxTest::RealTestDescription {
+public:
+ TestDescription_ScannerTestSuite_test_TokenMaker_blockComment_bad_lexeme() : CxxTest::RealTestDescription( Tests_ScannerTestSuite, suiteDescription_ScannerTestSuite, 666, "test_TokenMaker_blockComment_bad_lexeme" ) {}
+ void runTest() { suite_ScannerTestSuite.test_TokenMaker_blockComment_bad_lexeme(); }
+} testDescription_ScannerTestSuite_test_TokenMaker_blockComment_bad_lexeme;
+
 #include <cxxtest/Root.cpp>
