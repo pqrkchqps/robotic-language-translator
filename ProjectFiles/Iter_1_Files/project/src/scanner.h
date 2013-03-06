@@ -3,24 +3,30 @@
 
 #include <regex.h>
 #include <string>
+#include <stdexcept>
+using namespace std;
+
+
+//this is a comment
+/* A small meaningless comment...*/
 
 /* This enumerated type is used to keep track of what kind of
    construct was matched. 
 */
 
 //create a new exception 
-class InvalidToken : public runtime_error{
+class InvalidToken : public runtime_error {
 	public:
 	InvalidToken(const char* m) : runtime_error(m) {}
-}
-using namespace std; 
+};
+
 enum tokenEnumType { 
 
     // Keywords
-    nameKwd = 1, platformKwd, initialKwd, stateKwd, 
-    gotoKwd, whenKwd, performingKwd, exitKwd,
+    nameKwd = 1, platformKwd = 2, initialKwd = 3, stateKwd = 4, 
+    gotoKwd = 5, whenKwd, performingKwd, exitKwd,
 
-    intKwd, floatKwd, booleanKwd, stringKwd, charKwd,
+    intKwd, floatKwd, booleanKwd = 11, stringKwd, charKwd,
 
     trueKwd, falseKwd,
 
@@ -28,7 +34,7 @@ enum tokenEnumType {
     intConst, floatConst, stringConst, charConst,
 
     // Names
-    variableName ,
+    variableName,
 
     // Punctuation
     leftParen, rightParen, 
@@ -42,9 +48,9 @@ enum tokenEnumType {
     equalsEquals, lessThanEquals, greaterThanEquals, notEquals, 
 
     // Special terminal types
-    endOfFile ,
+    endOfFile,
     lexicalError
-} ;
+};
 typedef enum tokenEnumType tokenType ;
 
 // Below you need to write your class definitions for Token and Scanner.
@@ -68,8 +74,5 @@ public:
 	Token *scan(const char *);
 	
 };
-
-
-
 
 #endif /* SCANNER_H */
