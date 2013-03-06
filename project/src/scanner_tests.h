@@ -14,12 +14,9 @@ John Creeps
 
 using namespace std;
 
-<<<<<<< HEAD
 
-#include <tr1/tuple>
+//#include <tr1/tuple>
 
-=======
->>>>>>> 76aed9d8b430e5519b30c26352d06d5ebdfcd8d7
 class ScannerTestSuite : public CxxTest::TestSuite 
 {
 public:
@@ -432,10 +429,7 @@ public:
 	void test_TokenMaker_rightAngle_bad_lexeme ( ) {
     try{
      	Token *tk = new Token(rightAngle, "notrightAngle");
-<<<<<<< HEAD
-=======
      	TS_ASSERT (tk != NULL) ;
->>>>>>> 76aed9d8b430e5519b30c26352d06d5ebdfcd8d7
      	}
    	catch (const InvalidToken& ex){
     	TS_ASSERT (!strcmp(ex.what(),  ("lexeme is not the rightAngle")));  
@@ -477,8 +471,8 @@ public:
 
     //semiColon
     void test_TokenMaker_semiColon ( ) {
-		Token *tk = new Token(semiColon, ";");
-		TS_ASSERT(tk->terminal == semiColon);
+	Token *tk = new Token(semiColon, ";");
+	TS_ASSERT(tk->terminal == semiColon);
     }
 	void test_TokenMaker_semiColon_bad_lexeme ( ) {
     try{
@@ -493,8 +487,8 @@ public:
 
     //assign
     void test_TokenMaker_assign ( ) {
-		Token *tk = new Token(assign, ":=");
-		TS_ASSERT(tk->terminal == assign);
+	Token *tk = new Token(assign, ":=");
+	TS_ASSERT(tk->terminal == assign);
     }
 	void test_TokenMaker_assign_bad_lexeme ( ) {
     try{
@@ -508,8 +502,8 @@ public:
 
     //plusSign
     void test_TokenMaker_plusSign ( ) {
-		Token *tk = new Token(plusSign, "+");
-		TS_ASSERT(tk->terminal == plusSign);
+	Token *tk = new Token(plusSign, "+");
+	TS_ASSERT(tk->terminal == plusSign);
     }
 	void test_TokenMaker_plusSign_bad_lexeme ( ) {
     try{
@@ -524,8 +518,8 @@ public:
 
     //star
     void test_TokenMaker_star ( ) {
-		Token *tk = new Token(star, "*");
-		TS_ASSERT(tk->terminal == star);
+	Token *tk = new Token(star, "*");
+	TS_ASSERT(tk->terminal == star);
     }
 	void test_TokenMaker_star_bad_lexeme ( ) {
     try{
@@ -540,8 +534,8 @@ public:
 
     // dash
     void test_TokenMaker_dash ( ) {
-		Token *tk = new Token(dash, "-");
-		TS_ASSERT(tk->terminal == dash);
+	Token *tk = new Token(dash, "-");
+	TS_ASSERT(tk->terminal == dash);
     }
 	void test_TokenMaker_dash_bad_lexeme ( ) {
     try{
@@ -556,12 +550,8 @@ public:
 
     // forwardSlash
     void test_TokenMaker_forwardSlash ( ) {
-<<<<<<< HEAD
-		Token *tk = new Token(forwardSlash, "\/");
-=======
-		Token *tk = new Token(forwardSlash, "/");
->>>>>>> 76aed9d8b430e5519b30c26352d06d5ebdfcd8d7
-		TS_ASSERT(tk->terminal == forwardSlash);
+	Token *tk = new Token(forwardSlash, "/");
+	TS_ASSERT(tk->terminal == forwardSlash);
     }
 	void test_TokenMaker_forwardSlash_bad_lexeme ( ) {
     try{
@@ -608,13 +598,8 @@ public:
 
     // greaterThanEquals
     void test_TokenMaker_greaterThanEquals ( ) {
-<<<<<<< HEAD
 	Token *tk = new Token(greaterThanEquals, ">=");
 	TS_ASSERT(tk->terminal == greaterThanEquals);
-=======
-		Token *tk = new Token(greaterThanEquals, ">= something");
-		TS_ASSERT(tk->terminal == greaterThanEquals);
->>>>>>> 76aed9d8b430e5519b30c26352d06d5ebdfcd8d7
     }
 
     void test_TokenMaker_greaterThanEquals_bad_lexeme ( ) {
@@ -630,13 +615,8 @@ public:
 
     // notEquals
     void test_TokenMaker_notEquals ( ) {
-<<<<<<< HEAD
 	Token *tk = new Token(notEquals, "!=");
 	TS_ASSERT(tk->terminal == notEquals);
-=======
-		Token *tk = new Token(notEquals, "!= somthing");
-		TS_ASSERT(tk->terminal == notEquals);
->>>>>>> 76aed9d8b430e5519b30c26352d06d5ebdfcd8d7
     }
 	
     void test_TokenMaker_notEquals_bad_lexeme ( ) {
@@ -776,19 +756,11 @@ public:
     */
 
     // The "endOfFile" token is always the last one in the list of tokens.
-<<<<<<< HEAD
     void test_scan_empty ( ) {
         Token *tks = s->scan (" ");
         TS_ASSERT (tks != NULL);
         TS_ASSERT_EQUALS (tks->terminal, endOfFile);
         TS_ASSERT (tks->next == NULL);
-=======
-    void xtest_scan_empty ( ) {
-        Token *tks = s->scan ("  ") ;
-        TS_ASSERT (tks != NULL) ;
-        TS_ASSERT_EQUALS (tks->terminal, endOfFile) ;
-        TS_ASSERT (tks->next == NULL) ;
->>>>>>> 76aed9d8b430e5519b30c26352d06d5ebdfcd8d7
     }
 
     void test_scan_empty_comment ( ) {
