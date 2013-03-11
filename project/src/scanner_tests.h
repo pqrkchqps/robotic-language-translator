@@ -12,7 +12,10 @@ John Creeps
 #include <typeinfo>
 #include <cstring>
 
-using namespace std ;
+using namespace std;
+
+
+//#include <tr1/tuple>
 
 class ScannerTestSuite : public CxxTest::TestSuite 
 {
@@ -23,12 +26,12 @@ public:
        the method "scan".
      */
     Scanner *s ;
-    void test_setup_code ( ) {
-        s = new Scanner() ;
+    void test_setup_code ( ){
+        s = new Scanner();
     }
 	
-	//nameKwd
-	void test_TokenMaker_name ( ) {
+    //nameKwd
+    void test_TokenMaker_name ( ) {
      	Token *tk = new Token(nameKwd, "name");
     	TS_ASSERT(tk->terminal == nameKwd);  
     }
@@ -43,7 +46,7 @@ public:
     	}
     }
       
-   //platformKwd   
+    //platformKwd   
     void test_TokenMaker_platform ( ) {
      	Token *tk = new Token(platformKwd, "platform");
     	TS_ASSERT (tk->terminal == platformKwd);  
@@ -59,7 +62,7 @@ public:
     }
    
        
-     //initialKwd   
+    //initialKwd   
     void test_TokenMaker_initial ( ) {
      	Token *tk = new Token(initialKwd, "initial");
     	TS_ASSERT (tk->terminal == initialKwd);
@@ -75,7 +78,7 @@ public:
     }
     
     
-      //stateKwd   
+    //stateKwd   
     void test_TokenMaker_state ( ) {
      	Token *tk = new Token(stateKwd, "state");
     	TS_ASSERT (tk->terminal == stateKwd);  
@@ -91,7 +94,7 @@ public:
     }
     
     
-     //gotoKwd   
+    //gotoKwd   
     void test_TokenMaker_goto ( ) {
      	Token *tk = new Token(gotoKwd, "goto");
     	TS_ASSERT (tk->terminal == gotoKwd);  
@@ -107,7 +110,7 @@ public:
     }
  
     
-     //whenKwd   
+    //whenKwd   
     void test_TokenMaker_when ( ) {
      	Token *tk = new Token(whenKwd, "when");
     	TS_ASSERT (tk->terminal == whenKwd);  
@@ -123,7 +126,7 @@ public:
     }
     
     
-     //performingKwd   
+    //performingKwd   
     void test_TokenMaker_performing ( ) {
      	Token *tk = new Token(performingKwd, "performing");
     	TS_ASSERT (tk->terminal == performingKwd);  
@@ -138,7 +141,7 @@ public:
     	}
     }
     
-     //exitKwd   
+    //exitKwd   
     void test_TokenMaker_exit ( ) {
      	Token *tk = new Token(exitKwd, "exit");
     	TS_ASSERT (tk->terminal == exitKwd);  
@@ -153,7 +156,7 @@ public:
     	}
     }
     
-        //intKwd   
+    //intKwd   
     void test_TokenMaker_int ( ) {
      	Token *tk = new Token(intKwd, "int");
     	TS_ASSERT (tk->terminal == intKwd);  
@@ -169,7 +172,7 @@ public:
     }
     
     
-        //floatKwd   
+    //floatKwd   
     void xtest_TokenMaker_float ( ) {
      	Token *tk = new Token(floatKwd, "float");
     	TS_ASSERT (tk->terminal == floatKwd);  
@@ -185,7 +188,7 @@ public:
     }
     
     
-        //booleanKwd   
+    //booleanKwd   
     void test_TokenMaker_boolean( ) {
      	Token *tk = new Token(booleanKwd, "boolean");
     	TS_ASSERT (tk->terminal == booleanKwd);  
@@ -201,7 +204,7 @@ public:
     }
     
     
-        //stringKwd   
+    //stringKwd   
     void test_TokenMaker_string ( ) {
      	Token *tk = new Token(stringKwd, "string");
     	TS_ASSERT (tk->terminal == stringKwd);  
@@ -217,7 +220,7 @@ public:
     }
     
     
-        //charKwd   
+    //charKwd   
     void test_TokenMaker_char ( ) {
      	Token *tk = new Token(charKwd, "char");
     	TS_ASSERT (tk->terminal == charKwd);  
@@ -233,7 +236,7 @@ public:
     }
     
     
-        //trueKwd   
+    //trueKwd   
     void test_TokenMaker_true ( ) {
      	Token *tk = new Token(trueKwd, "true");
     	TS_ASSERT (tk->terminal == trueKwd);  
@@ -249,7 +252,7 @@ public:
     }
     
     
-        //falseKwd   
+    //falseKwd   
     void test_TokenMaker_false ( ) {
      	Token *tk = new Token(falseKwd, "false");
     	TS_ASSERT (tk->terminal == falseKwd);  
@@ -265,7 +268,7 @@ public:
     }
     
     
-        //intConst   
+    //intConst   
     void test_TokenMaker_intConst ( ) {
      	Token *tk = new Token(intConst, "234");
     	TS_ASSERT (tk->terminal ==intConst);  
@@ -281,7 +284,7 @@ public:
     }
     
     
-        //floatConst   
+    //floatConst   
     void test_TokenMaker_floatConst ( ) {
      	Token *tk = new Token(floatConst, "199.99");
     	TS_ASSERT (tk->terminal == floatConst);  
@@ -296,10 +299,9 @@ public:
     	}
     }
     
-    
-        //stringConst   
+    //stringConst   
     void test_TokenMaker_stringConst ( ) {
-     	Token *tk = new Token(stringConst, "'string1233232'");
+     	Token *tk = new Token(stringConst, "\"string 1233232\"");
     	TS_ASSERT (tk->terminal == stringConst);  
     }
     void test_TokenMaker_stringConst_bad_lexeme ( ) {
@@ -312,9 +314,9 @@ public:
     	}
     }
       
-        //charConst   
+    //charConst   
     void test_TokenMaker_charConst ( ) {
-     	Token *tk = new Token(charConst, "c");
+     	Token *tk = new Token(charConst, "'c'");
     	TS_ASSERT (tk->terminal == charConst);  
     }
     void test_TokenMaker_charConst_bad_lexeme ( ) {
@@ -357,7 +359,6 @@ public:
     	}
     }
     
-    
     //rightParen   
     void test_TokenMaker_rightParen ( ) {
      	Token *tk = new Token(rightParen, ")");
@@ -389,7 +390,7 @@ public:
     	}
     }
     
-      //rightCurly   
+    //rightCurly   
     void test_TokenMaker_rightCurly ( ) {
      	Token *tk = new Token(rightCurly, "}");
     	TS_ASSERT (tk->terminal == rightCurly);  
@@ -405,7 +406,7 @@ public:
     }
     
    
-    // leftAngle
+    //leftAngle
     void test_TokenMaker_leftAngle ( ) {
 		Token *tk = new Token(leftAngle, "<");
 		TS_ASSERT(tk->terminal == leftAngle);
@@ -420,7 +421,7 @@ public:
     	}
     }
 
-	 // rightAngle
+    //rightAngle
     void test_TokenMaker_rightAngle ( ) {
 		Token *tk = new Token(rightAngle, ">");
 		TS_ASSERT(tk->terminal == rightAngle);
@@ -436,7 +437,7 @@ public:
     }
 
 
- // colon
+    //colon
     void test_TokenMaker_colon ( ) {
 		Token *tk = new Token(colon, ":");
 		TS_ASSERT(tk->terminal == colon);
@@ -452,7 +453,7 @@ public:
     }
 
 
- // comma
+    //comma
     void test_TokenMaker_comma ( ) {
 		Token *tk = new Token(comma, ",");
 		TS_ASSERT(tk->terminal == comma);
@@ -468,10 +469,10 @@ public:
     }
 
 
- // semiColon
+    //semiColon
     void test_TokenMaker_semiColon ( ) {
-		Token *tk = new Token(semiColon, ";");
-		TS_ASSERT(tk->terminal == semiColon);
+	Token *tk = new Token(semiColon, ";");
+	TS_ASSERT(tk->terminal == semiColon);
     }
 	void test_TokenMaker_semiColon_bad_lexeme ( ) {
     try{
@@ -484,10 +485,10 @@ public:
     }
 
 
- // assign
+    //assign
     void test_TokenMaker_assign ( ) {
-		Token *tk = new Token(assign, "=");
-		TS_ASSERT(tk->terminal == assign);
+	Token *tk = new Token(assign, ":=");
+	TS_ASSERT(tk->terminal == assign);
     }
 	void test_TokenMaker_assign_bad_lexeme ( ) {
     try{
@@ -499,10 +500,10 @@ public:
     	}
     }
 
- // plusSign
+    //plusSign
     void test_TokenMaker_plusSign ( ) {
-		Token *tk = new Token(plusSign, "+");
-		TS_ASSERT(tk->terminal == plusSign);
+	Token *tk = new Token(plusSign, "+");
+	TS_ASSERT(tk->terminal == plusSign);
     }
 	void test_TokenMaker_plusSign_bad_lexeme ( ) {
     try{
@@ -515,10 +516,10 @@ public:
     }
 
 
- // star
+    //star
     void test_TokenMaker_star ( ) {
-		Token *tk = new Token(star, "*");
-		TS_ASSERT(tk->terminal == star);
+	Token *tk = new Token(star, "*");
+	TS_ASSERT(tk->terminal == star);
     }
 	void test_TokenMaker_star_bad_lexeme ( ) {
     try{
@@ -531,10 +532,10 @@ public:
     }
 
 
- // dash
+    // dash
     void test_TokenMaker_dash ( ) {
-		Token *tk = new Token(dash, "-");
-		TS_ASSERT(tk->terminal == dash);
+	Token *tk = new Token(dash, "-");
+	TS_ASSERT(tk->terminal == dash);
     }
 	void test_TokenMaker_dash_bad_lexeme ( ) {
     try{
@@ -547,10 +548,10 @@ public:
     }
 
 
- // forwardSlash
+    // forwardSlash
     void test_TokenMaker_forwardSlash ( ) {
-		Token *tk = new Token(forwardSlash, "/");
-		TS_ASSERT(tk->terminal == forwardSlash);
+	Token *tk = new Token(forwardSlash, "/");
+	TS_ASSERT(tk->terminal == forwardSlash);
     }
 	void test_TokenMaker_forwardSlash_bad_lexeme ( ) {
     try{
@@ -563,7 +564,7 @@ public:
     }
 
 
- // equalsEquals
+    // equalsEquals
     void test_TokenMaker_equalsEquals ( ) {
 		Token *tk = new Token(equalsEquals, "==");
 		TS_ASSERT(tk->terminal == equalsEquals);
@@ -579,12 +580,13 @@ public:
     }
 
 
- // lessThanEquals
+    // lessThanEquals
     void test_TokenMaker_lessThanEquals ( ) {
-		Token *tk = new Token(lessThanEquals, "<=");
-		TS_ASSERT(tk->terminal == lessThanEquals);
+	Token *tk = new Token(lessThanEquals, "<=");
+	TS_ASSERT(tk->terminal == lessThanEquals);
     }
-	void test_TokenMaker_lessThanEquals_bad_lexeme ( ) {
+
+    void test_TokenMaker_lessThanEquals_bad_lexeme ( ) {
     try{
      	Token *tk = new Token(lessThanEquals, "notlessThanEquals");
      	TS_ASSERT (tk != NULL) ;
@@ -594,12 +596,13 @@ public:
     	}
     }
 
- // greaterThanEquals
+    // greaterThanEquals
     void test_TokenMaker_greaterThanEquals ( ) {
-		Token *tk = new Token(greaterThanEquals, ">= something");
-		TS_ASSERT(tk->terminal == greaterThanEquals);
+	Token *tk = new Token(greaterThanEquals, ">=");
+	TS_ASSERT(tk->terminal == greaterThanEquals);
     }
-	void test_TokenMaker_greaterThanEquals_bad_lexeme ( ) {
+
+    void test_TokenMaker_greaterThanEquals_bad_lexeme ( ) {
     try{
      	Token *tk = new Token(greaterThanEquals, "notgreaterThanEquals");
         TS_ASSERT (tk != NULL) ;
@@ -610,12 +613,13 @@ public:
     }
 
 
- // notEquals
+    // notEquals
     void test_TokenMaker_notEquals ( ) {
-		Token *tk = new Token(notEquals, "!= somthing");
-		TS_ASSERT(tk->terminal == notEquals);
+	Token *tk = new Token(notEquals, "!=");
+	TS_ASSERT(tk->terminal == notEquals);
     }
-	void test_TokenMaker_notEquals_bad_lexeme ( ) {
+	
+    void test_TokenMaker_notEquals_bad_lexeme ( ) {
     try{
      	Token *tk = new Token(notEquals, "notnotEquals");
      	 TS_ASSERT (tk != NULL) ;
@@ -625,8 +629,30 @@ public:
     	}
     }
 
+    // endOfFile
+    void test_TokenMaker_endOfFile ( ) {
+	Token *tk = new Token(endOfFile, "");
+	TS_ASSERT(tk->terminal == endOfFile);
+    }
 
+    void test_TokenMaker_endOfFile_bad_lexeme ( ) {
+	try{
+	    Token *tk = new Token(endOfFile, "notnot");
+     	}
+   	catch (const InvalidToken& ex){
+    	TS_ASSERT (!strcmp(ex.what(),  ("lexeme is not the endOfFile")));
+    	}
+    }
 
+    //lexical error
+    void test_TokenMaker_lexicalError_bad_lexeme ( ) {
+    try{
+	Token *tk = new Token(lexicalError, "a");
+    }
+	catch (const InvalidToken& ex){
+	TS_ASSERT (!strcmp(ex.what(), ("lexicalError is not a valid token type")));
+       }
+    }
 
     // Tests for components and functions used by "scan"
     // --------------------------------------------------
@@ -711,13 +737,13 @@ public:
             }
             else {
                 ++ termIndex ;
-                currentToken = currentToken->next ;
+                currentToken = currentToken->next;
             }
         }
         return true ;
     }
 
-
+   
     /* Below are the provided test files that your code should also
        pass.
 
@@ -730,14 +756,14 @@ public:
     */
 
     // The "endOfFile" token is always the last one in the list of tokens.
-    void xtest_scan_empty ( ) {
-        Token *tks = s->scan ("  ") ;
-        TS_ASSERT (tks != NULL) ;
-        TS_ASSERT_EQUALS (tks->terminal, endOfFile) ;
-        TS_ASSERT (tks->next == NULL) ;
+    void test_scan_empty ( ) {
+        Token *tks = s->scan (" ");
+        TS_ASSERT (tks != NULL);
+        TS_ASSERT_EQUALS (tks->terminal, endOfFile);
+        TS_ASSERT (tks->next == NULL);
     }
 
-    void xtest_scan_empty_comment ( ) {
+    void test_scan_empty_comment ( ) {
         Token *tks = s->scan (" /* a comment */ ") ;
         TS_ASSERT (tks != NULL) ;
         TS_ASSERT_EQUALS (tks->terminal, endOfFile) ;
@@ -746,20 +772,20 @@ public:
 
     // When a lexical error occurs, the scanner creates a token with a 
     // single-character lexeme and lexicalError as the terminal.
-    void xtest_scan_lexicalErrors ( ) {
+    void test_scan_lexicalErrors ( ) {
         Token *tks = s->scan ("$&1  ") ;
         TS_ASSERT (tks != NULL) ;
         TS_ASSERT_EQUALS (tks->terminal, lexicalError) ;
         TS_ASSERT_EQUALS (tks->lexeme, "$");
-        tks = tks->next ;
+        tks = tks->next;
         TS_ASSERT (tks != NULL) ;
         TS_ASSERT_EQUALS (tks->terminal, lexicalError) ;
         TS_ASSERT_EQUALS (tks->lexeme, "&");
-        tks = tks->next ;
+        tks = tks->next;
         TS_ASSERT (tks != NULL) ;
-        TS_ASSERT_EQUALS (tks->terminal, intConst) ;
+        TS_ASSERT_EQUALS (tks->terminal, intConst);
         TS_ASSERT_EQUALS (tks->lexeme, "1");
-        tks = tks->next ;
+        tks = tks->next;
         TS_ASSERT (tks != NULL) ;
         TS_ASSERT_EQUALS (tks->terminal, endOfFile) ;
         TS_ASSERT (tks->next == NULL) ;
@@ -767,7 +793,7 @@ public:
 
 
     // A test for scanning numbers and a variable.
-    void xtest_scan_nums_vars ( ) {
+    void test_scan_nums_vars ( ) {
         Token *tks = s->scan (" 123 x 12.34 ") ;
         TS_ASSERT (tks != NULL) ;
         tokenType ts[] = { intConst, variableName, floatConst, endOfFile } ;
@@ -775,38 +801,34 @@ public:
     }
 
 
-
     /* This test checks that the scanner returns a list of tokens with
        the correct terminal fields.  It doesn't check that the lexeme
        are correct.
      */
-
-    void xtest_scan_bad_syntax_good_tokens ( ) {
+    void test_scan_bad_syntax_good_tokens ( ) {
         const char *filename = "../samples/bad_syntax_good_tokens.stm" ;
         char *text =  readInputFromFile ( filename )  ;
-        TS_ASSERT ( text ) ;
+        TS_ASSERT (text) ;
         Token *tks = s->scan ( text ) ;
         TS_ASSERT (tks != NULL) ;
         tokenType ts[] = { 
-            intConst, intConst, intConst, intConst, 
-
+            intConst, intConst, intConst, intConst,  
             stringConst, stringConst, stringConst,
 
             floatConst, floatConst, floatConst,
-
             charConst, charConst, charConst, charConst, 
+
             charConst, charConst, charConst, 
-
             trueKwd, falseKwd,
-
 
             colon, semiColon, comma, 
             leftCurly, leftParen, rightCurly, rightParen,
 
             plusSign, star, dash, forwardSlash, 
-            rightAngle, leftAngle,
 
+            rightAngle, leftAngle,
             equalsEquals, lessThanEquals, 
+
             greaterThanEquals, notEquals, 
             assign,
 
@@ -824,7 +846,7 @@ public:
         TS_ASSERT ( sameTerminals ( tks, count, ts ) ) ;
     }
 
-    void xtest_scan_sample_abstar ( ) {
+    void test_scan_sample_abstar ( ) {
         scanFileNoLexicalErrors ("../samples/abstar.stm") ;
     }
 
