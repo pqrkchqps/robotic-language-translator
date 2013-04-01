@@ -6,17 +6,11 @@ creps002 has maintained responsibility for updating the iteration1_work.txt file
 
 nguy1638 did tag file. 
 
-Jointly done for all the Requirements: 
-Write Test Cases:
-*Test Scanner:
-	1)write tokenMaker function to allow test_TokenMaker_leftCurly and other tests to execute
-	2)write one test case for each terminal symbol
-	3)Ensure the following requirements are being tested for:
-		*All lists returned by the scanner end with a token object whose terminal is enOfFile
-		*All list should only contain one token object whose terminal is endOfFile
-		*When a lexical error occurs, the scanner creates a token with a single-character lexeme and lexicalError as the terminal.
-	
+Jointly did work for the general architecture for the application. 
+Jointly wrote scanner.cpp
+Jointly Wrote Test Cases for each lexeme
 
-Joinly done for: 
-Write Code:
-	1)scanner.cpp
+creps002 Debugged scanner.cpp to ensured that all test cases passed.
+ 
+creps002 Cleaned files and moved duplicated code into a seperate header file syntaxDefinitions.h
+

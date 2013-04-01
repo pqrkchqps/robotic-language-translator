@@ -1,12 +1,12 @@
 #include "scanner.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include "regex.h"
 #include "readInput.h"
 #include <sys/stat.h>
 #include <sys/types.h> 
 #include <stdexcept>
 #include <string.h>
+#include "syntaxDefinitions.h"
 
 using namespace std; 
 
@@ -19,7 +19,8 @@ int consumeWhiteSpaceAndComments (regex_t *whiteSpace,
     int stillConsumingWhiteSpace ;
 
     do {
-        stillConsumingWhiteSpace = 0 ;  // exit loop if not reset by a match
+        stillConsumingWhiteSpace = 0 ;  
+        // exit loop if not reset by a match
 
         // Try to match white space
         numMatchedChars = matchRegex (whiteSpace, text) ;
@@ -52,129 +53,51 @@ int consumeWhiteSpaceAndComments (regex_t *whiteSpace,
 };
  
 Token::Token (tokenType terminal, string lexeme) {
-    regex_t *nameKwd;
-    nameKwd = makeRegex("^name");
-    regex_t *platformKwd;
-    platformKwd = makeRegex("^platform");
-    regex_t *initialKwd;
-    initialKwd = makeRegex("^initial");
-    regex_t *stateKwd;
-    stateKwd = makeRegex("^state");
-    regex_t *gotoKwd;
-    gotoKwd = makeRegex("^goto");
-    regex_t *whenKwd;
-    whenKwd = makeRegex("^when");
-    regex_t *performingKwd;
-    performingKwd = makeRegex("^performing");
-    regex_t *exitKwd;
-    exitKwd = makeRegex("^exit");
-    regex_t *intKwd;
-    intKwd = makeRegex("^int");
-    regex_t *floatKwd;
-    floatKwd = makeRegex("^float");
-    regex_t *booleanKwd;
-    booleanKwd = makeRegex("^boolean");
-    regex_t *stringKwd;
-    stringKwd = makeRegex("^string");
-    regex_t *charKwd;
-    charKwd = makeRegex("^char");
-    regex_t *trueKwd;
-    trueKwd = makeRegex("^true");
-    regex_t *falseKwd;
-    falseKwd = makeRegex("^false");
-    regex_t *intConst;
-    intConst = makeRegex("^[0-9]+");
-    regex_t *floatConst;
-    floatConst = makeRegex("^[0-9]+[.][0-9]+");
-    regex_t *stringConst;
-    stringConst = makeRegex("^\"[^\"]*\"");
-    regex_t *charConst;
-    charConst = makeRegex("^'([\\])?[^'\n\t\r ]'");
-    regex_t *variableName;
-    variableName = makeRegex("^([_a-zA-Z][a-zA-Z_0-9]*)");
-    regex_t *leftParen;
-    leftParen = makeRegex("^[(]");
-    regex_t *rightParen;
-    rightParen = makeRegex("^[)]");
-    regex_t *leftCurly;
-    leftCurly = makeRegex("^[{]");
-    regex_t *rightCurly;
-    rightCurly = makeRegex("^[}]");
-    regex_t *leftAngle;
-    leftAngle = makeRegex("^[<]");
-    regex_t *rightAngle;
-    rightAngle = makeRegex("^[>]");
-    regex_t *colon;
-    colon = makeRegex("^[:]");
-    regex_t *comma;
-    comma = makeRegex("^[,]");
-    regex_t *semiColon;
-    semiColon = makeRegex("^[;]");
-    regex_t *assign;
-    assign = makeRegex("^:=");
-    regex_t *plusSign;
-    plusSign = makeRegex("^[+]");
-    regex_t *star;
-    star = makeRegex("^[*]");
-    regex_t *dash;
-    dash = makeRegex("^[-]");
-    regex_t *forwardSlash;
-    forwardSlash = makeRegex("^[/]");
-    regex_t *equalsEquals;
-    equalsEquals = makeRegex("^==");
-    regex_t *lessThanEquals;
-    lessThanEquals = makeRegex("^<=");
-    regex_t *greaterThanEquals;
-    greaterThanEquals = makeRegex("^>=");
-    regex_t *notEquals;
-    notEquals = makeRegex("^!=");
-    regex_t *lexicalError;
-    lexicalError = makeRegex("^.");  
     int numMatchedChars = 0;
     const char *cstring = lexeme.c_str();
     
 	switch(terminal) {
-		case 1: //nameKwd:
-			numMatchedChars = matchRegex (nameKwd, cstring  );
+		case 1: //rnameKwd:
+			numMatchedChars = matchRegex (rnameKwd, cstring  );
 		    if (numMatchedChars == 4)
 		    	break;
 	    	else {		
 	    		throw (InvalidToken("lexeme is not the nameKwd"));
 		    }
 			
-		case 2: //platformKwd:
-			numMatchedChars = matchRegex (platformKwd, cstring  );
+		case 2: //rplatformKwd:
+			numMatchedChars = matchRegex (rplatformKwd, cstring  );
 		    if (numMatchedChars == 8)
 		   	break;
 	    	else {		
 	    		throw (InvalidToken("lexeme is not the platformKwd"));
 		    }
 		    
-		case 3: //initialKwd:
-			numMatchedChars = matchRegex (initialKwd, cstring  );
+		case 3: //rinitialKwd:
+			numMatchedChars = matchRegex (rinitialKwd, cstring  );
 		    if (numMatchedChars == 7)
 		    	break;
 	    	else {		
 	    		throw (InvalidToken("lexeme is not the initialKwd"));
 		    }
 		    
-		case 4: //stateKwd:
-			numMatchedChars = matchRegex (stateKwd, cstring  ) ;
+		case 4: //rstateKwd:
+			numMatchedChars = matchRegex (rstateKwd, cstring  ) ;
 		    if (numMatchedChars == 5)
 		    	break;
 	    	else {		
 	    		throw (InvalidToken("lexeme is not the stateKwd"));
 		    }
 		    
-		case 5: //gotoKwd:
-			numMatchedChars = matchRegex (gotoKwd, cstring  ) ;
+		case 5: //rgotoKwd:
+			numMatchedChars = matchRegex (rgotoKwd, cstring  ) ;
 		    if (numMatchedChars == 4)
 		    	break;
 	    	else {		
 	    		throw (InvalidToken("lexeme is not the gotoKwd"));
 		    }
 		case 6: //whenKwd:
-			numMatchedChars = matchRegex (whenKwd, cstring  ) ;
+			numMatchedChars = matchRegex (rwhenKwd, cstring  ) ;
 		    if (numMatchedChars == 4)
 		    	break;
 	    	else {		
@@ -182,7 +105,7 @@ Token::Token (tokenType terminal, string lexeme) {
 		    }
 		    
 		case 7: //performingKwd:
-			numMatchedChars = matchRegex (performingKwd, cstring);
+			numMatchedChars = matchRegex (rperformingKwd, cstring);
 		    if (numMatchedChars == 10)
 		    	break;
 	    	else {		
@@ -190,7 +113,7 @@ Token::Token (tokenType terminal, string lexeme) {
 		    }
 		    
 		case 8: //exitKwd:
-			numMatchedChars = matchRegex (exitKwd, cstring  ) ;
+			numMatchedChars = matchRegex (rexitKwd, cstring  ) ;
 		    if (numMatchedChars == 4)
 		    	break;
 	    	else {		
@@ -198,7 +121,7 @@ Token::Token (tokenType terminal, string lexeme) {
 		    }
 		    
 		case 9: //intKwd:
-			numMatchedChars = matchRegex (intKwd, cstring  ) ;
+			numMatchedChars = matchRegex (rintKwd, cstring  ) ;
 		    if (numMatchedChars == 3)
 		    	break;
 	    	else {		
@@ -206,7 +129,7 @@ Token::Token (tokenType terminal, string lexeme) {
 		    }
 		    
 		case 10: //floatKwd:
-			numMatchedChars = matchRegex (floatKwd, cstring  ) ;
+			numMatchedChars = matchRegex (rfloatKwd, cstring  ) ;
 		    if (numMatchedChars == 5)
 		    	break;
 	    	else {		
@@ -214,7 +137,7 @@ Token::Token (tokenType terminal, string lexeme) {
 		    }
 		    
 		case 11: //booleanKwd:
-			numMatchedChars = matchRegex (booleanKwd, cstring  ) ;
+			numMatchedChars = matchRegex (rbooleanKwd, cstring  ) ;
 		    if (numMatchedChars == 7)
 		    	break;
 	    	else {		
@@ -222,7 +145,7 @@ Token::Token (tokenType terminal, string lexeme) {
 		    }
 		    
 		case 12: //stringKwd:
-			numMatchedChars = matchRegex (stringKwd, cstring  ) ;
+			numMatchedChars = matchRegex (rstringKwd, cstring  ) ;
 		    if (numMatchedChars == 6)
 		    	break;
 	    	else {		
@@ -230,7 +153,7 @@ Token::Token (tokenType terminal, string lexeme) {
 		    }
 		    
 		case 13: //charKwd:
-			numMatchedChars = matchRegex (charKwd, cstring  ) ;
+			numMatchedChars = matchRegex (rcharKwd, cstring  ) ;
 		    if (numMatchedChars == 4)
 		    	break;
 	    	else {		
@@ -238,7 +161,7 @@ Token::Token (tokenType terminal, string lexeme) {
 		    }
 		    
 		case 14: //trueKwd:
-			numMatchedChars = matchRegex (trueKwd, cstring  ) ;
+			numMatchedChars = matchRegex (rtrueKwd, cstring  ) ;
 		    if (numMatchedChars == 4)
 		    	break;
 	    	else {		
@@ -246,7 +169,7 @@ Token::Token (tokenType terminal, string lexeme) {
 		    }
 		    
 		case 15: //falseKwd:
-			numMatchedChars = matchRegex (falseKwd, cstring  ) ;
+			numMatchedChars = matchRegex (rfalseKwd, cstring  ) ;
 		    if (numMatchedChars == 5)
 		    	break;
 	    	else {		
@@ -254,7 +177,7 @@ Token::Token (tokenType terminal, string lexeme) {
 		    }
 		   
 		case 16: //intConst:
-			numMatchedChars = matchRegex (intConst, cstring  ) ;
+			numMatchedChars = matchRegex (rintConst, cstring  ) ;
 		    if (numMatchedChars > 0)
 		    	break;
 	    	else {		
@@ -262,7 +185,7 @@ Token::Token (tokenType terminal, string lexeme) {
 		    }
 		    
 		case 17: //floatConst:
-			numMatchedChars = matchRegex (floatConst, cstring  ) ;
+			numMatchedChars = matchRegex (rfloatConst, cstring  ) ;
 		    if (numMatchedChars > 0)
 		    	break;
 	    	else {		
@@ -270,7 +193,7 @@ Token::Token (tokenType terminal, string lexeme) {
 		    }
 		    
 		case 18: //stringConst:
-			numMatchedChars = matchRegex (stringConst, cstring  ) ;
+			numMatchedChars = matchRegex (rstringConst, cstring  ) ;
 		    if (numMatchedChars > 0)
 		    	break;
 	    	else {		
@@ -278,7 +201,7 @@ Token::Token (tokenType terminal, string lexeme) {
 		    }
 		    
 		case 19: //charConst:
-			numMatchedChars = matchRegex (charConst, cstring) ;
+			numMatchedChars = matchRegex (rcharConst, cstring) ;
 		    if (numMatchedChars == 3 || numMatchedChars == 4 )
 		    	break;
 	    	else {		
@@ -286,7 +209,7 @@ Token::Token (tokenType terminal, string lexeme) {
 		    }
 		    
 		case 20: //variableName:
-			numMatchedChars = matchRegex (variableName, cstring);
+			numMatchedChars = matchRegex (rvariableName, cstring);
 		    if (numMatchedChars > 0)
 		    	break;
 	    	else {		
@@ -294,7 +217,7 @@ Token::Token (tokenType terminal, string lexeme) {
 		    }
 		   
 		case 21: //leftParen:
-			numMatchedChars = matchRegex (leftParen, cstring); 
+			numMatchedChars = matchRegex (rleftParen, cstring); 
 		    if (numMatchedChars == 1) 
 		    	break; 
 	    	else {	
@@ -302,7 +225,7 @@ Token::Token (tokenType terminal, string lexeme) {
 		    }
 		    
 		case 22: //rightParen:
-			numMatchedChars = matchRegex (rightParen, cstring);
+			numMatchedChars = matchRegex (rrightParen, cstring);
 		    if (numMatchedChars == 1)
 		    	break;
 	    	else {		
@@ -310,7 +233,7 @@ Token::Token (tokenType terminal, string lexeme) {
 		    }
 		    
 		case 23: //leftCurly:
-			numMatchedChars = matchRegex (leftCurly, cstring) ;
+			numMatchedChars = matchRegex (rleftCurly, cstring) ;
 		    if (numMatchedChars == 1)
 		    	break;
 	    	else {		
@@ -318,7 +241,7 @@ Token::Token (tokenType terminal, string lexeme) {
 		    }
 		    
 		case 24: //rightCurly: 
-			numMatchedChars = matchRegex (rightCurly, cstring);
+			numMatchedChars = matchRegex (rrightCurly, cstring);
 		    if (numMatchedChars == 1)
 		    	break;
 	    	else {		
@@ -326,7 +249,7 @@ Token::Token (tokenType terminal, string lexeme) {
 		    }
 		    
 		case 25: //leftAngle:
-			numMatchedChars = matchRegex (leftAngle, cstring);
+			numMatchedChars = matchRegex (rleftAngle, cstring);
 		    if (numMatchedChars == 1)
 		    	break;
 	    	else {		
@@ -334,7 +257,7 @@ Token::Token (tokenType terminal, string lexeme) {
 		    }
 		    
 		case 26: //rightAngle:
-			numMatchedChars = matchRegex (rightAngle, cstring);
+			numMatchedChars = matchRegex (rrightAngle, cstring);
 		    if (numMatchedChars == 1)
 		    	break;
 	    	else {		
@@ -342,7 +265,7 @@ Token::Token (tokenType terminal, string lexeme) {
 		    }
 	    
 		case 27: //colon:
-			numMatchedChars = matchRegex (colon, cstring);
+			numMatchedChars = matchRegex (rcolon, cstring);
 		    if (numMatchedChars == 1)
 		    	break;
 	    	else {		
@@ -350,7 +273,7 @@ Token::Token (tokenType terminal, string lexeme) {
 		    }
 		    
 		case 28: //comma:
-			numMatchedChars = matchRegex (comma, cstring);
+			numMatchedChars = matchRegex (rcomma, cstring);
 		    if (numMatchedChars == 1)
 		    	break;
 	    	else {		
@@ -358,7 +281,7 @@ Token::Token (tokenType terminal, string lexeme) {
 		    }
 		    
 		case 29: //semiColon: 
-			numMatchedChars = matchRegex (semiColon, cstring);
+			numMatchedChars = matchRegex (rsemiColon, cstring);
 		    if (numMatchedChars == 1)
 		    	break;
 	    	else {		
@@ -366,7 +289,7 @@ Token::Token (tokenType terminal, string lexeme) {
 		    }
 		    
 		case 30: //assign: 
-			numMatchedChars = matchRegex (assign, cstring);
+			numMatchedChars = matchRegex (rassign, cstring);
 		    if (numMatchedChars == 2)
 		    	break;
 	    	else {		
@@ -374,7 +297,7 @@ Token::Token (tokenType terminal, string lexeme) {
 		    }
 		    
 		case 31: //plusSign:
-			numMatchedChars = matchRegex (plusSign, cstring);
+			numMatchedChars = matchRegex (rplusSign, cstring);
 		    if (numMatchedChars == 1)
 		    	break;
 	    	else {		
@@ -382,7 +305,7 @@ Token::Token (tokenType terminal, string lexeme) {
 		    }
 		    
 		case 32: //star:
-			numMatchedChars = matchRegex (star, cstring);
+			numMatchedChars = matchRegex (rstar, cstring);
 		    if (numMatchedChars == 1)
 		    	break;
 	    	else {		
@@ -390,7 +313,7 @@ Token::Token (tokenType terminal, string lexeme) {
 		    }
 		    
 		case 33: //dash:
-			numMatchedChars = matchRegex (dash, cstring);
+			numMatchedChars = matchRegex (rdash, cstring);
 		    if (numMatchedChars == 1)
 		    	break;
 	    	else {		
@@ -398,7 +321,7 @@ Token::Token (tokenType terminal, string lexeme) {
 		    }
 		    
 		case 34: //forwardSlash:
-			numMatchedChars = matchRegex (forwardSlash, cstring  ) ;
+			numMatchedChars = matchRegex (rforwardSlash, cstring  ) ;
 		    if (numMatchedChars == 1)
 		    	break;
 	    	else {		
@@ -406,7 +329,7 @@ Token::Token (tokenType terminal, string lexeme) {
 		    }
 		    
 		case 35: //equalsEquals:
-			numMatchedChars = matchRegex (equalsEquals, cstring  ) ;
+			numMatchedChars = matchRegex (requalsEquals, cstring  ) ;
 		    if (numMatchedChars == 2)
 		    	break;
 	    	else {		
@@ -414,7 +337,7 @@ Token::Token (tokenType terminal, string lexeme) {
 		    }
 		    
 		case 36: //lessThanEquals:
-			numMatchedChars = matchRegex (lessThanEquals, cstring  ) ;
+			numMatchedChars = matchRegex (rlessThanEquals, cstring  ) ;
 		    if (numMatchedChars == 2)
 		    	break;
 	    	else {		
@@ -422,7 +345,7 @@ Token::Token (tokenType terminal, string lexeme) {
 		    }
 		    
 		case 37: //greaterThanEquals:
-			numMatchedChars = matchRegex (greaterThanEquals, cstring  ) ;
+			numMatchedChars = matchRegex (rgreaterThanEquals, cstring  ) ;
 		    if (numMatchedChars == 2)
 		    	break;
 	    	else {		
@@ -430,7 +353,7 @@ Token::Token (tokenType terminal, string lexeme) {
 		    }
 		    
 		case 38: //notEquals:
-			numMatchedChars = matchRegex (notEquals, cstring  ) ;
+			numMatchedChars = matchRegex (rnotEquals, cstring  ) ;
 		    if (numMatchedChars == 2)
 		    	break;
 	    	else {		
@@ -440,17 +363,17 @@ Token::Token (tokenType terminal, string lexeme) {
 		case 39: //endOfFile:
 		    if ( lexeme.empty() )
 		    	break;
-	    	else {		
+            	else {		
 	    		throw (InvalidToken("lexeme is not the endOfFile"));
-		    }
+	    	    }
 		    
 		case 40: //lexicalError:
-			numMatchedChars = matchRegex (lexicalError, cstring) ;
+			numMatchedChars = matchRegex (rlexicalError, cstring) ;
 			if (numMatchedChars == 1)
 				break;
 		else {
 			throw (InvalidToken("lexeme is not a lexicalError"));
-			}
+		    }
 		    
 		default:
 			throw (InvalidToken("Terminal type is not supported"));
@@ -462,146 +385,17 @@ Token::Token (tokenType terminal, string lexeme) {
 
 
 Token *Scanner::scan(const char *text) {
-	size_t text_size = strlen(text);
-	const char *text_start = text;
+    size_t text_size = strlen(text);
+    const char *text_start = text;
 	
-	Token *tail_token = new Token(endOfFile, "");
-	tail_token->next = NULL;
-	Token *head_token = new Token(endOfFile, "");
-	head_token->next = tail_token;
-	Token *temp_token = head_token;
-	Token *cabous_token =head_token;
-    	// Create the compiled regular expressions.
+    Token *tail_token = new Token(endOfFile, "");
+    tail_token->next = NULL;
+    Token *head_token = new Token(endOfFile, "");
+    head_token->next = tail_token;
+    Token *temp_token = head_token;
+    Token *cabous_token = head_token;
     
-    regex_t *whiteSpace;
-    whiteSpace = makeRegex ("^[\n\t\r ]+");
-
-    regex_t *blockComment ;
-    blockComment = makeRegex("^/\\*([^\\*]|\\*+[^\\*/])*\\*+/");
-
-    regex_t *lineComment;
-    lineComment = makeRegex("^//([^\n])*");
-    
-    // Keywords
-    regex_t *rnameKwd;
-    rnameKwd = makeRegex("^name");
-    
-    regex_t *rplatformKwd;
-    rplatformKwd = makeRegex("^platform");
-    
-    regex_t *rinitialKwd;
-    rinitialKwd = makeRegex("^initial");
-    
-    regex_t *rstateKwd;
-    rstateKwd = makeRegex("^state");
-    
-    regex_t *rgotoKwd;
-    rgotoKwd = makeRegex("^goto");
-    
-    regex_t *rwhenKwd;
-    rwhenKwd = makeRegex("^when");
-    
-    regex_t *rperformingKwd;
-    rperformingKwd = makeRegex("^performing");
-    
-    regex_t *rexitKwd;
-    rexitKwd = makeRegex("^exit");
-    
-    regex_t *rintKwd;
-    rintKwd = makeRegex("^int");
-    
-    regex_t *rfloatKwd;
-    rfloatKwd = makeRegex("^float");
-    
-    regex_t *rbooleanKwd;
-    rbooleanKwd = makeRegex("^boolean");
-    
-    regex_t *rstringKwd;
-    rstringKwd = makeRegex("^string");
-    
-    regex_t *rcharKwd;
-    rcharKwd = makeRegex("^char");
-    
-    regex_t *rtrueKwd;
-    rtrueKwd = makeRegex("^true");
-    
-    regex_t *rfalseKwd;
-    rfalseKwd = makeRegex("^false");
-      
-    //Constants  
-    regex_t *rintConst;
-    rintConst = makeRegex("^[0-9]+*");
-    
-    regex_t *rfloatConst;
-    rfloatConst = makeRegex("^[0-9]+*\\.[0-9]+*");
-    
-    regex_t *rstringConst;
-    rstringConst = makeRegex("^\"[^\"]*\"");
-    
-    regex_t *rcharConst;
-    rcharConst = makeRegex("^'([\\])?[^'\n\t\r ]'");
-       
-    //Names
-    regex_t *rvariableName;
-    rvariableName = makeRegex("^([_a-zA-Z][a-zA-Z_0-9]*)");
-    
-    //Punctuation    
-    regex_t *rleftParen;
-    rleftParen = makeRegex("^[(]");
-    
-    regex_t *rrightParen;
-    rrightParen = makeRegex("^[)]");
-    
-    regex_t *rleftCurly;
-    rleftCurly = makeRegex("^[{]");
-    
-    regex_t *rrightCurly;
-    rrightCurly = makeRegex("^[}]");
-    
-    regex_t *rleftAngle;
-    rleftAngle = makeRegex("^[<]");
-    
-    regex_t *rrightAngle;
-    rrightAngle = makeRegex("^[>]");
-    
-    regex_t *rcolon;
-    rcolon = makeRegex("^[:]");
-    
-    regex_t *rcomma;
-    rcomma = makeRegex("^[,]");
-    
-    regex_t *rsemiColon;
-    rsemiColon = makeRegex("^[;]");
-    
-    regex_t *rassign;
-    rassign = makeRegex("^:=");
-    
-    regex_t *rplusSign;
-    rplusSign = makeRegex("^[+]");
-    
-    regex_t *rstar;
-    rstar = makeRegex("^[*]");
-    
-    regex_t *rdash;
-    rdash = makeRegex("^[-]");
-
-    regex_t *rforwardSlash;
-    rforwardSlash = makeRegex("^[/]");
-    
-    regex_t *requalsEquals;
-    requalsEquals = makeRegex("^==");
-    
-    regex_t *rlessThanEquals;
-    rlessThanEquals = makeRegex("^<=");
-    
-    regex_t *rgreaterThanEquals;
-    rgreaterThanEquals = makeRegex("^>=");
-    
-    regex_t *rnotEquals;
-    rnotEquals = makeRegex("^!=");
-    
-    
-    
+     
     /* This enumerated type is used to keep track of what kind of
        construct was matched. 
      */
@@ -1214,16 +1008,5 @@ Token *Scanner::scan(const char *text) {
             text = text + maxNumMatchedChars ;
     }
 
-    /* In this application the only information we collect is the
-       number of words and number of integer constants.  In a scanner
-       we would need to accumulate the list of tokens. */
-    
     return head_token->next;
-
-    /* You will add another printf statement to print the number of
-       "Foo" keywords.  All of these numbers should be on separate
-       lines.  In assessing your work we will require that your output
-       exactly match ours: no extra spaces and each number on a
-       separate line. */
-  
 }

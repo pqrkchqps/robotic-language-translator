@@ -25,633 +25,763 @@ public:
        by the testing framework.  The scanner is used in some tests of
        the method "scan".
      */
+
+	
     Scanner *s ;
     void test_setup_code ( ){
         s = new Scanner();
     }
-	
+
+    bool exception_thrown;	
     //nameKwd
-    void test_TokenMaker_name ( ) {
+    void test_terminal_name ( ) {
      	Token *tk = new Token(nameKwd, "name");
     	TS_ASSERT(tk->terminal == nameKwd);  
     }
-    
-    void test_TokenMaker_name_bad_lexeme ( ) {
-    try{
-     	Token *tk = new Token(nameKwd, "notname");
-     	TS_ASSERT (tk != NULL) ;
+
+
+    void test_terminal_name_bad_lexeme ( ) {
+	exception_thrown = false;
+	try{
+     		Token *tk = new Token(nameKwd, "notname");
+	     	TS_ASSERT (tk != NULL) ;
      	}
    	catch (const InvalidToken& ex1){
-    	TS_ASSERT(!strcmp(ex1.what(),  ("lexeme is not the nameKwd")));  
+	    	TS_ASSERT(!strcmp(ex1.what(),  ("lexeme is not the nameKwd")));  
+		exception_thrown = true;
     	}
+	TS_ASSERT(exception_thrown);
     }
       
     //platformKwd   
-    void test_TokenMaker_platform ( ) {
+    void test_terminal_platform ( ) {
      	Token *tk = new Token(platformKwd, "platform");
     	TS_ASSERT (tk->terminal == platformKwd);  
     }
-    void test_TokenMaker_platform_bad_lexeme ( ) {
-    try{
-     	Token *tk = new Token(platformKwd, "notplatformKwd");
-     	TS_ASSERT (tk != NULL) ;
+    void test_terminal_platform_bad_lexeme ( ) {
+	exception_thrown = false;
+	try{
+     		Token *tk = new Token(platformKwd, "notplatformKwd");
+	     	TS_ASSERT (tk != NULL) ;
      	}
    	catch (const InvalidToken& ex2){
-    	TS_ASSERT(!strcmp(ex2.what(),  ("lexeme is not the platformKwd")));  
+    		TS_ASSERT(!strcmp(ex2.what(),  ("lexeme is not the platformKwd")));  
+		exception_thrown = true;
     	}
+	TS_ASSERT(exception_thrown);
     }
    
        
     //initialKwd   
-    void test_TokenMaker_initial ( ) {
+    void test_terminal_initial ( ) {
      	Token *tk = new Token(initialKwd, "initial");
     	TS_ASSERT (tk->terminal == initialKwd);
     }
-    void test_TokenMaker_initial_bad_lexeme ( ) {
-    try{
-     	Token *tk = new Token(initialKwd, "notinitialKwd");
-     	TS_ASSERT (tk != NULL) ;
+    void test_terminal_initial_bad_lexeme ( ) {
+	exception_thrown = false;
+	try{
+	     	Token *tk = new Token(initialKwd, "notinitialKwd");
+	     	TS_ASSERT (tk != NULL) ;
      	}
    	catch (const InvalidToken& ex3){
-    	TS_ASSERT(!strcmp(ex3.what(),  ("lexeme is not the initialKwd")));  
+    		TS_ASSERT(!strcmp(ex3.what(),  ("lexeme is not the initialKwd")));  
+		exception_thrown = true;
     	}
+	TS_ASSERT(exception_thrown);
     }
     
     
     //stateKwd   
-    void test_TokenMaker_state ( ) {
+    void test_terminal_state ( ) {
      	Token *tk = new Token(stateKwd, "state");
     	TS_ASSERT (tk->terminal == stateKwd);  
     }
-    void test_TokenMaker_state_bad_lexeme ( ) {
-    try{
-     	Token *tk = new Token(stateKwd, "notstateKwd");
-     	TS_ASSERT (tk != NULL) ;
+    void test_terminal_state_bad_lexeme ( ) {
+	exception_thrown = false;
+        try{
+ 	    	Token *tk = new Token(stateKwd, "notstateKwd");
+     		TS_ASSERT (tk != NULL) ;
      	}
    	catch (const InvalidToken& ex4){
-    	TS_ASSERT (!strcmp(ex4.what(),  ("lexeme is not the stateKwd")));  
+    		TS_ASSERT (!strcmp(ex4.what(),  ("lexeme is not the stateKwd")));  
+		exception_thrown = true;
     	}
+	TS_ASSERT(exception_thrown);
     }
     
     
     //gotoKwd   
-    void test_TokenMaker_goto ( ) {
+    void test_terminal_goto ( ) {
      	Token *tk = new Token(gotoKwd, "goto");
     	TS_ASSERT (tk->terminal == gotoKwd);  
     }
-    void test_TokenMaker_goto_bad_lexeme ( ) {
-    try{
-     	Token *tk = new Token(gotoKwd, "notgotoKwd");
-     	TS_ASSERT (tk != NULL) ;
+    void test_terminal_goto_bad_lexeme ( ) {
+	exception_thrown = false;
+	try{
+	     	Token *tk = new Token(gotoKwd, "notgotoKwd");
+     		TS_ASSERT (tk != NULL) ;
      	}
    	catch (const InvalidToken& ex){
-    	TS_ASSERT (!strcmp(ex.what(),  ("lexeme is not the gotoKwd")));  
+    		TS_ASSERT (!strcmp(ex.what(),  ("lexeme is not the gotoKwd")));  
+		exception_thrown = true;
     	}
+	TS_ASSERT(exception_thrown);
     }
  
     
     //whenKwd   
-    void test_TokenMaker_when ( ) {
+    void test_terminal_when ( ) {
      	Token *tk = new Token(whenKwd, "when");
     	TS_ASSERT (tk->terminal == whenKwd);  
     }
-    void test_TokenMaker_when_bad_lexeme ( ) {
-    try{
-     	Token *tk = new Token(whenKwd, "notwhenKwd");
-     	TS_ASSERT (tk != NULL) ;
+    void test_terminal_when_bad_lexeme ( ) {
+	exception_thrown = false;
+	try{
+	     	Token *tk = new Token(whenKwd, "notwhenKwd");
+     		TS_ASSERT (tk != NULL) ;
      	}
    	catch (const InvalidToken& ex){
-    	TS_ASSERT (!strcmp(ex.what(),  ("lexeme is not the whenKwd")));  
+	    	TS_ASSERT (!strcmp(ex.what(),  ("lexeme is not the whenKwd")));  
+		exception_thrown = true;
     	}
+	TS_ASSERT(exception_thrown);
     }
     
     
     //performingKwd   
-    void test_TokenMaker_performing ( ) {
+    void test_terminal_performing ( ) {
      	Token *tk = new Token(performingKwd, "performing");
     	TS_ASSERT (tk->terminal == performingKwd);  
     }
-    void test_TokenMaker_performing_bad_lexeme ( ) {
-    try{
-     	Token *tk = new Token(performingKwd, "notperformingKwd");
-     	TS_ASSERT (tk != NULL) ;
+    void test_terminal_performing_bad_lexeme ( ) {
+	exception_thrown = false;
+	try{
+     		Token *tk = new Token(performingKwd, "notperformingKwd");
+	     	TS_ASSERT (tk != NULL) ;
      	}
    	catch (const InvalidToken& ex){
-    	TS_ASSERT (!strcmp(ex.what(),  ("lexeme is not the performingKwd")));  
+    		TS_ASSERT (!strcmp(ex.what(),  ("lexeme is not the performingKwd")));  
+		exception_thrown = true;
     	}
+	TS_ASSERT(exception_thrown);
     }
     
     //exitKwd   
-    void test_TokenMaker_exit ( ) {
+    void test_terminal_exit ( ) {
      	Token *tk = new Token(exitKwd, "exit");
     	TS_ASSERT (tk->terminal == exitKwd);  
     }
-    void test_TokenMaker_exit_bad_lexeme ( ) {
-    try{
-     	Token *tk = new Token(exitKwd, "notexitKwd");
-     	TS_ASSERT (tk != NULL) ;
+    void test_terminal_exit_bad_lexeme ( ) {
+	exception_thrown = false;
+	try{
+     		Token *tk = new Token(exitKwd, "notexitKwd");
+	     	TS_ASSERT (tk != NULL) ;
      	}
    	catch (const InvalidToken& ex){
-    	TS_ASSERT (!strcmp(ex.what(),  ("lexeme is not the exitKwd")));  
+    		TS_ASSERT (!strcmp(ex.what(),  ("lexeme is not the exitKwd")));  
+		exception_thrown = true;
     	}
+	TS_ASSERT(exception_thrown);
     }
     
     //intKwd   
-    void test_TokenMaker_int ( ) {
+    void test_terminal_int ( ) {
      	Token *tk = new Token(intKwd, "int");
     	TS_ASSERT (tk->terminal == intKwd);  
     }
-    void xtest_TokenMaker_int_bad_lexeme ( ) {
-    try{
-     	Token *tk = new Token(intKwd, "notintKwd");
-     	TS_ASSERT (tk != NULL) ;
+    void xtest_terminal_int_bad_lexeme ( ) {
+	exception_thrown = false;
+	try{
+	     	Token *tk = new Token(intKwd, "notintKwd");
+	     	TS_ASSERT (tk != NULL) ;
      	}
    	catch (const InvalidToken& ex){
-    	TS_ASSERT (!strcmp(ex.what(),  ("lexeme is not the intKwd")));  
+	    	TS_ASSERT (!strcmp(ex.what(),  ("lexeme is not the intKwd")));  
+		exception_thrown = true;
     	}
+	TS_ASSERT(exception_thrown);
     }
     
     
     //floatKwd   
-    void xtest_TokenMaker_float ( ) {
+    void xtest_terminal_float ( ) {
      	Token *tk = new Token(floatKwd, "float");
     	TS_ASSERT (tk->terminal == floatKwd);  
     }
-    void xtest_TokenMaker_float_bad_lexeme ( ) {
-    try{
-     	Token *tk = new Token(floatKwd, "notfloatKwd");
-     	TS_ASSERT (tk != NULL) ;
+    void xtest_terminal_float_bad_lexeme ( ) {
+	exception_thrown = false;
+	try{
+	     	Token *tk = new Token(floatKwd, "notfloatKwd");
+     		TS_ASSERT (tk != NULL) ;
      	}
    	catch (const InvalidToken& ex){
-    	TS_ASSERT (!strcmp(ex.what(),  ("lexeme is not the floatKwd")));  
+	    	TS_ASSERT (!strcmp(ex.what(),  ("lexeme is not the floatKwd")));  
+		exception_thrown = true;
     	}
+	TS_ASSERT(exception_thrown);
     }
     
     
     //booleanKwd   
-    void test_TokenMaker_boolean( ) {
+    void test_terminal_boolean( ) {
      	Token *tk = new Token(booleanKwd, "boolean");
     	TS_ASSERT (tk->terminal == booleanKwd);  
     }
-    void test_TokenMaker_boolean_bad_lexeme ( ) {
-    try{
-     	Token *tk = new Token(booleanKwd, "notbooleanKwd");
-     	TS_ASSERT (tk != NULL) ;
+    void test_terminal_boolean_bad_lexeme ( ) {
+	exception_thrown = false;
+	try{
+	     	Token *tk = new Token(booleanKwd, "notbooleanKwd");
+	     	TS_ASSERT (tk != NULL) ;
      	}
    	catch (const InvalidToken& ex){
-    	TS_ASSERT (!strcmp(ex.what(),  ("lexeme is not the booleanKwd")));  
+    		TS_ASSERT (!strcmp(ex.what(),  ("lexeme is not the booleanKwd")));  
+		exception_thrown = true;
     	}
+	TS_ASSERT(exception_thrown);
     }
     
     
     //stringKwd   
-    void test_TokenMaker_string ( ) {
+    void test_terminal_string ( ) {
      	Token *tk = new Token(stringKwd, "string");
     	TS_ASSERT (tk->terminal == stringKwd);  
     }
-    void test_TokenMaker_string_bad_lexeme ( ) {
-    try{
-     	Token *tk = new Token(stringKwd, "notstringKwd");
-     	TS_ASSERT (tk != NULL) ;
+    void test_terminal_string_bad_lexeme ( ) {
+	exception_thrown = false;
+	try{
+	     	Token *tk = new Token(stringKwd, "notstringKwd");
+	     	TS_ASSERT (tk != NULL) ;
      	}
    	catch (const InvalidToken& ex){
-    	TS_ASSERT (!strcmp(ex.what(),  ("lexeme is not the stringKwd")));  
+	    	TS_ASSERT (!strcmp(ex.what(),  ("lexeme is not the stringKwd")));  
+		exception_thrown = true;
     	}
+	TS_ASSERT(exception_thrown);
     }
     
     
     //charKwd   
-    void test_TokenMaker_char ( ) {
+    void test_terminal_char ( ) {
      	Token *tk = new Token(charKwd, "char");
     	TS_ASSERT (tk->terminal == charKwd);  
     }
-    void test_TokenMaker_char_bad_lexeme ( ) {
-    try{
-     	Token *tk = new Token(charKwd, "notcharKwd");
-     	TS_ASSERT (tk != NULL) ;
+    void test_terminal_char_bad_lexeme ( ) {
+	exception_thrown = false;
+	try{
+	     	Token *tk = new Token(charKwd, "notcharKwd");
+	     	TS_ASSERT (tk != NULL) ;
      	}
    	catch (const InvalidToken& ex){
-    	TS_ASSERT (!strcmp(ex.what(),  ("lexeme is not the charKwd")));  
+	    	TS_ASSERT (!strcmp(ex.what(),  ("lexeme is not the charKwd")));  
+		exception_thrown = true;
     	}
+	TS_ASSERT(exception_thrown);
     }
     
     
     //trueKwd   
-    void test_TokenMaker_true ( ) {
+    void test_terminal_true ( ) {
      	Token *tk = new Token(trueKwd, "true");
     	TS_ASSERT (tk->terminal == trueKwd);  
     }
-    void test_TokenMaker_true_bad_lexeme ( ) {
-    try{
-     	Token *tk = new Token(trueKwd, "nottrueKwd");
-     	TS_ASSERT (tk != NULL) ;
+    void test_terminal_true_bad_lexeme ( ) {
+	exception_thrown = false;
+	try{
+	     	Token *tk = new Token(trueKwd, "nottrueKwd");
+	     	TS_ASSERT (tk != NULL) ;
      	}
    	catch (const InvalidToken& ex){
-    	TS_ASSERT (!strcmp(ex.what(),  ("lexeme is not the trueKwd")));  
+	    	TS_ASSERT (!strcmp(ex.what(),  ("lexeme is not the trueKwd")));  
+		exception_thrown = true;
     	}
+	TS_ASSERT(exception_thrown);
     }
     
     
     //falseKwd   
-    void test_TokenMaker_false ( ) {
+    void test_terminal_false ( ) {
      	Token *tk = new Token(falseKwd, "false");
     	TS_ASSERT (tk->terminal == falseKwd);  
     }
-    void test_TokenMaker_false_bad_lexeme ( ) {
-    try{
-     	Token *tk = new Token(falseKwd, "notfalseKwd");
-     	TS_ASSERT (tk != NULL) ;
+    void test_terminal_false_bad_lexeme ( ) {
+	exception_thrown = false;
+	try{
+     		Token *tk = new Token(falseKwd, "notfalseKwd");
+	     	TS_ASSERT (tk != NULL) ;
      	}
    	catch (const InvalidToken& ex){
-    	TS_ASSERT (!strcmp(ex.what(),  ("lexeme is not the falseKwd")));  
+    		TS_ASSERT (!strcmp(ex.what(),  ("lexeme is not the falseKwd")));  
+		exception_thrown = true;
     	}
+	TS_ASSERT(exception_thrown);
     }
     
     
     //intConst   
-    void test_TokenMaker_intConst ( ) {
+    void test_terminal_intConst ( ) {
      	Token *tk = new Token(intConst, "234");
     	TS_ASSERT (tk->terminal ==intConst);  
     }
-    void test_TokenMaker_intConst_bad_lexeme ( ) {
-    try{
-     	Token *tk = new Token(intConst, "notintConst");
-     	TS_ASSERT (tk != NULL) ;
+    void test_terminal_intConst_bad_lexeme ( ) {
+	exception_thrown = false;
+	try{
+	     	Token *tk = new Token(intConst, "notintConst");
+	     	TS_ASSERT (tk != NULL) ;
      	}
    	catch (const InvalidToken& ex){
-    	TS_ASSERT (!strcmp(ex.what(),  ("lexeme is not the intConst")));  
+    		TS_ASSERT (!strcmp(ex.what(),  ("lexeme is not the intConst")));  
+		exception_thrown = true;
     	}
+	TS_ASSERT(exception_thrown);
     }
     
     
     //floatConst   
-    void test_TokenMaker_floatConst ( ) {
+    void test_terminal_floatConst ( ) {
      	Token *tk = new Token(floatConst, "199.99");
     	TS_ASSERT (tk->terminal == floatConst);  
     }
-    void test_TokenMaker_floatConst_bad_lexeme ( ) {
-    try{
-     	Token *tk = new Token(floatConst, "notfloatConst");
-     	TS_ASSERT (tk != NULL) ;
+    void test_terminal_floatConst_bad_lexeme ( ) {
+	exception_thrown = false;
+	try{
+	     	Token *tk = new Token(floatConst, "notfloatConst");
+	     	TS_ASSERT (tk != NULL) ;
      	}
    	catch (const InvalidToken& ex){
-    	TS_ASSERT (!strcmp(ex.what(),  ("lexeme is not the floatConst")));  
+	    	TS_ASSERT (!strcmp(ex.what(),  ("lexeme is not the floatConst")));  
+		exception_thrown = true;
     	}
+	TS_ASSERT(exception_thrown);
     }
     
     //stringConst   
-    void test_TokenMaker_stringConst ( ) {
+    void test_terminal_stringConst ( ) {
      	Token *tk = new Token(stringConst, "\"string 1233232\"");
     	TS_ASSERT (tk->terminal == stringConst);  
     }
-    void test_TokenMaker_stringConst_bad_lexeme ( ) {
-    try{
-     	Token *tk = new Token(stringConst, "notstringConstant");
-     	TS_ASSERT (tk != NULL) ;
+    void test_terminal_stringConst_bad_lexeme ( ) {
+	exception_thrown = false;
+	try{
+	     	Token *tk = new Token(stringConst, "notstringConstant");
+	     	TS_ASSERT (tk != NULL) ;
      	}
    	catch (const InvalidToken& ex){
-    	TS_ASSERT (!strcmp(ex.what(),  ("lexeme is not the stringConst")));  
+	    	TS_ASSERT (!strcmp(ex.what(),  ("lexeme is not the stringConst")));  
+		exception_thrown = true;
     	}
+	TS_ASSERT(exception_thrown);
     }
       
     //charConst   
-    void test_TokenMaker_charConst ( ) {
+    void test_terminal_charConst ( ) {
      	Token *tk = new Token(charConst, "'c'");
     	TS_ASSERT (tk->terminal == charConst);  
     }
-    void test_TokenMaker_charConst_bad_lexeme ( ) {
-    try{
-     	Token *tk = new Token(charConst, "notcharConst");
-     	TS_ASSERT (tk != NULL) ;
+    void test_terminal_charConst_bad_lexeme ( ) {
+	exception_thrown = false;
+	try{
+	     	Token *tk = new Token(charConst, "notcharConst");
+	     	TS_ASSERT (tk != NULL) ;
      	}
    	catch (const InvalidToken& ex){
-    	TS_ASSERT (!strcmp(ex.what(),  ("lexeme is not the charConst")));  
+    		TS_ASSERT (!strcmp(ex.what(),  ("lexeme is not the charConst")));  
+		exception_thrown = true;
     	}
+	TS_ASSERT(exception_thrown);
     }
      
     //variableName   
-    void test_TokenMaker_variableName ( ) {
+    void test_terminal_variableName ( ) {
      	Token *tk = new Token(variableName, "var");
     	TS_ASSERT (tk->terminal == variableName);  
     }
-    void test_TokenMaker_variableName_bad_lexeme ( ) {
-    try{
-     	Token *tk = new Token(variableName, "notvariableName");
-     	TS_ASSERT (tk != NULL) ;
+    void test_terminal_variableName_bad_lexeme ( ) {
+	exception_thrown = false;
+	try{
+	     	Token *tk = new Token(variableName, "6notvar");
+     		TS_ASSERT (tk != NULL) ;
      	}
    	catch (const InvalidToken& ex){
-    	TS_ASSERT (!strcmp(ex.what(),  ("lexeme is not the variableName")));  
+    		TS_ASSERT (!strcmp(ex.what(),  ("lexeme is not the variableName")));  
+		exception_thrown = true;
     	}
+	TS_ASSERT(exception_thrown);
     }
     
     //leftParen   
-    void test_TokenMaker_leftParen ( ) {
+    void test_terminal_leftParen ( ) {
      	Token *tk = new Token(leftParen, "(");
     	TS_ASSERT (tk->terminal == leftParen);  
     }
-    void test_TokenMaker_leftParen_bad_lexeme ( ) {
-    try{
-     	Token *tk = new Token(leftParen, "notleftParen");
-     	TS_ASSERT (tk != NULL) ;
+    void test_terminal_leftParen_bad_lexeme ( ) {
+	exception_thrown = false;
+	try{
+	     	Token *tk = new Token(leftParen, "notleftParen");
+     		TS_ASSERT (tk != NULL) ;
      	}
    	catch (const InvalidToken& ex){
-    	TS_ASSERT (!strcmp(ex.what(),  ("lexeme is not the leftParen")));  
+	    	TS_ASSERT (!strcmp(ex.what(),  ("lexeme is not the leftParen")));  
+		exception_thrown = true;
     	}
+	TS_ASSERT(exception_thrown);
     }
     
     //rightParen   
-    void test_TokenMaker_rightParen ( ) {
+    void test_terminal_rightParen ( ) {
      	Token *tk = new Token(rightParen, ")");
     	TS_ASSERT (tk->terminal == rightParen);  
     }
-    void test_TokenMaker_rightParen_bad_lexeme ( ) {
-    try{
-     	Token *tk = new Token(rightParen, "notrightParen");
-     	TS_ASSERT (tk != NULL) ;
+    void test_terminal_rightParen_bad_lexeme ( ) {
+	exception_thrown = false;
+	try{
+	     	Token *tk = new Token(rightParen, "notrightParen");
+	     	TS_ASSERT (tk != NULL) ;
      	}
    	catch (const InvalidToken& ex){
-    	TS_ASSERT (!strcmp(ex.what(),  ("lexeme is not the rightParen")));  
+	    	TS_ASSERT (!strcmp(ex.what(),  ("lexeme is not the rightParen")));  
+		exception_thrown = true;
     	}
+	TS_ASSERT(exception_thrown);
     }
     
     
     //leftCurly   
-    void test_TokenMaker_leftCurly ( ) {
+    void test_terminal_leftCurly ( ) {
      	Token *tk = new Token(leftCurly, "{");
     	TS_ASSERT (tk->terminal == leftCurly);  
     }
-    void test_TokenMaker_leftCurly_bad_lexeme ( ) {
-    try{
-     	Token *tk = new Token(leftCurly, "notleftCurly");
-     	TS_ASSERT (tk != NULL) ;
+    void test_terminal_leftCurly_bad_lexeme ( ) {
+	exception_thrown = false;
+	try{
+	     	Token *tk = new Token(leftCurly, "notleftCurly");
+	     	TS_ASSERT (tk != NULL) ;
      	}
    	catch (const InvalidToken& ex){
-    	TS_ASSERT (!strcmp(ex.what(),  ("lexeme is not the leftCurly")));  
+	    	TS_ASSERT (!strcmp(ex.what(),  ("lexeme is not the leftCurly")));  
+		exception_thrown = true;
     	}
+	TS_ASSERT(exception_thrown);
     }
     
     //rightCurly   
-    void test_TokenMaker_rightCurly ( ) {
+    void test_terminal_rightCurly ( ) {
      	Token *tk = new Token(rightCurly, "}");
     	TS_ASSERT (tk->terminal == rightCurly);  
     }
-    void test_TokenMaker_rightCurly_bad_lexeme ( ) {
-    try{
-     	Token *tk = new Token(rightCurly, "notrightCurly");
-     	TS_ASSERT (tk != NULL) ;
+    void test_terminal_rightCurly_bad_lexeme ( ) {
+	exception_thrown = false;
+	try{
+	     	Token *tk = new Token(rightCurly, "notrightCurly");
+	     	TS_ASSERT (tk != NULL) ;
      	}
    	catch (const InvalidToken& ex){
-    	TS_ASSERT (!strcmp(ex.what(),  ("lexeme is not the rightCurly")));  
+	    	TS_ASSERT (!strcmp(ex.what(),  ("lexeme is not the rightCurly")));  
+		exception_thrown = true;
     	}
+	TS_ASSERT(exception_thrown);
     }
     
    
     //leftAngle
-    void test_TokenMaker_leftAngle ( ) {
-		Token *tk = new Token(leftAngle, "<");
-		TS_ASSERT(tk->terminal == leftAngle);
+    void test_terminal_leftAngle ( ) {
+	Token *tk = new Token(leftAngle, "<");
+	TS_ASSERT(tk->terminal == leftAngle);
     }
-	void test_TokenMaker_leftAngle_bad_lexeme ( ) {
-    try{
-     	Token *tk = new Token(leftAngle, "notleftAngle");
-     	TS_ASSERT (tk != NULL) ;
+    void test_terminal_leftAngle_bad_lexeme ( ) {
+	exception_thrown = false;
+	try{
+	  	Token *tk = new Token(leftAngle, "notleftAngle");
+     		TS_ASSERT (tk != NULL) ;
      	}
    	catch (const InvalidToken& ex){
-    	TS_ASSERT (!strcmp(ex.what(),  ("lexeme is not the leftAngle")));  
+	    	TS_ASSERT (!strcmp(ex.what(),  ("lexeme is not the leftAngle")));  
+		exception_thrown = true;
     	}
+	TS_ASSERT(exception_thrown);
     }
 
     //rightAngle
-    void test_TokenMaker_rightAngle ( ) {
-		Token *tk = new Token(rightAngle, ">");
-		TS_ASSERT(tk->terminal == rightAngle);
+    void test_terminal_rightAngle ( ) {
+	Token *tk = new Token(rightAngle, ">");
+	TS_ASSERT(tk->terminal == rightAngle);
     }
-	void test_TokenMaker_rightAngle_bad_lexeme ( ) {
-    try{
-     	Token *tk = new Token(rightAngle, "notrightAngle");
-     	TS_ASSERT (tk != NULL) ;
+    void test_terminal_rightAngle_bad_lexeme ( ) {
+	exception_thrown = false;
+	try{
+	     	Token *tk = new Token(rightAngle, "notrightAngle");
+     		TS_ASSERT (tk != NULL) ;
      	}
    	catch (const InvalidToken& ex){
-    	TS_ASSERT (!strcmp(ex.what(),  ("lexeme is not the rightAngle")));  
+	    	TS_ASSERT (!strcmp(ex.what(),  ("lexeme is not the rightAngle")));  
+		exception_thrown = true;
     	}
+	TS_ASSERT(exception_thrown);
     }
 
 
     //colon
-    void test_TokenMaker_colon ( ) {
-		Token *tk = new Token(colon, ":");
-		TS_ASSERT(tk->terminal == colon);
+    void test_terminal_colon ( ) {
+	Token *tk = new Token(colon, ":");
+	TS_ASSERT(tk->terminal == colon);
     }
-	void test_TokenMaker_colon_bad_lexeme ( ) {
-    try{
-     	Token *tk = new Token(colon, "notcolon");
-     	TS_ASSERT (tk != NULL) ;
+    void test_terminal_colon_bad_lexeme ( ) {
+	exception_thrown = false;
+    	try{
+	     	Token *tk = new Token(colon, "notcolon");
+	     	TS_ASSERT (tk != NULL) ;
      	}
    	catch (const InvalidToken& ex){
-    	TS_ASSERT (!strcmp(ex.what(),  ("lexeme is not the colon")));  
+	    	TS_ASSERT (!strcmp(ex.what(),  ("lexeme is not the colon")));  
+		exception_thrown = true;
     	}
+	TS_ASSERT(exception_thrown);
     }
 
 
     //comma
-    void test_TokenMaker_comma ( ) {
-		Token *tk = new Token(comma, ",");
-		TS_ASSERT(tk->terminal == comma);
+    void test_terminal_comma ( ) {
+	Token *tk = new Token(comma, ",");
+	TS_ASSERT(tk->terminal == comma);
     }
-	void test_TokenMaker_comma_bad_lexeme ( ) {
-    try{
-     	Token *tk = new Token(comma, "notcomma");
-     	TS_ASSERT (tk != NULL) ;
+    void test_terminal_comma_bad_lexeme ( ) {
+	exception_thrown = false;
+    	try{
+	     	Token *tk = new Token(comma, "notcomma");
+	     	TS_ASSERT (tk != NULL) ;
      	}
    	catch (const InvalidToken& ex){
-    	TS_ASSERT (!strcmp(ex.what(),  ("lexeme is not the comma")));  
+	    	TS_ASSERT (!strcmp(ex.what(),  ("lexeme is not the comma")));  
+		exception_thrown = true;
     	}
+	TS_ASSERT(exception_thrown);
     }
 
 
     //semiColon
-    void test_TokenMaker_semiColon ( ) {
+    void test_terminal_semiColon ( ) {
 	Token *tk = new Token(semiColon, ";");
 	TS_ASSERT(tk->terminal == semiColon);
     }
-	void test_TokenMaker_semiColon_bad_lexeme ( ) {
-    try{
-     	Token *tk = new Token(semiColon, "notsemiColon");
-     	TS_ASSERT (tk != NULL) ;
+
+    void test_terminal_semiColon_bad_lexeme ( ) {
+	exception_thrown = false;
+    	try{
+     		Token *tk = new Token(semiColon, "notsemiColon");
+	     	TS_ASSERT (tk != NULL) ;
      	}
    	catch (const InvalidToken& ex){
-    	TS_ASSERT (!strcmp(ex.what(),  ("lexeme is not the semiColon")));  
+    		TS_ASSERT (!strcmp(ex.what(),  ("lexeme is not the semiColon")));  
+		exception_thrown = true;
     	}
+	TS_ASSERT(exception_thrown);
     }
 
 
     //assign
-    void test_TokenMaker_assign ( ) {
+    void test_terminal_assign ( ) {
 	Token *tk = new Token(assign, ":=");
 	TS_ASSERT(tk->terminal == assign);
     }
-	void test_TokenMaker_assign_bad_lexeme ( ) {
-    try{
-     	Token *tk = new Token(assign, "notassign");
-     	TS_ASSERT (tk != NULL) ;
+    void test_terminal_assign_bad_lexeme ( ) {
+	exception_thrown = false;
+    	try{
+	     	Token *tk = new Token(assign, "notassign");
+	     	TS_ASSERT (tk != NULL) ;
      	}
    	catch (const InvalidToken& ex){
-    	TS_ASSERT (!strcmp(ex.what(),  ("lexeme is not the assign")));  
+    		TS_ASSERT (!strcmp(ex.what(),  ("lexeme is not the assign")));  
+		exception_thrown = true;
     	}
+	TS_ASSERT(exception_thrown);
     }
 
     //plusSign
-    void test_TokenMaker_plusSign ( ) {
+    void test_terminal_plusSign ( ) {
 	Token *tk = new Token(plusSign, "+");
 	TS_ASSERT(tk->terminal == plusSign);
     }
-	void test_TokenMaker_plusSign_bad_lexeme ( ) {
-    try{
-     	Token *tk = new Token(plusSign, "notplusSign");
-     	TS_ASSERT (tk != NULL) ;
+    void test_terminal_plusSign_bad_lexeme ( ) {
+	exception_thrown = false;
+    	try{
+		Token *tk = new Token(plusSign, "notplusSign");
+	     	TS_ASSERT (tk != NULL) ;
      	}
    	catch (const InvalidToken& ex){
-    	TS_ASSERT (!strcmp(ex.what(),  ("lexeme is not the plusSign")));  
+	    	TS_ASSERT (!strcmp(ex.what(),  ("lexeme is not the plusSign")));  
+		exception_thrown = true;
     	}
+	TS_ASSERT(exception_thrown);
     }
 
 
     //star
-    void test_TokenMaker_star ( ) {
+    void test_terminal_star ( ) {
 	Token *tk = new Token(star, "*");
 	TS_ASSERT(tk->terminal == star);
     }
-	void test_TokenMaker_star_bad_lexeme ( ) {
-    try{
-     	Token *tk = new Token(star, "notstar");
-     	TS_ASSERT (tk != NULL) ;
+    void test_terminal_star_bad_lexeme ( ) {
+	exception_thrown = false;
+	try{
+		Token *tk = new Token(star, "notstar");
+	     	TS_ASSERT (tk != NULL) ;
      	}
    	catch (const InvalidToken& ex){
-    	TS_ASSERT (!strcmp(ex.what(),  ("lexeme is not the star")));  
+    		TS_ASSERT (!strcmp(ex.what(),  ("lexeme is not the star")));  
+		exception_thrown = true;
     	}
+	TS_ASSERT(exception_thrown);
     }
 
 
     // dash
-    void test_TokenMaker_dash ( ) {
+    void test_terminal_dash ( ) {
 	Token *tk = new Token(dash, "-");
 	TS_ASSERT(tk->terminal == dash);
     }
-	void test_TokenMaker_dash_bad_lexeme ( ) {
-    try{
-     	Token *tk = new Token(dash, "notdash");
-     	TS_ASSERT (tk != NULL) ;
+    void test_terminal_dash_bad_lexeme ( ) {
+	exception_thrown = false;
+	try{
+    	 	Token *tk = new Token(dash, "notdash");
+	     	TS_ASSERT (tk != NULL) ;
      	}
    	catch (const InvalidToken& ex){
-    	TS_ASSERT (!strcmp(ex.what(),  ("lexeme is not the dash")));  
+    		TS_ASSERT (!strcmp(ex.what(),  ("lexeme is not the dash")));  
+		exception_thrown = true;
     	}
+	TS_ASSERT(exception_thrown);
     }
 
 
     // forwardSlash
-    void test_TokenMaker_forwardSlash ( ) {
+    void test_terminal_forwardSlash ( ) {
 	Token *tk = new Token(forwardSlash, "/");
 	TS_ASSERT(tk->terminal == forwardSlash);
     }
-	void test_TokenMaker_forwardSlash_bad_lexeme ( ) {
-    try{
-     	Token *tk = new Token(forwardSlash, "notforwardSlash");
-     	TS_ASSERT (tk != NULL) ;
+    void test_terminal_forwardSlash_bad_lexeme ( ) {
+	exception_thrown = false;
+	try{
+	     	Token *tk = new Token(forwardSlash, "notforwardSlash");
+	     	TS_ASSERT (tk != NULL) ;
      	}
    	catch (const InvalidToken& ex){
-    	TS_ASSERT (!strcmp(ex.what(),  ("lexeme is not the forwardSlash")));  
+	    	TS_ASSERT (!strcmp(ex.what(),  ("lexeme is not the forwardSlash")));  
+		exception_thrown = true;
     	}
+	TS_ASSERT(exception_thrown);
     }
 
 
     // equalsEquals
-    void test_TokenMaker_equalsEquals ( ) {
+    void test_terminal_equalsEquals ( ) {
 		Token *tk = new Token(equalsEquals, "==");
 		TS_ASSERT(tk->terminal == equalsEquals);
     }
-	void test_TokenMaker_equalsEquals_bad_lexeme ( ) {
-    try{
-     	Token *tk = new Token(equalsEquals, "notequalsEquals");
-     	TS_ASSERT (tk != NULL) ;
+    void test_terminal_equalsEquals_bad_lexeme ( ) {
+	exception_thrown = false;
+	try{
+	     	Token *tk = new Token(equalsEquals, "notequalsEquals");
+	     	TS_ASSERT (tk != NULL) ;
      	}
    	catch (const InvalidToken& ex){
-    	TS_ASSERT (!strcmp(ex.what(),  ("lexeme is not the equalsEquals")));  
+    		TS_ASSERT (!strcmp(ex.what(),  ("lexeme is not the equalsEquals")));  
+		exception_thrown = true;
     	}
+	TS_ASSERT(exception_thrown);
     }
 
 
     // lessThanEquals
-    void test_TokenMaker_lessThanEquals ( ) {
+    void test_terminal_lessThanEquals ( ) {
 	Token *tk = new Token(lessThanEquals, "<=");
 	TS_ASSERT(tk->terminal == lessThanEquals);
     }
 
-    void test_TokenMaker_lessThanEquals_bad_lexeme ( ) {
-    try{
-     	Token *tk = new Token(lessThanEquals, "notlessThanEquals");
-     	TS_ASSERT (tk != NULL) ;
-     	}
-   	catch (const InvalidToken& ex){
-    	TS_ASSERT (!strcmp(ex.what(),  ("lexeme is not the lessThanEquals")));  
+    void test_terminal_lessThanEquals_bad_lexeme ( ) {
+	exception_thrown = false;
+    	try{
+     		Token *tk = new Token(lessThanEquals, "notlessThanEquals");
+     		TS_ASSERT (tk != NULL) ;
+	}
+    	catch (const InvalidToken& ex){
+    		TS_ASSERT (!strcmp(ex.what(),  ("lexeme is not the lessThanEquals")));  
+		exception_thrown = true;
     	}
+	TS_ASSERT(exception_thrown);
     }
 
     // greaterThanEquals
-    void test_TokenMaker_greaterThanEquals ( ) {
+    void test_terminal_greaterThanEquals ( ) {
 	Token *tk = new Token(greaterThanEquals, ">=");
 	TS_ASSERT(tk->terminal == greaterThanEquals);
     }
 
-    void test_TokenMaker_greaterThanEquals_bad_lexeme ( ) {
-    try{
-     	Token *tk = new Token(greaterThanEquals, "notgreaterThanEquals");
-        TS_ASSERT (tk != NULL) ;
+    void test_terminal_greaterThanEquals_bad_lexeme ( ) {
+	exception_thrown = false;
+	try{
+     		Token *tk = new Token(greaterThanEquals, "notgreaterThanEquals");
+       		TS_ASSERT (tk != NULL) ;
      	}
-   	catch (const InvalidToken& ex){
-    	TS_ASSERT (!strcmp(ex.what(),  ("lexeme is not the greaterThanEquals")));  
+	catch (const InvalidToken& ex){
+    		TS_ASSERT (!strcmp(ex.what(),  ("lexeme is not the greaterThanEquals")));  
+		exception_thrown = true;
     	}
+	TS_ASSERT(exception_thrown);
     }
 
 
     // notEquals
-    void test_TokenMaker_notEquals ( ) {
+    void test_terminal_notEquals ( ) {
 	Token *tk = new Token(notEquals, "!=");
 	TS_ASSERT(tk->terminal == notEquals);
     }
 	
-    void test_TokenMaker_notEquals_bad_lexeme ( ) {
-    try{
-     	Token *tk = new Token(notEquals, "notnotEquals");
-     	 TS_ASSERT (tk != NULL) ;
+    void test_terminal_notEquals_bad_lexeme ( ) {
+	exception_thrown = false;
+	try{
+     		Token *tk = new Token(notEquals, "notnotEquals");
+	     	 TS_ASSERT (tk != NULL) ;
      	}
    	catch (const InvalidToken& ex){
-    	TS_ASSERT (!strcmp(ex.what(),  ("lexeme is not the notEquals")));  
+	    	TS_ASSERT (!strcmp(ex.what(),  ("lexeme is not the notEquals")));  
+		exception_thrown = true;
     	}
+	TS_ASSERT(exception_thrown);
     }
 
     // endOfFile
-    void test_TokenMaker_endOfFile ( ) {
+    void test_terminal_endOfFile ( ) {
 	Token *tk = new Token(endOfFile, "");
 	TS_ASSERT(tk->terminal == endOfFile);
     }
 
-    void test_TokenMaker_endOfFile_bad_lexeme ( ) {
+    void test_terminal_endOfFile_bad_lexeme ( ) {
+	exception_thrown = false;
 	try{
 	    Token *tk = new Token(endOfFile, "notnot");
      	}
    	catch (const InvalidToken& ex){
-    	TS_ASSERT (!strcmp(ex.what(),  ("lexeme is not the endOfFile")));
+    	    TS_ASSERT (!strcmp(ex.what(),  ("lexeme is not the endOfFile")));
+	    exception_thrown = true;
     	}
+	TS_ASSERT(exception_thrown);
     }
 
     //lexical error
-    void test_TokenMaker_lexicalError_bad_lexeme ( ) {
-    try{
-	Token *tk = new Token(lexicalError, "a");
+    void test_terminal_lexicalError ( ) {
+	Token *tk = new Token(lexicalError, "&");
+	TS_ASSERT(tk->terminal == lexicalError);
     }
+
+    void test_terminal_lexicalError_bad_lexeme ( ) {
+	exception_thrown = false;
+	try {
+	    Token *tk = new Token(lexicalError, "");
+	}
 	catch (const InvalidToken& ex){
-	TS_ASSERT (!strcmp(ex.what(), ("lexicalError is not a valid token type")));
+		TS_ASSERT (!strcmp(ex.what(), ("lexeme is not a lexicalError")));
+		exception_thrown = true;
        }
+	TS_ASSERT(exception_thrown);
     }
 
     // Tests for components and functions used by "scan"
