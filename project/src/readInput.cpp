@@ -14,7 +14,7 @@ char *readInputFromFile (const char *filename) {
     FILE *in_fp ;
     in_fp = fopen(filename,"r") ;
     if ( in_fp==NULL ) {
-	//printf ("File \"%s\" not found.\n", argv[1]);
+//        printf ("File \"%s\" not found.\n", argv[1]);
         return NULL ;
     }
 

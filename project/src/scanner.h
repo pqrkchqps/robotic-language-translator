@@ -24,9 +24,9 @@ enum tokenEnumType {
 
     // Keywords
     nameKwd = 1, platformKwd = 2, initialKwd = 3, stateKwd = 4, 
-    gotoKwd = 5, whenKwd, performingKwd, exitKwd,
+    gotoKwd, whenKwd, performingKwd, exitKwd,
 
-    intKwd, floatKwd, booleanKwd = 11, stringKwd, charKwd,
+    intKwd, floatKwd, booleanKwd, stringKwd, charKwd,
 
     trueKwd, falseKwd,
 
@@ -34,7 +34,7 @@ enum tokenEnumType {
     intConst, floatConst, stringConst, charConst,
 
     // Names
-    variableName,
+    variableName ,
 
     // Punctuation
     leftParen, rightParen, 
@@ -74,5 +74,8 @@ public:
 	Token *scan(const char *);
 	
 };
+
+
+
 
 #endif /* SCANNER_H */
