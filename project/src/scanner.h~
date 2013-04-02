@@ -67,7 +67,7 @@ public:
 	Token (string lexeme, tokenType terminal);
 	Token (tokenType terminal, string lexeme);
         Token (string lexeme, tokenType terminal, Token* next);
-        Token (const char* lexeme, tokenType terminal, Token* next);
+        Token (const char *lexeme, tokenType terminal, Token* next);
         void init (string lexeme, tokenType terminal, Token* next);
 
 };

@@ -65,7 +65,7 @@ Token::Token (string lexeme, tokenType terminal, Token* next) {
     init(lexeme, terminal, next);
 }
 
-Token::Token (const char* lexeme, tokenType terminal, Token* next){
+Token::Token (const char [1] lexeme, tokenType terminal, Token* next){
     string s = lexeme;
     init(s, terminal, next);
 }
