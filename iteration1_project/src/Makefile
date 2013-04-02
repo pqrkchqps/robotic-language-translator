@@ -2,9 +2,7 @@ CXX_DIR = ../lib/cxxtest
 CXXTEST = $(CXX_DIR)/cxxtestgen.pl
 CXXFLAGS = --error-printer --abort-on-fail --have-eh
 
-
 FLAGS = -Wall -g 
-
 
 # Program files.
 readInput.o:	readInput.cpp readInput.h
@@ -15,15 +13,6 @@ regex.o:	regex.cpp regex.h
 
 scanner.o:	scanner.cpp scanner.h regex.h
 	g++ $(FLAGS) -c scanner.cpp 
-
-parser.o: 	parser.cpp parser.h
-	g++ $(FLAGS) -c parser.cpp parser.h
-
-parser_tests.cpp:	parser_tests.cpp
-	g++ $(FLAGS) parser_tests.cpp
-
-parser_tests: $(FLAGS) parser_tests.h
-	g++ $(FLAGS) parser_tests.h
 
 
 # Testing files and targets.
@@ -43,6 +32,7 @@ scanner_tests:	scanner_tests.cpp scanner.o regex.o readInput.o
 
 scanner_tests.cpp:	scanner.o scanner_tests.h readInput.h
 	$(CXXTEST) $(CXXFLAGS) -o scanner_tests.cpp scanner_tests.h
+
 
 clean:
 	rm -Rf *.o \
