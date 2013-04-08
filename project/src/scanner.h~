@@ -3,7 +3,6 @@
 
 #include "regex.h"
 #include <stdexcept>
-#include <tr1/functional>
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/stat.h>
@@ -12,12 +11,6 @@
 #include <string.h>
 
 using namespace std; 
-//this is a comment
-/* A small meaningless comment...*/
-
-/* This enumerated type is used to keep track of what kind of
-   construct was matched. 
-*/
 
 //create a new exception 
 class InvalidToken : public runtime_error {
@@ -25,14 +18,12 @@ class InvalidToken : public runtime_error {
 	InvalidToken(const char* m) : runtime_error(m) {}
 };
 
-enum tokenEnumType { 
+enum tokenEnumType {
 
     // Keywords
     nameKwd = 1, platformKwd = 2, initialKwd = 3, stateKwd = 4, 
     gotoKwd = 5, whenKwd, performingKwd, exitKwd,
-
     intKwd, floatKwd, booleanKwd = 11, stringKwd, charKwd,
-
     trueKwd, falseKwd,
 
     // Constants
@@ -42,8 +33,8 @@ enum tokenEnumType {
     variableName,
 
     // Punctuation
-    leftParen, rightParen, 
-    leftCurly, rightCurly, 
+    leftParen, rightParen,
+    leftCurly, rightCurly,
 
     leftAngle, rightAngle,
     colon, comma, semiColon, 
@@ -62,52 +53,55 @@ enum tokenEnumType {
 typedef enum tokenEnumType tokenType ;
 
 class Token {
-//fields
 public:
+	//constructors for Token 
+	Token (string lexeme, tokenType terminal);
+	Token (tokenType terminal, string lexeme);
+	Token (string lexeme, tokenType terminal, Token* next);
+	Token (const char* lexeme, tokenType terminal, Token* next);
+	void init (string lexeme, tokenType terminal, Token* next);
+	//accessors
+	void set_next(Token* next);
+	Token* get_next();
+	tokenType get_terminal();
+	string get_lexeme();
+//private:
 	tokenType terminal;
 	string lexeme;
 	Token* next;
-
-//constructor for Token 
-	Token (string lexeme, tokenType terminal);
-	Token (tokenType terminal, string lexeme);
-   Token (string lexeme, tokenType terminal, Token* next);
-   Token (const char* lexeme, tokenType terminal, Token* next);
-   void init (string lexeme, tokenType terminal, Token* next);
-	//Token (string lexeme, tokenType terminal, Token *next, char basic_constructor);
 };
 
 
-class TokenType {
-	public:
-		TokenType() {};
-		TokenType(regex_t* lexeme_pattern, tokenType terminal, 
-				bool (*err_checking_func)(int numMatchedChars,string lexeme), const char* err_string);
-				
-		TokenType(tokenType terminal, regex_t* lexeme_pattern, 
-				bool (*err_checking_func)(int numMatchedChars,string lexeme), const char* err_string);
-				
-	 	//ADD ACCESSORS
-	 	int checkMatch(const char* lexeme);
-		Token makeTokenType(const char* lexeme);
-		bool (*checkError)(int,string);
-		void throwError();
-		const char* err_string;		
-		regex_t* lexeme_pattern;
-		tokenType terminal;
-		int numMatchedChars;
-		
-		
+class TokenBuilder {
+public:
+	//constructors
+	TokenBuilder() {};
+	TokenBuilder(regex_t* lexeme_pattern, tokenType terminal);	
+	TokenBuilder(tokenType terminal, regex_t* lexeme_pattern);
+
+	//methods
+ 	int checkMatch(const char* lexeme);
+	Token makeTokenBuilder(const char* lexeme);
+	bool (*checkError)(int,string);
+	void throwError();
+	//accessors
+	tokenType get_terminal();
+private:
+	//fields
+	const char* err_string;		
+	regex_t* lexeme_pattern;
+	tokenType terminal;
+	int numMatchedChars;
 };
 
 class Scanner {
 public:
-//methods
+	//methods
 	Token *scan(const char *);
 	Scanner();
 	void buildSyntax();
 private:
-	TokenType* token_builders;
+	TokenBuilder* token_builders;
 	int syntax_size;
 	regex_t* whiteSpace;
 	regex_t* blockComment;

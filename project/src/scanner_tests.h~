@@ -24,61 +24,141 @@ public:
      */
 
 	
+
+    /*
+	We added the code to test the default cases for all the terminals
+	These test cases were placed with the scanner tests because
+	we use the scanner to test the creation of tokens. 
+    */
     Scanner *s ;
     void test_setup_code ( ){
         s = new Scanner();
     }
 
-	void terminal_tester(tokenType Kwd, const char * correct_str, const char * incorrect_str, const char * error_msg){
-      bool exception_thrown = false;
-      Token *head = s->scan(correct_str);
-    	TS_ASSERT(head->terminal == Kwd);
-	}
-
-
-	void test_all_terminals() {
-		/*terminal_tester(nameKwd, "name", "notname", "lexeme is not the nameKwd");
-		terminal_tester(platformKwd, "platform", "notplatformKwd", "lexeme is not the platformKwd");
-		terminal_tester(initialKwd, "initial", "notinitialKwd", "lexeme is not the initialKwd");
-		terminal_tester(stateKwd, "state", "notstateKwd", "lexeme is not the stateKwd");
-		terminal_tester(gotoKwd, "goto", "notgotoKwd", "lexeme is not the gotoKwd");
-		terminal_tester(whenKwd, "when", "notwhenKwd",  "lexeme is not the whenKwd");
-		terminal_tester(performingKwd, "performing", "notperformingKwd", "lexeme is not the performingKwd");  
-		terminal_tester(exitKwd, "exit", "notexitKwd", "lexeme is not the exitKwd"); 
-		terminal_tester(intKwd, "int", "notintKwd", "lexeme is not the intKwd");
-		terminal_tester(floatKwd, "float", "notfloatKwd", "lexeme is not the floatKwd");
-		terminal_tester(booleanKwd, "boolean", "notbooleanKwd", "lexeme is not the booleanKwd");
-		terminal_tester(stringKwd, "string", "notstringKwd", "lexeme is not the stringKwd");
-		terminal_tester(charKwd, "char", "notcharKwd", "lexeme is not the charKwd");
-		terminal_tester(trueKwd, "true", "nottrueKwd", "lexeme is not the trueKwd");  
-		terminal_tester(falseKwd, "false", "notfalseKwd", "lexeme is not the falseKwd");
-		terminal_tester(intConst, "234", "notintConst", "lexeme is not the intConst");
-		terminal_tester(floatConst, "199.99", "notfloatConst", "lexeme is not the floatConst");
-		terminal_tester(stringConst, "\"string 1233232\"", "notstringConstant", "lexeme is not the stringConst");
-		terminal_tester(charConst, "'c'", "notcharConst", "lexeme is not the charConst");
-		terminal_tester(variableName, "var", "6notvar", "lexeme is not the variableName");
-		terminal_tester(leftParen, "(", "notleftParen", "lexeme is not the leftParen");
-		terminal_tester(rightParen, ")", "notrightParen", "lexeme is not the rightParen");
-		terminal_tester(leftCurly, "{", "notleftCurly", "lexeme is not the leftCurly");
-		terminal_tester(rightCurly, "}", "notrightCurly", "lexeme is not the rightCurly");
-		terminal_tester(leftAngle, "<", "notleftAngle", "lexeme is not the leftAngle");
-		terminal_tester(rightAngle, ">", "notrightAngle", "lexeme is not the rightAngle");
-		terminal_tester(colon, ":", "notcolon", "lexeme is not the colon");
-		terminal_tester(comma, ",", "notcomma", "lexeme is not the comma");
-		terminal_tester(semiColon, ";", "notsemiColon", "lexeme is not the semiColon");
-		terminal_tester(assign, ":=", "notassign", "lexeme is not the assign");
-		terminal_tester(plusSign, "+", "notplusSign", "lexeme is not the plusSign");
-		terminal_tester(star, "*", "notstar", "lexeme is not the star");
-		terminal_tester(dash, "-", "notdash", "lexeme is not the dash");
-		terminal_tester(forwardSlash, "/", "notforwardSlash", "lexeme is not the forwardSlash");
-		terminal_tester(equalsEquals, "==", "notequalsEquals", "lexeme is not the equalsEquals");
-		terminal_tester(lessThanEquals, "<=", "notlessThanEquals", "lexeme is not the lessThanEquals");
-		terminal_tester(greaterThanEquals, ">=", "notgreaterThanEquals", "lexeme is not the greaterThanEquals");
-		terminal_tester(notEquals, "!=", "notnotEquals", "lexeme is not the notEquals");
-		terminal_tester(endOfFile, "", "notnot", "lexeme is not the endOfFile");
-		terminal_tester(lexicalError, "&", "", "lexeme is not a lexicalError");
-		*/
-	}
+    void terminal_tester(tokenType Kwd, const char* str){
+    	Token *head = s->scan(str);
+    	TS_ASSERT(head->get_terminal() == Kwd);
+    }
+    void test_nameKwd(){
+	terminal_tester(nameKwd, "name");
+    }
+    void test_platformKwd(){
+	terminal_tester(platformKwd, "platform");
+    }
+    void test_initialKwd(){
+	terminal_tester(initialKwd, "initial");
+    }
+    void test_stateKwd(){
+	terminal_tester(stateKwd, "state");
+    }
+    void test_gotoKwd(){
+	terminal_tester(gotoKwd, "goto");
+    }
+    void test_whenKwd(){
+	terminal_tester(whenKwd, "when");
+    }
+    void test_performingKwd(){
+	terminal_tester(performingKwd, "performing");
+    }
+    void test_exitKwd(){
+	terminal_tester(exitKwd, "exit");
+    }
+    void test_intKwd(){
+	terminal_tester(intKwd, "int");
+    }
+    void test_floatKwd(){
+	terminal_tester(floatKwd, "float");
+    }
+    void test_booleanKwd(){
+	terminal_tester(booleanKwd, "boolean");
+    }
+    void test_stringKwd(){
+	terminal_tester(stringKwd, "string");
+    }
+    void test_charKwd(){
+	terminal_tester(charKwd, "char");
+    }
+    void test_trueKwd(){
+	terminal_tester(trueKwd, "true");
+    }
+    void test_falseKwd(){
+	terminal_tester(falseKwd, "false");
+    }
+    void test_intConst(){
+	terminal_tester(intConst, "234");
+    }
+    void test_floatConst(){
+	terminal_tester(floatConst, "199.99");
+    }
+    void test_stringConst(){
+	terminal_tester(stringConst, "\"string 1233232\"");
+    }
+    void test_charConst(){
+	terminal_tester(charConst, "'c'");
+    }
+    void test_variableName(){
+	terminal_tester(variableName, "var");
+    }
+    void test_leftParen(){
+	terminal_tester(leftParen, "(");
+    }
+    void test_rightParen(){
+	terminal_tester(rightParen, ")");
+    }
+    void test_leftCurly(){
+	terminal_tester(leftCurly, "{");
+    }
+    void test_rightCurly(){
+	terminal_tester(rightCurly, "}");
+    }
+    void test_leftAngle(){
+	terminal_tester(leftAngle, "<");
+    }
+    void test_rightAngle(){
+	terminal_tester(rightAngle, ">");
+    }
+    void test_colon(){
+	terminal_tester(colon, ":");
+    }
+    void test_comma(){
+	terminal_tester(comma, ",");
+    }
+    void test_semiColon(){
+	terminal_tester(semiColon, ";");
+    }
+    void test_assign(){
+	terminal_tester(assign, ":=");
+    }
+    void test_plusSign(){
+	terminal_tester(plusSign, "+");
+    }
+    void test_star(){
+	terminal_tester(star, "*");
+    }
+    void test_dash(){
+	terminal_tester(dash, "-");
+    }
+    void test_forwardSlash(){
+	terminal_tester(forwardSlash, "/");
+    }
+    void test_equalsEquals(){
+	terminal_tester(equalsEquals, "==");
+    }
+    void test_lessThanEquals(){
+	terminal_tester(lessThanEquals, "<=");
+    }
+    void test_greaterThanEquals(){
+	terminal_tester(greaterThanEquals, ">=");
+    }
+    void test_notEquals(){
+	terminal_tester(notEquals, "!=");
+    }
+    void test_endOfFile(){
+	terminal_tester(endOfFile, "");
+    }
+    void test_lexicalError(){
+	terminal_tester(lexicalError, "&");
+    }
 
     // Tests for components and functions used by "scan"
     // --------------------------------------------------
@@ -128,11 +208,11 @@ public:
     bool noLexicalErrors (Token *tks) {
         Token *currentToken = tks ;
         while (currentToken != NULL) {
-            if (currentToken->terminal == lexicalError) {
+            if (currentToken->get_terminal() == lexicalError) {
                 return false;
             }
             else {
-                currentToken = currentToken->next ;
+                currentToken = currentToken->get_next() ;
             }
         }
         return true ;
@@ -158,12 +238,12 @@ public:
         Token *currentToken = tks ;
         int termIndex = 0 ;
         while (currentToken != NULL && termIndex < numTerms ) {
-            if (currentToken->terminal != ts[termIndex]) {
+            if (currentToken->get_terminal() != ts[termIndex]) {
                 return false;
             }
             else {
                 ++ termIndex ;
-                currentToken = currentToken->next;
+                currentToken = currentToken->get_next();
             }
         }
         return true ;
@@ -185,15 +265,15 @@ public:
     void test_scan_empty ( ) {
         Token *tks = s->scan (" ");
         TS_ASSERT (tks != NULL);
-        TS_ASSERT_EQUALS (tks->terminal, endOfFile);
-        TS_ASSERT (tks->next == NULL);
+        TS_ASSERT_EQUALS (tks->get_terminal(), endOfFile);
+        TS_ASSERT (tks->get_next() == NULL);
     }
 
     void test_scan_empty_comment ( ) {
         Token *tks = s->scan (" /* a comment */ ") ;
         TS_ASSERT (tks != NULL) ;
-        TS_ASSERT_EQUALS (tks->terminal, endOfFile) ;
-        TS_ASSERT (tks->next == NULL) ;
+        TS_ASSERT_EQUALS (tks->get_terminal(), endOfFile) ;
+        TS_ASSERT (tks->get_next() == NULL) ;
     }
 
     // When a lexical error occurs, the scanner creates a token with a 
@@ -201,20 +281,20 @@ public:
     void test_scan_lexicalErrors ( ) {
         Token *tks = s->scan ("$&1  ") ;
         TS_ASSERT (tks != NULL) ;
-        TS_ASSERT_EQUALS (tks->terminal, lexicalError) ;
+        TS_ASSERT_EQUALS (tks->get_terminal(), lexicalError) ;
         TS_ASSERT_EQUALS (tks->lexeme, "$");
-        tks = tks->next;
+        tks = tks->get_next();
         TS_ASSERT (tks != NULL) ;
-        TS_ASSERT_EQUALS (tks->terminal, lexicalError) ;
+        TS_ASSERT_EQUALS (tks->get_terminal(), lexicalError) ;
         TS_ASSERT_EQUALS (tks->lexeme, "&");
-        tks = tks->next;
+        tks = tks->get_next();
         TS_ASSERT (tks != NULL) ;
-        TS_ASSERT_EQUALS (tks->terminal, intConst);
+        TS_ASSERT_EQUALS (tks->get_terminal(), intConst);
         TS_ASSERT_EQUALS (tks->lexeme, "1");
-        tks = tks->next;
+        tks = tks->get_next();
         TS_ASSERT (tks != NULL) ;
-        TS_ASSERT_EQUALS (tks->terminal, endOfFile) ;
-        TS_ASSERT (tks->next == NULL) ;
+        TS_ASSERT_EQUALS (tks->get_terminal(), endOfFile) ;
+        TS_ASSERT (tks->get_next() == NULL) ;
     }
 
 

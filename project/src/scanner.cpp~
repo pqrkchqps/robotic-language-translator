@@ -25,32 +25,35 @@ Token::Token (const char* lexeme, tokenType terminal, Token* next){
 void Token::init(string lexeme, tokenType terminal, Token* next) {
 	this->terminal = terminal;
 	this->lexeme = lexeme;
-   this->next = next;
+	this->next = next;
 }
 
-int TokenType::checkMatch(const char* lexeme){
+tokenType Token::get_terminal() {return this->terminal;};
+string Token::get_lexeme() {return this->lexeme;};
+Token* Token::get_next() {return this->next;};
+void Token::set_next(Token* next){
+	this->next = next;
+}
+
+tokenType TokenBuilder::get_terminal() {return this->terminal;};
+
+int TokenBuilder::checkMatch(const char* lexeme){
 	int ret = matchRegex(this->lexeme_pattern, lexeme);
 	return ret;
 }
 
-void TokenType::throwError(){
+void TokenBuilder::throwError(){
 	throw InvalidToken(this->err_string);
 }
 
-TokenType::TokenType(regex_t *lexeme_pattern, tokenType terminal,
-					bool (*err_checking_func)(int numMatchedChars,string lexeme), const char* err_string) {
+TokenBuilder::TokenBuilder(regex_t *lexeme_pattern, tokenType terminal) {
 	this->lexeme_pattern = lexeme_pattern;
 	this->terminal = terminal;
-	this->checkError = err_checking_func;
-	this->err_string = err_string;
 }
 
-TokenType::TokenType(tokenType terminal, regex_t *lexeme_pattern, 
-				bool (*err_checking_func)(int numMatchedChars,string lexeme), const char* err_string) {
+TokenBuilder::TokenBuilder(tokenType terminal, regex_t *lexeme_pattern) {
 	this->lexeme_pattern = lexeme_pattern;
 	this->terminal = terminal;
-	this->checkError = err_checking_func;
-	this->err_string = err_string;
 }
 
 int consumeWhiteSpaceAndComments (regex_t *whiteSpace, 
@@ -101,12 +104,20 @@ Scanner::Scanner() {
 
 
 
-Token *Scanner::scan(const char *text) {   		
+Token *Scanner::scan(const char *text) {   	
+    //The tail token is always an endOfFile	
     Token *tail_token = new Token(endOfFile, "");
-    tail_token->next = NULL;
+    //The tail token's next is always null
+    tail_token->set_next(NULL);
+
+    //head is junk used to keep track of the front of the list
     Token *head_token = new Token(endOfFile, "");
-    head_token->next = tail_token;
+    head_token->set_next(tail_token);
+
+    //temp is a swap variable
     Token *temp_token = head_token;
+
+    //back keeps track of the token before tail
     Token *back_token = head_token;
     
     int numMatchedChars = 0;
@@ -120,9 +131,12 @@ Token *Scanner::scan(const char *text) {
      */
 
     int maxNumMatchedChars = 0 ;
+
+    //consume whitespace to ensure there are no tokens in the text
     numMatchedChars = consumeWhiteSpaceAndComments(this->whiteSpace, this->blockComment, this->lineComment, text);
     text = text + numMatchedChars;
 
+    //Search until end of file
     while ( text[0] != '\0' ) {
         maxNumMatchedChars = 0 ; 
         
@@ -149,27 +163,27 @@ Token *Scanner::scan(const char *text) {
            is strictly greater than.  Not greater than or  equal to.
         */
 
-	   matchType = noMatch;
-		string lexeme(text);
-	  	for (int i = 0; i < this->syntax_size; i++) {
-			  numMatchedChars = this->token_builders[i].checkMatch(text);
-	        if (numMatchedChars > maxNumMatchedChars) {
-   	         maxNumMatchedChars = numMatchedChars;
-	        	   matchType = this->token_builders[i].terminal;
-   	         if (!this->token_builders[i].checkError(numMatchedChars, lexeme))
-   	         	this->token_builders[i].throwError();
-   	     }
+	matchType = noMatch;
+	string lexeme(text);
+	//Iterates through all lexemes to check for a match
+  	for (int i = 0; i < this->syntax_size; i++) {
+		  numMatchedChars = this->token_builders[i].checkMatch(text);
+        	if (numMatchedChars > maxNumMatchedChars) {
+        	    maxNumMatchedChars = numMatchedChars;
+          	    matchType = this->token_builders[i].get_terminal();
+	   	}
    	}
-		    
-		if (matchType == noMatch) {
-		 	string buffer = string (text, maxNumMatchedChars);
-		 	temp_token = new Token(string(buffer), matchType, tail_token); 
-		 	back_token->next = temp_token;
-		 	back_token = temp_token; 
-		}
+
+	//check that a match is found before storing	    
+	if (matchType != noMatch) {
+	 	string buffer = string (text, maxNumMatchedChars);
+	 	temp_token = new Token(string(buffer), matchType, tail_token); 
+	 	back_token->set_next(temp_token);
+	 	back_token = temp_token; 
+	}
 		// Consume the characters that were matched.
 		text = text + maxNumMatchedChars;
     }
-
-    return head_token->next;
+head_token->get_next();
+    return head_token->get_next();
 }
