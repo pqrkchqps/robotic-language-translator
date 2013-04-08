@@ -1,12 +1,17 @@
 #ifndef SCANNER_H
 #define SCANNER_H
 
-#include <regex.h>
-#include <string>
+#include "regex.h"
 #include <stdexcept>
-using namespace std;
+#include <tr1/functional>
+#include <stdio.h>
+#include <stdlib.h>
+#include <sys/stat.h>
+#include <sys/types.h> 
+#include <stdexcept>
+#include <string.h>
 
-
+using namespace std; 
 //this is a comment
 /* A small meaningless comment...*/
 
@@ -49,16 +54,16 @@ enum tokenEnumType {
 
     // Special terminal types
     endOfFile,
-    lexicalError
+    lexicalError,
+    noMatch
 };
-typedef enum tokenEnumType tokenType ;
 
 // Below you need to write your class definitions for Token and Scanner.
-
+typedef enum tokenEnumType tokenType ;
 
 class Token {
-public:
 //fields
+public:
 	tokenType terminal;
 	string lexeme;
 	Token* next;
@@ -66,17 +71,47 @@ public:
 //constructor for Token 
 	Token (string lexeme, tokenType terminal);
 	Token (tokenType terminal, string lexeme);
-        Token (string lexeme, tokenType terminal, Token* next);
-        Token (const char *lexeme, tokenType terminal, Token* next);
-        void init (string lexeme, tokenType terminal, Token* next);
+   Token (string lexeme, tokenType terminal, Token* next);
+   Token (const char* lexeme, tokenType terminal, Token* next);
+   void init (string lexeme, tokenType terminal, Token* next);
+	//Token (string lexeme, tokenType terminal, Token *next, char basic_constructor);
+};
 
+
+class TokenType {
+	public:
+		TokenType() {};
+		TokenType(regex_t* lexeme_pattern, tokenType terminal, 
+				bool (*err_checking_func)(int numMatchedChars,string lexeme), const char* err_string);
+				
+		TokenType(tokenType terminal, regex_t* lexeme_pattern, 
+				bool (*err_checking_func)(int numMatchedChars,string lexeme), const char* err_string);
+				
+	 	//ADD ACCESSORS
+	 	int checkMatch(const char* lexeme);
+		Token makeTokenType(const char* lexeme);
+		bool (*checkError)(int,string);
+		void throwError();
+		const char* err_string;		
+		regex_t* lexeme_pattern;
+		tokenType terminal;
+		int numMatchedChars;
+		
+		
 };
 
 class Scanner {
 public:
 //methods
 	Token *scan(const char *);
-	
+	Scanner();
+	void buildSyntax();
+private:
+	TokenType* token_builders;
+	int syntax_size;
+	regex_t* whiteSpace;
+	regex_t* blockComment;
+	regex_t* lineComment;
 };
 
 #endif /* SCANNER_H */
