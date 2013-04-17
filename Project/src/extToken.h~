@@ -186,7 +186,7 @@ public:
     ParseResult led (ParseResult left) {
         return parser->parseExtendedExprToken (left) ; 
     }
-    int lbp() { return 1; }
+    int lbp() { return 80; }
 };
 
 

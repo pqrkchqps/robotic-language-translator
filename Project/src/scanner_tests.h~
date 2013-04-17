@@ -282,15 +282,15 @@ public:
         Token *tks = s->scan ("$&1  ") ;
         TS_ASSERT (tks != NULL) ;
         TS_ASSERT_EQUALS (tks->get_terminal(), lexicalError) ;
-        TS_ASSERT_EQUALS (tks->lexeme, "$");
+        TS_ASSERT_EQUALS (tks->get_lexeme(), "$");
         tks = tks->get_next();
         TS_ASSERT (tks != NULL) ;
         TS_ASSERT_EQUALS (tks->get_terminal(), lexicalError) ;
-        TS_ASSERT_EQUALS (tks->lexeme, "&");
+        TS_ASSERT_EQUALS (tks->get_lexeme(), "&");
         tks = tks->get_next();
         TS_ASSERT (tks != NULL) ;
         TS_ASSERT_EQUALS (tks->get_terminal(), intConst);
-        TS_ASSERT_EQUALS (tks->lexeme, "1");
+        TS_ASSERT_EQUALS (tks->get_lexeme(), "1");
         tks = tks->get_next();
         TS_ASSERT (tks != NULL) ;
         TS_ASSERT_EQUALS (tks->get_terminal(), endOfFile) ;

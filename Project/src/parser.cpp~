@@ -423,7 +423,7 @@ ParseResult Parser::parseExprToken ( ) {
 ParseResult Parse:: parseExtendedExprToken (ParseResult left){
 	ParseResult pr;
 	match(tokenEnumType);
-	parseExpr(prevToken -> lbp() );	
+	parseExpr(prevToken -> lbp());	
 	return pr; 
 }
 
