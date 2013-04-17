@@ -187,9 +187,19 @@ public:
         return parser->parseExtendedExprToken (left) ; 
     }
     int lbp() { return 1; }
+    std::string description() { return "Expression Token"; }
 };
 
-
+class NullExprToken : public ExtToken {
+public:
+   NullExprToken (Parser *p, Token *t) : ExtToken(p,t) { }
+	ParseResult nud () { return parser->parseNullExprToken (); }
+	    ParseResult led (ParseResult left) {
+        return parser->parseNullExprToken () ; 
+    }
+    int lbp() { return -1; }
+    std::string description() { return "Null Expression Token"; }
+};
 
 
 

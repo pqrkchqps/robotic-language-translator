@@ -23,7 +23,19 @@ public:
         p = new Parser() ;
         DEBUG = 0 ;
     }
-      
+     
+    /*
+    
+    We created a new token type parseExprToken and parseExtendedExprToken because 
+    we want to test functionality of parseResult, led and nud. We want to impliment
+    in 2 ways. One way we translate token into parseResult and nother way we store 
+    property of parseResult. 
+    
+    */
+    
+    
+     
+     
 
     /* In this file you will add 3 additional tests like the one for
        squareMapper below.
@@ -34,7 +46,7 @@ public:
        also include the appropriate documentation of that effort.
     */
 
-    /*void ttest_ast_squareMapper ( ) {
+    /*void test_ast_squareMapper ( ) {
         string file = "../samples/squareMapper.cff" ;
         const char *text =  readInputFromFile ( file.c_str() )  ;
         TS_ASSERT ( text ) ;

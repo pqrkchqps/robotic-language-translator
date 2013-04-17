@@ -29,6 +29,8 @@
 
 using namespace std ;
 
+int i; 
+
 Parser::Parser ( ) { } 
 
 ParseResult Parser::parse (const char *text) {
@@ -294,9 +296,10 @@ ParseResult Parser::parseExpr (int rbp) {
        associated parse methods.  The ExtToken objects have 'nud' and
        'led' methods that are dispatchers that call the appropriate
        parse methods.*/
+       
     ParseResult left = currToken->nud() ;
    
-    while (rbp < currToken->lbp() ) {
+    while (rbp <= currToken->lbp() ) {
         left = currToken->led(left) ;
     }
 
@@ -412,19 +415,35 @@ ParseResult Parser::parseDivision ( ParseResult left ) {
     return pr ;
 }
 
-//new impliment
+/*
+	New impliment: New adding tests functionality of parseResult, led and nud. 
+	We want to impliment in 2 ways. One way we translate token into parseResult
+	and another way we store property of parseResult. 
+	
+*/ 
 
-ParseResult Parser::parseExprToken ( ) {
+ParseResult Parser::parseExprToken () {
     ParseResult pr ;
-    match (tokenEnumType) ;
+    match (lexicalError) ;
+    //make and store a parseResult of type ExprToken 
     return pr ;
 }
 
-ParseResult Parse:: parseExtendedExprToken (ParseResult left){
-	ParseResult pr;
-	match(tokenEnumType);
-	parseExpr(prevToken -> lbp());	
-	return pr; 
+ParseResult Parser::parseNullExprToken ( ) {
+    ParseResult pr ;
+    match (endOfFile) ;
+     //make and store a parseResult of type NullExprToken 
+    return pr ;
+}
+
+ParseResult Parser::parseExtendedExprToken (ParseResult left){
+    ParseResult pr ;
+    match(lexicalError) ;
+    string name( prevToken->lexeme ) ;
+     //make and store a parseResult of type ExtendedExprToken
+    parseExpr( prevToken->lbp() ); 
+
+    return pr ;
 }
 
 
@@ -511,3 +530,4 @@ string Parser::makeErrorMsg ( tokenType terminal ) {
 string Parser::makeErrorMsg ( const char *msg ) {
     return msg ;
 }
+

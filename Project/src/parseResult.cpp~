@@ -12,8 +12,5 @@ using namespace std ;
 ParseResult::ParseResult ( ) {
     errors = "" ;
     ok = true ;
-    //tokenType terminal;
-	 //string lexeme;
-	 next = NULL;
     // ast = NULL ; 
 }

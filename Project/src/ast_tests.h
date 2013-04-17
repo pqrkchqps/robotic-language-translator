@@ -24,6 +24,22 @@ public:
         DEBUG = 0 ;
     }
      
+    /*
+    
+    We created a new token type parseExprToken and parseExtendedExprToken because 
+    we want to test functionality of parseResult, led and nud. We want to impliment
+    them in 2 ways. One way we translate token into parseResult and another way we store 
+    property of parseResult. 
+    
+    the first method we used was to transform token and store the token as a parseResult  
+    this means each token is stored as a seperate parse result.
+    we will be using polymorphic behavor, so we will need a general abstract interface
+    to sepresent the common parts of the parse result's functionality.
+    
+    */
+    
+    
+     
      
 
     /* In this file you will add 3 additional tests like the one for
@@ -35,7 +51,7 @@ public:
        also include the appropriate documentation of that effort.
     */
 
-    /*void ttest_ast_squareMapper ( ) {
+    /*void test_ast_squareMapper ( ) {
         string file = "../samples/squareMapper.cff" ;
         const char *text =  readInputFromFile ( file.c_str() )  ;
         TS_ASSERT ( text ) ;

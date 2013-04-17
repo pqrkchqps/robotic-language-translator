@@ -18,7 +18,7 @@ public:
     ParseResult() ;
     std::string errors ;
     std::string pp ;
-    Token *ast ;
+    //Token *ast ;
     bool ok ;
 } ;
 
