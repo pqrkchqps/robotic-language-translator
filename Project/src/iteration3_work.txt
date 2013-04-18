@@ -1,4 +1,5 @@
-Joinly done for editing makefile
+Joinly edited makefile
 Joinly done for iter3 tag
 Joinly done for commenting on ast_tests.h and parser.cpp
-Joinly done for writting test cases
+Joinly wrote test cases
+Joinly modified parseResult.h and parseResult.cpp file 

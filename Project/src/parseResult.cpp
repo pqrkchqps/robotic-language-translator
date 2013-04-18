@@ -9,6 +9,14 @@
 
 using namespace std ;
 
+/*********************************************************************
+	
+	We modifed ParseResult and created ExprResult, NullExprResult, 
+	and ExtendedExprResult to make an interface for them. The purpose
+	of making an interface was to make the function easier to implement. 
+
+*********************************************************************/
+
 ParseResult::ParseResult ( ) {
     this->setErrors("");
     this->setOK(true) ;

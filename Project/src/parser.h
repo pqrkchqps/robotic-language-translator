@@ -73,9 +73,12 @@ public:
 
     ParseResult parseRelationalExpr ( ParseResult left ) ;
     
-    /*************************************************
-    	New impliment 
-    **************************************************/
+    /***************************************************************************
+    
+     	Function declaration for ExprToken, NullExprToken, ExtendedExprToken, 
+     	and NullExprToken 
+     	
+    ****************************************************************************/
     
     ParseResult parseExtendedExprToken(ParseResult left); 
     ParseResult parseExprToken();
