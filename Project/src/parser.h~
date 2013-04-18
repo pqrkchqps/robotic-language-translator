@@ -42,13 +42,13 @@ public:
     // Program, Platform, Decls, Decl, States, State,
     // Transitions, Transition, Stmts, Stmt, Expr
 
-    ParseResult parseProgram () ;
-    ParseResult parsePlatform () ;
-    ParseResult parseDecls () ;
-    ParseResult parseDecl () ;
+    ParseResult* parseProgram () ;
+    ParseResult* parsePlatform () ;
+    ParseResult* parseDecls () ;
+    ParseResult* parseDecl () ;
     ParseResult parseType () ;
-    ParseResult parseStates () ;
-    ParseResult parseState () ;
+    ParseResult* parseStates () ;
+    ParseResult* parseState () ;
     ParseResult parseTransitions () ;
     ParseResult parseTransition () ;
     ParseResult parseStmts () ;
@@ -80,6 +80,7 @@ public:
     ParseResult parseExtendedExprToken(ParseResult left); 
     ParseResult parseExprToken();
     ParseResult parseNullExprToken(); 
+    ParseResult parseNullExprToken(ParseResult left);
 
     // Helper function used by the parser.
     void match (tokenType tt) ;

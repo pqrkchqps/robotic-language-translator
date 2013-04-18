@@ -42,7 +42,7 @@ public:
     
     
     
-    void testParseExpresion() {
+    /*void ttestParseExpresion() {
 	    ParseResult pr ;
 	    const char *text = "$#$";
 	    p->tokens = extendTokenList ( p, s->scan (text) ) ;
@@ -58,7 +58,22 @@ public:
   	    TS_ASSERT(pr.getNext()->getNext()->getTerminal() == expr);
   	    TS_ASSERT(pr.getNext()->getNext()->getNext()->getTerminal() == nullExpr);
 	 }
-      
+      */
+
+    void testAddition() {
+            ParseResult pr ;
+	    const char *text = "3+2";
+	    p->tokens = extendTokenList ( p, s->scan (text) ) ;
+	    TS_ASSERT(p->tokens != NULL) ;
+	    p->currToken = p->tokens ;
+	    pr = p->parseExpr(0);
+	    TS_ASSERT(pr.getLexeme() == "3");
+  	    TS_ASSERT(pr.getNext()->getLexeme() == "+");
+  	    TS_ASSERT(pr.getNext()->getNext()->getLexeme() == "2");
+  	    TS_ASSERT(pr.getTerminal() == intConst);
+  	    TS_ASSERT(pr.getNext()->getTerminal() == plusSign);
+  	    TS_ASSERT(pr.getNext()->getNext()->getTerminal() == intConst);
+    }
      
 
     /* In this file you will add 3 additional tests like the one for
@@ -70,7 +85,7 @@ public:
        also include the appropriate documentation of that effort.
     */
 
-    /*void ttest_ast_squareMapper ( ) {
+    /*void test_ast_squareMapper ( ) {
         string file = "../samples/squareMapper.cff" ;
         const char *text =  readInputFromFile ( file.c_str() )  ;
         TS_ASSERT ( text ) ;

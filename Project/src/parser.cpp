@@ -48,7 +48,7 @@ ParseResult Parser::parse (const char *text) {
     catch (string errMsg) {
         pr.setOK(false);
         pr.setErrors(errMsg);
-        // pr.ast = NULL ;
+        pr.ast = NULL ;
     }
     return pr ;
 }
@@ -66,19 +66,36 @@ ParseResult Parser::parseProgram () {
     // Program ::= nameKwd colon variableName semiColon Platform Decls States
     match(nameKwd) ;
     match(colon) ;
+
     match(variableName) ;
-    //Node* p = new Node(prevtoken);
-    //ParseResult var(p);
-    //ast.program.addVariableName(var);
+    string name( prevToken->lexeme ) ;
+
     match(semiColon) ;
-    //ast.addNode(
-    parsePlatform();
-    //ast.addNode(
-    parseDecls();
-    //ast.addNode(
-    parseStates();
+
+    ParseResult prPlatform = parsePlatform() ;
+    Platform *p = NULL ;
+    if (prPlatform.ast) {
+        p = dynamic_cast<Platform *>(prPlatform.ast) ;
+        if ( ! p ) throw ( (string) "Bad cast of Platform in parseProgram" ) ;
+    }
+
+    ParseResult prDecls = parseDecls() ;
+    Decls *d = NULL ;
+    if (prDecls.ast) {
+        d = dynamic_cast<Decls *>(prDecls.ast) ;
+        if ( ! d ) throw ( (string) "Bad cast of Decls in parseProgram" ) ;
+    }
+
+    ParseResult prStates = parseStates() ;
+    State *s = NULL ;
+    if (prStates.ast) {
+        s = dynamic_cast<State *>(prStates.ast) ;
+        if ( ! s ) throw ( (string) "Bad cast of State in parseProgram" ) ;
+    }
+
     match(endOfFile) ;
-    //ast.addNode(NULL);
+
+    pr.ast = new Program(name, p, d, s) ;
     return pr ;
 }
 
@@ -103,8 +120,6 @@ ParseResult Parser::parseDecls () {
         // Decls ::= Decl Decls
         parseDecl() ;
         parseDecls() ;
-        //ast.addNode(parseDecls() );
-    	  //ast.addNode(parseStates() );
     }
     else {
         // Decls ::= 
@@ -298,8 +313,8 @@ ParseResult Parser::parseExpr (int rbp) {
        parse methods.*/
        
     ParseResult left = currToken->nud() ;
-    if (prevToken->terminal == extendedExpr)
-    	  left = currToken->led(left) ;
+    //if (prevToken->terminal == extendedExpr)
+    //	  left = currToken->led(left) ;
     while (rbp < currToken->lbp() ) {
         left = currToken->led(left) ;
     }
@@ -329,9 +344,12 @@ ParseResult Parser::parseFalseKwd ( ) {
 
 // Expr ::= intConst
 ParseResult Parser::parseIntConst ( ) {
-    ParseResult pr ;
     match ( intConst ) ;
-    return pr ;
+    IntConstResult* pr = new IntConstResult(prevToken->lexeme);
+    //make and store a parseResult of type ExprToken 
+
+    ParseResult *ret = dynamic_cast<ParseResult*>(pr);
+    return *ret ;
 }
 
 // Expr ::= floatConst
@@ -375,12 +393,17 @@ ParseResult Parser::parseNestedExpr ( ) {
 // Expr ::= Expr plusSign Expr
 ParseResult Parser::parseAddition ( ParseResult left ) {
     // parser has already matched left expression 
-    ParseResult pr ;
 
     match ( plusSign ) ;
-    parseExpr( prevToken->lbp() ); 
+    AdditionExprResult* pr = new AdditionExprResult();
+    //make and store a parseResult of type ExprToken 
 
-    return pr ;
+    ParseResult right = parseExpr( prevToken->lbp() ); 
+    
+    ParseResult* par = dynamic_cast<ParseResult*>(pr);
+    left.setNext(par);
+    par->setNext(&right);
+    return left;
 }
 
 // Expr ::= Expr star Expr

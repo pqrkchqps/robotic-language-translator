@@ -12,32 +12,76 @@ using namespace std ;
 ParseResult::ParseResult ( ) {
     this->setErrors("");
     this->setOK(true) ;
-    this->setTerminal(noMatch);
-	 this->setLexeme("");
-	 this->setNext(NULL);
-    // ast = NULL ; 
-}
+    this->ast = NULL ; 
+};
 
+this->astNode::this->astNode() {
+    this->setTerminal(noMatch);
+    this->setLexeme("");
+    this->setNext(NULL);
+    this->next = NULL;
+};
 ExprResult::ExprResult(string lexeme){
-    this->setErrors ("") ;
-    this->setOK(true);
     this->setTerminal(expr);
 	 this->setLexeme (lexeme);
 	 this->setNext(NULL);
-}
+    this->next = NULL;
+};
+
+IntConstResult::IntConstResult(string lexeme){
+    this->setTerminal(intConst);
+	 this->setLexeme (lexeme);
+	 this->setNext(NULL);
+    this->next = NULL;
+};
+
 
 NullExprResult::NullExprResult(){
-    this->setErrors("") ;
-    this->setOK(true) ;
     this->setTerminal(nullExpr);
 	 this->setLexeme("0");
 	 this->setNext(NULL);
-}
+    this->next = NULL;
+};
 
 ExtendedExprResult::ExtendedExprResult(string lexeme){
-    this->setErrors("");
-    this->setOK(true);
     this->setTerminal(extendedExpr);
-	 this->setLexeme(lexeme);
+    this->setLexeme(lexeme);
+    this->setNext(NULL);
+    this->next = NULL;
+};
+
+AdditionExprResult::AdditionExprResult(){
+    this->setTerminal(plusSign);
+    this->setLexeme("+");
+    this->setNext(NULL);
+    this->next = NULL;
+};
+
+Platform::Platform (string var_name ) {
+    this->setTerminal(platformKwd);
+	 this->setLexeme(var_name);
 	 this->setNext(NULL);
-}
+    this->next = NULL ; 
+};
+
+Decls::Decls(ParseResult left, ParseResult right){
+    this->setTerminal(noMatch);
+	 this->setLexeme("");
+	 this->setNext(NULL);
+    this->next = NULL ; 
+
+};
+
+States::States(){
+    this->setTerminal(stateKwd);
+	 this->setLexeme("");
+	 this->setNext(NULL);
+    this->next = NULL ; 
+};
+
+Program::Program(std::string name, Platform* p, Decls* d, States* s){
+    this->setTerminal(noMatch);
+	 this->setLexeme("");
+	 this->setNext(NULL);
+    this->next = NULL;
+};
