@@ -15,6 +15,68 @@
 #include <string>
 
 
+class ASTNode {
+public:
+    ASTNode() ;
+    std::string getLexeme() {return this->lexeme;};
+    void setLexeme(std::string lexeme) {this->lexeme = lexeme;};
+    tokenType getTerminal()  {return this->terminal;};
+    void setTerminal(tokenType terminal) {this->terminal = terminal;};
+    ASTNode* getNext() {return this->next;};
+    void setNext(ASTNode* next) {this->next = next;};
+
+private:    
+    virtual ~ASTNode();
+    tokenType terminal;
+    string lexeme;
+    ASTNode* next;
+};
+
+class ExprResult : public ASTNode{
+public:
+	ExprResult(string lexeme);
+};
+
+class IntConstResult : public ASTNode{
+public:
+	IntConstResult(string lexeme);
+};
+
+class NullExprResult : public ASTNode{
+public:
+	NullExprResult();
+};
+
+class ExtendedExprResult : public ASTNode{
+public:
+	ExtendedExprResult(string lexeme);
+};
+
+class AdditionExprResult : public ASTNode{
+public:
+	AdditionExprResult();
+};
+
+class Platform : public ASTNode{
+public:
+	Platform(std::string var_name);
+};
+
+class Decls : public ASTNode{
+public:
+	Decls(Decls* d);
+};
+
+class State : public ASTNode{
+public:
+	State();
+};
+
+class Program : public ASTNode{
+public:
+	Program(std::string name, Platform* p, Decls* d, State* s);
+};
+
 class ParseResult {
 public:
     ParseResult() ;
@@ -23,10 +85,6 @@ public:
     std::string getPP() {return this->pp;};
     void setPP(std::string pp) {this->pp = pp;};
     
-    std::string getLexeme() {return this->lexeme;};
-    void setLexeme(std::string lexeme) {this->lexeme = lexeme;};
-    tokenType getTerminal()  {return this->terminal;};
-    void setTerminal(tokenType terminal) {this->terminal = terminal;};
     bool getOK() {return this->ok;};
     void setOK(bool ok) {this->ok = ok;};
     ParseResult* getNext() {return this->next;};
@@ -34,29 +92,9 @@ public:
       
     std::string errors ;
     std::string pp ;
-    //Token *ast ;
+    ASTNode *ast ;
     bool ok ;
-  	 ParseResult* next;
-private:
-    tokenType terminal;
-	 string lexeme;
+    ParseResult* next;
 } ;
-
-class ExprResult : public ParseResult{
-public:
-	ExprResult(string lexeme);
-};
-
-class NullExprResult : public ParseResult{
-public:
-	NullExprResult();
-};
-
-class ExtendedExprResult : public ParseResult{
-public:
-	ExtendedExprResult(string lexeme);
-};
-
-
 
 #endif /* PARSER_RESULT_H */

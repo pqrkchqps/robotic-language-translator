@@ -34,15 +34,15 @@ public:
     The first method we used was to transform token and store the token as a parseResult  
     this means each token is stored as a seperate parse result.
     We will be using polymorphic behavor, so we will need a general abstract interface
-    to sepresent the common parts of the parse result's functionality.
+    to represent the common parts of the parse result's functionality.
     
-    These test cases below indicated: which order you wrote these test 
+    These test case should be in order of top down design. 
     
     *************************************************************************************/
     
     
     
-    void testParseExpresion() {
+    /*void ttestParseExpresion() {
 	    ParseResult pr ;
 	    const char *text = "$#$";
 	    p->tokens = extendTokenList ( p, s->scan (text) ) ;
@@ -58,7 +58,22 @@ public:
   	    TS_ASSERT(pr.getNext()->getNext()->getTerminal() == expr);
   	   // TS_ASSERT(pr.getNext()->getNext()->getNext()->getTerminal() == nullExpr);
 	 }
-      
+      */
+
+    void testAddition() {
+            ParseResult pr ;
+	    const char *text = "3+2";
+	    p->tokens = extendTokenList ( p, s->scan (text) ) ;
+	    TS_ASSERT(p->tokens != NULL) ;
+	    p->currToken = p->tokens ;
+	    pr = p->parseExpr(0);
+	    TS_ASSERT(pr.getLexeme() == "3");
+  	    TS_ASSERT(pr.getNext()->getLexeme() == "+");
+  	    TS_ASSERT(pr.getNext()->getNext()->getLexeme() == "2");
+  	    TS_ASSERT(pr.getTerminal() == intConst);
+  	    TS_ASSERT(pr.getNext()->getTerminal() == plusSign);
+  	    TS_ASSERT(pr.getNext()->getNext()->getTerminal() == intConst);
+    }
      
 
     /* In this file you will add 3 additional tests like the one for

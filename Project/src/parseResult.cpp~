@@ -11,40 +11,75 @@ using namespace std ;
 
 /*********************************************************************
 	
-	We modifed ParseResult and created ExprResult, NullExprResult, 
-	and ExtendedExprResult to make interface for them. 
+	We modifed ParseResult and created ExprResult, IntConstResult,
+	, ExtendedExprResult, NullExprResult, AdditionExprResult...... to make an interface for them. The purpose
+	of making an interface was to make the function easier to implement. 
 
 *********************************************************************/
 
 ParseResult::ParseResult ( ) {
     this->setErrors("");
     this->setOK(true) ;
+    this->ast = NULL ; 
+};
+
+/*this->astNode::this->astNode() {
     this->setTerminal(noMatch);
-	 this->setLexeme("");
-	 this->setNext(NULL);
-    // ast = NULL ; 
-}
+    this->setLexeme("");
+    this->setNext(NULL);
+};*/
 
 ExprResult::ExprResult(string lexeme){
-    this->setErrors ("") ;
-    this->setOK(true);
     this->setTerminal(expr);
 	 this->setLexeme (lexeme);
 	 this->setNext(NULL);
-}
+};
+
+IntConstResult::IntConstResult(string lexeme){
+    this->setTerminal(intConst);
+	 this->setLexeme (lexeme);
+	 this->setNext(NULL);
+};
+
 
 NullExprResult::NullExprResult(){
-    this->setErrors("") ;
-    this->setOK(true) ;
     this->setTerminal(nullExpr);
 	 this->setLexeme("0");
 	 this->setNext(NULL);
-}
+};
 
 ExtendedExprResult::ExtendedExprResult(string lexeme){
-    this->setErrors("");
-    this->setOK(true);
     this->setTerminal(extendedExpr);
-	 this->setLexeme(lexeme);
+    this->setLexeme(lexeme);
+    this->setNext(NULL);
+};
+
+AdditionExprResult::AdditionExprResult(){
+    this->setTerminal(plusSign);
+    this->setLexeme("+");
+    this->setNext(NULL);
+};
+
+Platform::Platform (string var_name ) {
+    this->setTerminal(platformKwd);
+	 this->setLexeme(var_name);
 	 this->setNext(NULL);
-}
+};
+
+Decls::Decls(const *Decls){
+    this->setTerminal(noMatch);
+	 this->setLexeme("");
+	 this->setNext(NULL);
+};
+
+State::State(){
+    this->setTerminal(stateKwd);
+	 this->setLexeme("");
+	 this->setNext(NULL);
+};
+
+Program::Program(std::string name, Platform* p, Decls* d, State* s){
+    this->setTerminal(noMatch);
+	 this->setLexeme("");
+	 this->setNext(NULL);
+};
