@@ -177,11 +177,15 @@ public:
     std::string description() { return "end of file"; }
 } ;
 
+/*********************************************************************
 
+	Create classes for ExprToken and NullExprToken
+
+**********************************************************************/
 
 class ExprToken : public ExtToken {
 public:
-    ExprToken (Parser *p, Token *t) : ExtToken(p,t) { }
+    ExprToken (Parser *p, Token *t, std::string d) : ExtToken(p,t,d) { }
     ParseResult nud () { return parser->parseExprToken (); }
     ParseResult led (ParseResult left) {
         return parser->parseExtendedExprToken (left) ; 
@@ -194,8 +198,8 @@ class NullExprToken : public ExtToken {
 public:
    NullExprToken (Parser *p, Token *t) : ExtToken(p,t) { }
 	ParseResult nud () { return parser->parseNullExprToken (); }
-	    ParseResult led (ParseResult left) {
-        return parser->parseNullExprToken () ; 
+	ParseResult led (ParseResult left) {
+        return parser->parseNullExprToken (left) ; 
     }
     int lbp() { return -1; }
     std::string description() { return "Null Expression Token"; }

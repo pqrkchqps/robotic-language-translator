@@ -46,8 +46,8 @@ ParseResult Parser::parse (const char *text) {
         pr = parseProgram( ) ;
     }
     catch (string errMsg) {
-        pr.ok = false ;
-        pr.errors = errMsg ;
+        pr.setOK(false);
+        pr.setErrors(errMsg);
         // pr.ast = NULL ;
     }
     return pr ;
@@ -298,8 +298,9 @@ ParseResult Parser::parseExpr (int rbp) {
        parse methods.*/
        
     ParseResult left = currToken->nud() ;
-   
-    while (rbp <= currToken->lbp() ) {
+    if (prevToken->terminal == extendedExpr)
+    	  left = currToken->led(left) ;
+    while (rbp < currToken->lbp() ) {
         left = currToken->led(left) ;
     }
 
@@ -415,35 +416,62 @@ ParseResult Parser::parseDivision ( ParseResult left ) {
     return pr ;
 }
 
-/*
-	New impliment: New adding tests functionality of parseResult, led and nud. 
+/***********************************************************************************
+
+	New implement: New adding tests functionality of parseResult, led and nud. 
 	We want to impliment in 2 ways. One way we translate token into parseResult
 	and another way we store property of parseResult. 
 	
-*/ 
+***********************************************************************************/ 
 
 ParseResult Parser::parseExprToken () {
-    ParseResult pr ;
     match (lexicalError) ;
+    ExprResult* pr = new ExprResult(prevToken->lexeme);
     //make and store a parseResult of type ExprToken 
-    return pr ;
+    
+    /*pr = currToken->nud();
+    while(rbp < currToken->lbp()) {
+    	pr = currToken->led(left);
+    }*/  
+    
+    ParseResult *ret = dynamic_cast<ParseResult*>(pr);
+    return *ret;
 }
 
 ParseResult Parser::parseNullExprToken ( ) {
-    ParseResult pr ;
     match (endOfFile) ;
+    NullExprResult* pr = new NullExprResult();
      //make and store a parseResult of type NullExprToken 
-    return pr ;
+    //pr = currToken->nud(); 
+    ParseResult *ret = dynamic_cast<ParseResult*>(pr);
+    return *ret;
+}
+
+ParseResult Parser::parseNullExprToken (ParseResult left ) {
+    match (endOfFile) ;
+    NullExprResult* pr = new NullExprResult();
+     //make and store a parseResult of type NullExprToken 
+    //pr = currToken->nud(); 
+    ParseResult *ret = dynamic_cast<ParseResult*>(pr);
+    left.setNext(ret);
+    return left;
 }
 
 ParseResult Parser::parseExtendedExprToken (ParseResult left){
-    ParseResult pr ;
+	 //parse has already matched left expression 
     match(lexicalError) ;
-    string name( prevToken->lexeme ) ;
-     //make and store a parseResult of type ExtendedExprToken
-    parseExpr( prevToken->lbp() ); 
+    ExtendedExprResult* pr = new ExtendedExprResult( prevToken->lexeme ) ;
+        
+    // just advance token, since examining it in parseExpr caused
+    // this method being called.
+    ParseResult right = parseExpr( prevToken->lbp() ); 
+    
+    ParseResult* par = dynamic_cast<ParseResult*>(pr);
+    
+    left.setNext(par);
+    par->setNext(&right);
 
-    return pr ;
+    return left;
 }
 
 

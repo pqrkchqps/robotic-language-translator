@@ -10,7 +10,34 @@
 using namespace std ;
 
 ParseResult::ParseResult ( ) {
-    errors = "" ;
-    ok = true ;
+    this->setErrors("");
+    this->setOK(true) ;
+    this->setTerminal(noMatch);
+	 this->setLexeme("");
+	 this->setNext(NULL);
     // ast = NULL ; 
+}
+
+ExprResult::ExprResult(string lexeme){
+    this->setErrors ("") ;
+    this->setOK(true);
+    this->setTerminal(expr);
+	 this->setLexeme (lexeme);
+	 this->setNext(NULL);
+}
+
+NullExprResult::NullExprResult(){
+    this->setErrors("") ;
+    this->setOK(true) ;
+    this->setTerminal(nullExpr);
+	 this->setLexeme("0");
+	 this->setNext(NULL);
+}
+
+ExtendedExprResult::ExtendedExprResult(string lexeme){
+    this->setErrors("");
+    this->setOK(true);
+    this->setTerminal(extendedExpr);
+	 this->setLexeme(lexeme);
+	 this->setNext(NULL);
 }

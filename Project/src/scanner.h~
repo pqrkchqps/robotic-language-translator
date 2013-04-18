@@ -46,7 +46,10 @@ enum tokenEnumType {
     // Special terminal types
     endOfFile,
     lexicalError,
-    noMatch
+    noMatch,
+    expr,
+    extendedExpr,
+    nullExpr
 };
 
 // Below you need to write your class definitions for Token and Scanner.

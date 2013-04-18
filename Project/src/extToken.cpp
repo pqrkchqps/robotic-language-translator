@@ -69,7 +69,12 @@ ExtToken *extendToken (Parser *p, Token *tokens) {
     case notEquals: 
         return new RelationalOpToken(p, tokens, tokens->lexeme) ;
         
-     //testing parseResult in 2 different methods of doing expressions
+    /*****************************************************************
+    
+    Testing parseResult in 2 different methods of doing expressions
+    
+    ******************************************************************/
+    
     case lexicalError: return new ExprToken(p,tokens,"lexical error") ;
     case endOfFile: return new NullExprToken(p,tokens) ;
 
