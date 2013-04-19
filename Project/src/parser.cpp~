@@ -401,8 +401,7 @@ ParseResult Parser::parseAddition ( ParseResult left ) {
     pr.ast = new AdditionExprResult();
     //make and store a parseResult of type ExprToken 
 
-    ParseResult right;
-    right.ast = parseExpr( prevToken->lbp() ); 
+    ParseResult right = parseExpr( prevToken->lbp() ); 
     
     left.setNext(&pr);
     pr.setNext(&right);
@@ -411,13 +410,18 @@ ParseResult Parser::parseAddition ( ParseResult left ) {
 
 // Expr ::= Expr star Expr
 ParseResult Parser::parseMultiplication ( ParseResult left ) {
-    // parser has already matched left expression 
-    ParseResult pr ;
+    // parser has already matched left expression
+    ParseResult pr;
+    //make and store a parseResult of type ExprToken 
+    match ( dash ) ;
+    pr.ast = new SubtractionExprResult();
+    //make and store a parseResult of type ExprToken 
 
-    match ( star ) ;
-    parseExpr( prevToken->lbp() ); 
-
-    return pr ;
+    ParseResult right = parseExpr( prevToken->lbp() ); 
+    
+    left.setNext(&pr);
+    pr.setNext(&right);
+    return left;
 }
 
 // Expr ::= Expr dash Expr
