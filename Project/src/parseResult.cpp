@@ -12,7 +12,8 @@ using namespace std ;
 /*********************************************************************
 	
 	We modifed ParseResult and created ExprResult, IntConstResult,
-	, ExtendedExprResult, NullExprResult, AdditionExprResult...... to make an interface for them. The purpose
+	NullExprResult, ExtendedExprResult, AdditionExprResult, Platform, 
+	Decls, State, Program to make an interface for them. The purpose
 	of making an interface was to make the function easier to implement. 
 
 *********************************************************************/
