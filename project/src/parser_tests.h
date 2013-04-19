@@ -22,7 +22,7 @@ public:
 
     void test_parse_bad_syntax ( ) {
         const char *text 
-          = readInputFromFile ( "../samples/bad_syntax_good_tokens.cff" )  ;
+          = readInputFromFile ( "../samples/bad_syntax_good_tokens.stm" )  ;
         TS_ASSERT ( text ) ;
         ParseResult pr = p->parse ( text ) ;
         TS_ASSERT ( ! pr.ok ) ;
@@ -49,7 +49,7 @@ public:
     }
 
     void test_parse_abstar ( ) {
-        const char *filename = "../samples/abstar.cff" ;
+        const char *filename = "../samples/abstar.stm" ;
         const char *text = readInputFromFile ( filename )  ;
         TS_ASSERT ( text ) ;
         ParseResult pr = p->parse ( text ) ;
@@ -58,7 +58,7 @@ public:
         TSM_ASSERT ( msg , pr.ok );
     }
     void test_parse_box ( ) {
-        const char *filename = "../samples/box.cff" ;
+        const char *filename = "../samples/box.stm" ;
         const char *text = readInputFromFile ( filename )  ;
         TS_ASSERT ( text ) ;
         ParseResult pr = p->parse ( text ) ;
@@ -67,7 +67,7 @@ public:
         TSM_ASSERT ( msg , pr.ok );
     }
     void test_parse_sumOfSquares ( ) {
-        const char *filename = "../samples/sumOfSquares.cff" ;
+        const char *filename = "../samples/sumOfSquares.stm" ;
         const char *text = readInputFromFile ( filename )  ;
         TS_ASSERT ( text ) ;
         ParseResult pr = p->parse ( text ) ;
