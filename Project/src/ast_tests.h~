@@ -38,9 +38,34 @@ public:
     
     These test cases should be in order of top down design. 
     
+    Is there a way to implement Iteration 3 so that you do not need to implement all of 
+    the AST classes before you can write and your code can pass a test case?
+    That is, how can we develop this so that we do not need to implement the AST classes all at once?
+	 How can we start small, perhaps implementing just one class or related set of classes and then proceed from there?
+	 
+    --> There is a way we can implement the AST classes without writting the entire parser. 
+    By following the recommendation given in the instruction, we can start with one none terminal 
+    such as expression and incrementaly test and write the code. We orgininally try to add small
+    helper Tokens and helper functions to test the functionality of expression without
+    writting all the expression. This proved unhelpful, and testing the functionality of a single
+    compound expression, addition, was far more effective and producing and testing good code. 
+    To implement expression we experiment with the number of design, the most useful one all involved
+    a list of parseResult. The first method for implementing polymophic behavior used parseResult
+    as a base class for newly implemented custom ParseResult types. This code did not work with 
+    the exsinting style presented in the code base. The implementation we finally used closely 
+    mimic the style of the sample code found online. Custom ASTNode(s) was stored on Parseresult 
+    in polymophic behavoir which used for type checking the ASTNode.  
+    
+    
+<<<<<<< HEAD
+    
+    
     *************************************************************************************/
     
     
+	//test for Addition 
+    void testAddition() {
+=======
 	//test for Addition 
     void testAddition() {
             ParseResult pr ;
@@ -61,6 +86,7 @@ public:
     }
 
     void testSubtraction() {
+>>>>>>> da442db36afa71e8411d69e39397a24993ec61cf
             ParseResult pr ;
 	    const char *text = "3-2";
 	    p->tokens = extendTokenList ( p, s->scan (text) ) ;
