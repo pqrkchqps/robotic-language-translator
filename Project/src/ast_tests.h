@@ -78,6 +78,59 @@ public:
   	    TS_ASSERT(pr.getNext()->getNext()->ast->getTerminal() == intConst);
     }
 
+    void testSubtraction() {
+            ParseResult pr ;
+	    const char *text = "3-2";
+	    p->tokens = extendTokenList ( p, s->scan (text) ) ;
+	    TS_ASSERT(p->tokens != NULL) ;
+	    p->currToken = p->tokens ;
+	    pr = p->parseExpr(0);
+
+  	    TS_ASSERT(pr.getNext() != NULL);
+  	    TS_ASSERT(pr.getNext()->getNext() != NULL);
+	    TS_ASSERT(pr.ast->getLexeme() == "3");
+  	    TS_ASSERT(pr.getNext()->ast->getLexeme() == "-");
+  	    TS_ASSERT(pr.getNext()->getNext()->ast->getLexeme() == "2");
+  	    TS_ASSERT(pr.ast->getTerminal() == intConst);
+  	    TS_ASSERT(pr.getNext()->ast->getTerminal() == dash);
+  	    TS_ASSERT(pr.getNext()->getNext()->ast->getTerminal() == intConst);
+    }
+
+    void testDivision() {
+            ParseResult pr ;
+	    const char *text = "3/2";
+	    p->tokens = extendTokenList ( p, s->scan (text) ) ;
+	    TS_ASSERT(p->tokens != NULL) ;
+	    p->currToken = p->tokens ;
+	    pr = p->parseExpr(0);    
+
+  	    TS_ASSERT(pr.getNext() != NULL);
+  	    TS_ASSERT(pr.getNext()->getNext() != NULL);
+	    TS_ASSERT(pr.ast->getLexeme() == "3");
+  	    TS_ASSERT(pr.getNext()->ast->getLexeme() == "/");
+  	    TS_ASSERT(pr.getNext()->getNext()->ast->getLexeme() == "2");
+  	    TS_ASSERT(pr.ast->getTerminal() == intConst);
+  	    TS_ASSERT(pr.getNext()->ast->getTerminal() == fowardSlash);
+  	    TS_ASSERT(pr.getNext()->getNext()->ast->getTerminal() == intConst);
+    }
+
+    void testMultiplication() {
+            ParseResult pr ;
+	    const char *text = "3*2";
+	    p->tokens = extendTokenList ( p, s->scan (text) ) ;
+	    TS_ASSERT(p->tokens != NULL) ;
+	    p->currToken = p->tokens ;
+	    pr = p->parseExpr(0);    
+
+  	    TS_ASSERT(pr.getNext() != NULL);
+  	    TS_ASSERT(pr.getNext()->getNext() != NULL);
+	    TS_ASSERT(pr.ast->getLexeme() == "3");
+  	    TS_ASSERT(pr.getNext()->ast->getLexeme() == "*");
+  	    TS_ASSERT(pr.getNext()->getNext()->ast->getLexeme() == "2");
+  	    TS_ASSERT(pr.ast->getTerminal() == intConst);
+  	    TS_ASSERT(pr.getNext()->ast->getTerminal() == star);
+  	    TS_ASSERT(pr.getNext()->getNext()->ast->getTerminal() == intConst);
+    }
      
 
     /* In this file you will add 3 additional tests like the one for
