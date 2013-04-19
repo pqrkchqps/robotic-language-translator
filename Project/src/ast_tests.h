@@ -117,7 +117,7 @@ public:
   	    TS_ASSERT(pr.getNext()->ast->getLexeme() == "/");
   	    TS_ASSERT(pr.getNext()->getNext()->ast->getLexeme() == "2");
   	    TS_ASSERT(pr.ast->getTerminal() == intConst);
-  	    TS_ASSERT(pr.getNext()->ast->getTerminal() == fowardSlash);
+  	    TS_ASSERT(pr.getNext()->ast->getTerminal() == forwardSlash);
   	    TS_ASSERT(pr.getNext()->getNext()->ast->getTerminal() == intConst);
     }
 
@@ -138,23 +138,7 @@ public:
   	    TS_ASSERT(pr.getNext()->ast->getTerminal() == star);
   	    TS_ASSERT(pr.getNext()->getNext()->ast->getTerminal() == intConst);
     }
-    
-    //test for Subtraction 
-      void testSubtraction() {
-            ParseResult pr ;
-	    const char *text = "3-2";
-	    p->tokens = extendTokenList ( p, s->scan (text) ) ;
-	    TS_ASSERT(p->tokens != NULL) ;
-	    p->currToken = p->tokens ;
-	    pr = p->parseExpr(0);
-	    TS_ASSERT(pr.getLexeme() == "3");
-  	    TS_ASSERT(pr.getNext()->getLexeme() == "-");
-  	    TS_ASSERT(pr.getNext()->getNext()->getLexeme() == "2");
-  	    TS_ASSERT(pr.getTerminal() == intConst);
-  	    TS_ASSERT(pr.getNext()->getTerminal() == dash);
-  	    TS_ASSERT(pr.getNext()->getNext()->getTerminal() == intConst);
-    }
-    
+
     //test for Multiplication
     
     //test for Division 

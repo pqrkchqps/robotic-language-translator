@@ -37,9 +37,9 @@ public:
 	ExprResult(string lexeme);
 };
 
-class IntConstResult : public ASTNode{
+class IntConst : public ASTNode{
 public:
-	IntConstResult(string lexeme);
+	IntConst(string lexeme);
 };
 
 class NullExprResult : public ASTNode{
@@ -52,9 +52,24 @@ public:
 	ExtendedExprResult(string lexeme);
 };
 
-class AdditionExprResult : public ASTNode{
+class Addition : public ASTNode{
 public:
-	AdditionExprResult();
+	Addition();
+};
+
+class Subtraction : public ASTNode{
+public:
+	Subtraction();
+};
+
+class Multiplication : public ASTNode{
+public:
+	Multiplication();
+};
+
+class Division : public ASTNode{
+public:
+	Division();
 };
 
 class Platform : public ASTNode{

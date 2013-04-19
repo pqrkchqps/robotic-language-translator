@@ -350,7 +350,7 @@ ParseResult Parser::parseFalseKwd ( ) {
 ParseResult Parser::parseIntConst ( ) {
     ParseResult pr;
     match ( intConst ) ;
-    pr.ast = new IntConstResult(prevToken->lexeme);
+    pr.ast = new IntConst(prevToken->lexeme);
     //make and store a parseResult of type ExprToken 
     return pr;
 }
@@ -398,7 +398,7 @@ ParseResult Parser::parseAddition ( ParseResult left ) {
     ParseResult pr;
     //make and store a parseResult of type ExprToken 
     match ( plusSign ) ;
-    pr.ast = new AdditionExprResult();
+    pr.ast = new Addition();
     //make and store a parseResult of type ExprToken 
 
     ParseResult right = parseExpr( prevToken->lbp() ); 
@@ -414,7 +414,7 @@ ParseResult Parser::parseMultiplication ( ParseResult left ) {
     ParseResult pr;
     //make and store a parseResult of type ExprToken 
     match ( star ) ;
-    pr.ast = new MultiplicationExprResult();
+    pr.ast = new Multiplication();
     //make and store a parseResult of type ExprToken 
 
     ParseResult right = parseExpr( prevToken->lbp() ); 
@@ -430,7 +430,7 @@ ParseResult Parser::parseSubtraction ( ParseResult left ) {
     ParseResult pr;
     //make and store a parseResult of type ExprToken 
     match ( dash ) ;
-    pr.ast = new AdditionExprResult();
+    pr.ast = new Subtraction();
     //make and store a parseResult of type ExprToken 
 
     ParseResult right = parseExpr( prevToken->lbp() ); 
@@ -446,7 +446,7 @@ ParseResult Parser::parseDivision ( ParseResult left ) {
     ParseResult pr;
     //make and store a parseResult of type ExprToken 
     match ( forwardSlash ) ;
-    pr.ast = new DivisionExprResult();
+    pr.ast = new Division();
     //make and store a parseResult of type ExprToken 
 
     ParseResult right = parseExpr( prevToken->lbp() ); 

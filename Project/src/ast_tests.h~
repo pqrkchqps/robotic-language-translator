@@ -49,23 +49,23 @@ public:
     helper Tokens and helper functions to test the functionality of expression without
     writting all the expression. This proved unhelpful, and testing the functionality of a single
     compound expression, addition, was far more effective and producing and testing good code. 
+    
     To implement expression we experiment with the number of design, the most useful one all involved
     a list of parseResult. The first method for implementing polymophic behavior used parseResult
     as a base class for newly implemented custom ParseResult types. This code did not work with 
     the exsinting style presented in the code base. The implementation we finally used closely 
     mimic the style of the sample code found online. Custom ASTNode(s) was stored on Parseresult 
-    in polymophic behavoir which used for type checking the ASTNode.  
+    in polymophic behavoir which used for type checking the ASTNode. 
+    
+    To test this functionality will be start with the addition testcase and precided to 
+    copy this style for all the subsequence expressions.   
     
     
-<<<<<<< HEAD
     
     
     *************************************************************************************/
     
     
-	//test for Addition 
-    void testAddition() {
-=======
 	//test for Addition 
     void testAddition() {
             ParseResult pr ;
@@ -86,7 +86,6 @@ public:
     }
 
     void testSubtraction() {
->>>>>>> da442db36afa71e8411d69e39397a24993ec61cf
             ParseResult pr ;
 	    const char *text = "3-2";
 	    p->tokens = extendTokenList ( p, s->scan (text) ) ;
@@ -139,23 +138,7 @@ public:
   	    TS_ASSERT(pr.getNext()->ast->getTerminal() == star);
   	    TS_ASSERT(pr.getNext()->getNext()->ast->getTerminal() == intConst);
     }
-    
-    //test for Subtraction 
-      void testSubtraction() {
-            ParseResult pr ;
-	    const char *text = "3-2";
-	    p->tokens = extendTokenList ( p, s->scan (text) ) ;
-	    TS_ASSERT(p->tokens != NULL) ;
-	    p->currToken = p->tokens ;
-	    pr = p->parseExpr(0);
-	    TS_ASSERT(pr.getLexeme() == "3");
-  	    TS_ASSERT(pr.getNext()->getLexeme() == "-");
-  	    TS_ASSERT(pr.getNext()->getNext()->getLexeme() == "2");
-  	    TS_ASSERT(pr.getTerminal() == intConst);
-  	    TS_ASSERT(pr.getNext()->getTerminal() == dash);
-  	    TS_ASSERT(pr.getNext()->getNext()->getTerminal() == intConst);
-    }
-    
+
     //test for Multiplication
     
     //test for Division 

@@ -36,7 +36,7 @@ ExprResult::ExprResult(string lexeme){
 	 this->setNext(NULL);
 };
 
-IntConstResult::IntConstResult(string lexeme){
+IntConst::IntConst(string lexeme){
     this->setTerminal(intConst);
 	 this->setLexeme (lexeme);
 	 this->setNext(NULL);
@@ -55,9 +55,27 @@ ExtendedExprResult::ExtendedExprResult(string lexeme){
     this->setNext(NULL);
 };
 
-AdditionExprResult::AdditionExprResult(){
+Addition::Addition(){
     this->setTerminal(plusSign);
     this->setLexeme("+");
+    this->setNext(NULL);
+};
+
+Subtraction::Subtraction(){
+    this->setTerminal(dash);
+    this->setLexeme("-");
+    this->setNext(NULL);
+};
+
+Division::Division(){
+    this->setTerminal(forwardSlash);
+    this->setLexeme("/");
+    this->setNext(NULL);
+};
+
+Multiplication::Multiplication(){
+    this->setTerminal(star);
+    this->setLexeme("*");
     this->setNext(NULL);
 };
 
