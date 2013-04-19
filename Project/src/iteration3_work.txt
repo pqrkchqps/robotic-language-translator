@@ -1,5 +1,5 @@
 Joinly edited makefile
 Joinly done for iter3 tag
 Joinly done for commenting on ast_tests.h and parser.cpp
-Joinly wrote test cases
+John wrote test cases
 Joinly modified parseResult.h and parseResult.cpp file 

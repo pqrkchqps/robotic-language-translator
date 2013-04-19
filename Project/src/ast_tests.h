@@ -24,57 +24,55 @@ public:
         DEBUG = 0 ;
     }
      
-    /************************************************************************************
+    /*******************************************************************************************
     
-    We created a new token type parseExprToken and parseExtendedExprToken because 
-    we want to test functionality of parseResult, led and nud. We want to implement
-    them in 2 ways. One way we translate token into parseResult and another way we store 
-    property of parseResult. 
-    
-    The first method we used was to transform token and store the token as a parseResult  
-    this means each token is stored as a seperate parse result.
-    We will be using polymorphic behavor, so we will need a general abstract interface
-    to represent the common parts of the parse result's functionality.
-    
-    These test cases should be in order of top down design. 
-    
-    Is there a way to implement Iteration 3 so that you do not need to implement all of 
-    the AST classes before you can write and your code can pass a test case?
-    That is, how can we develop this so that we do not need to implement the AST classes all at once?
-	 How can we start small, perhaps implementing just one class or related set of classes and then proceed from there?
-	 
-    --> There is a way we can implement the AST classes without writting the entire parser. 
-    By following the recommendation given in the instruction, we can start with one none terminal 
-    such as expression and incrementaly test and write the code. We orgininally try to add small
-    helper Tokens and helper functions to test the functionality of expression without
-    writting all the expression. This proved unhelpful, and testing the functionality of a single
-    compound expression, addition, was far more effective and producing and testing good code. 
-    
-    To implement expression we experiment with the number of design, the most useful one all involved
-    a list of parseResult. The first method for implementing polymophic behavior used parseResult
-    as a base class for newly implemented custom ParseResult types. This code did not work with 
-    the exsinting style presented in the code base. The implementation we finally used closely 
-    mimic the style of the sample code found online. Custom ASTNode(s) was stored on Parseresult 
-    in polymophic behavoir which used for type checking the ASTNode. 
-    
-    To test this functionality will be start with the addition testcase and precided to 
-    copy this style for all the subsequence expressions.   
+		 We created a new token type parseExprToken and parseExtendedExprToken because 
+		 we want to test functionality of parseResult, led and nud. We want to implement
+		 them in 2 ways. One way we translate token into parseResult and another way we 
+		 store property of parseResult. 
+		 
+		 The first method we used was to transform token and store the token as a parseResult.
+		 This means each token is stored as a seperate parse result. We will be using 
+		 polymorphic behavor, so we will need a general abstract interface to represent 
+		 the common parts of the parse result's functionality.
+		 
+		 These test cases should be in order of top down design. 
+		 
+		 Question: Is there a way to implement Iteration 3 so that you do not need to implement 
+		 all of the AST classes before you can write and your code can pass a test case?
+		 That is, how can we develop this so that we do not need to implement the AST classes 
+		 all at once? How can we start small, perhaps implementing just one class or related 
+		 set of classes and then proceed from there?
+		 
+		 There is a way we can implement the AST classes without writting the entire parser. 
+		 By following the recommendation given in the instruction, we can start with one 
+		 none terminal such as expression and incrementaly test and write the code. We orgininally 
+		 try to add small helper Tokens and helper functions to test the functionality of 
+		 expression without writting all the expression. This proved that it was unhelpful, 
+		 and testing the functionality of a single compound expression, addition, was far more 
+		 effective and producing and testing good code. 
+		 
+		 To implement expression we experiment with the number of design, the most useful one 
+		 all involved a list of parseResult. The first method for implementing polymorphic behavior 
+		 used parseResult as a base class for newly implemented custom ParseResult types. 
+		 This code did not work with the existing style presented in the code base. 
+		 The implementation we finally used closely mimic the style of the sample code 
+		 found online. Custom ASTNode(s) was stored on Parseresult in polymophic behavoir 
+		 which used for type checking the ASTNode. 
+		 
+		 To test this functionality will be start with the addition testcase and precided to 
+		 copy this style for all the subsequence expressions.   
 
+		 To test the functionality of constant expressions we opted to just check the case
+		 where one constant expression was handed to the parseExpr method.
+		 The reason we did this is because the parser should fail if the sequence of
+		 expressions are not valid.  The case where there are more than one expression was
+		 commented out because it is not usefull for testing that constant expressions
+		 evaluate correctly. The functionality that checks for bad expressions will likely
+		 be tested in a one of the nonterminals higher in the AST.
 
-/////
-
-    To test the functionality of constant expressions we opted to just check the case
-    where one constant expression was handed to the parseExpr method.
-    The reason we did this is because the parser should fail if the sequence of
-    expressions are not valid.  The case where there are more than one expression was
-    commented out because it is not usefull for testing that constant expressions
-    evaluate correctly.  The functionality that checks for bad expressions will likely
-    be tested in a one of the nonterminals higher in the AST.
-
-    Testing for trueKwd, falseKwd and variableName followed the same pattern as the 
-    other constant expressions.  These terminals experienced no problems.
-    
-    
+		 Testing for trueKwd, falseKwd and variableName followed the same pattern as the 
+		 other constant expressions. These terminals experienced no problems.
     
     
     *************************************************************************************/
@@ -166,7 +164,6 @@ public:
 	    TS_ASSERT(p->tokens != NULL) ;
 	    p->currToken = p->tokens ;
 	    pr = p->parseExpr(0);    
-
   	    TS_ASSERT(pr.getNext() != NULL);
   	    TS_ASSERT(pr.getNext()->getNext() != NULL);
 	    TS_ASSERT(pr.ast->getLexeme() == "\"3\"");
@@ -328,8 +325,7 @@ public:
     //test for Transition
     
     //test for Type 
-    
-    
+       
     //test for Decl
     
     //test for State

@@ -471,7 +471,7 @@ ParseResult Parser::parseDivision ( ParseResult left ) {
 /***********************************************************************************
 
 	New implement: New adding tests functionality of parseResult, led and nud. 
-	We want to impliment in 2 ways. One way we translate token into parseResult
+	We want to implement in 2 ways. One way we translate token into parseResult
 	and another way we store property of parseResult. 
 	
 ***********************************************************************************/ 
