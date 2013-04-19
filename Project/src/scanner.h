@@ -49,7 +49,10 @@ enum tokenEnumType {
     noMatch,
     expr,
     extendedExpr,
-    nullExpr
+    nullExpr,
+    consDeclToken,
+    nullDeclToken,
+    declToken
 };
 
 // Below you need to write your class definitions for Token and Scanner.

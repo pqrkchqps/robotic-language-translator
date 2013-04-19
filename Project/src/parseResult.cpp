@@ -18,35 +18,83 @@ using namespace std ;
 
 *********************************************************************/
 
-ParseResult::ParseResult ( ) {
+
+DeclResult::DeclResult(std::string type, std::string name){
     this->setErrors("");
     this->setOK(true) ;
     this->ast = NULL ; 
 };
+DeclResult::DeclResult(std::string type, std::string name, std::string value){
+    this->setErrors("");
+    this->setOK(true) ;
+    this->ast = new Decl(); 
+    this->type = type;
+    this->name = name;
+    this->value = "NULL";
+};
 
+Decl::Decl() {
+    this->setTerminal(declToken);
+    this->setLexeme ("Decl");
+    this->setNext(NULL);
+};
+
+ConsDeclResult::ConsDeclResult(ParseResult car, ParseResult cdr){
+    this->setErrors("");
+    this->setOK(true) ;
+    this->ast = new ConsDecl(); 
+    this->left = car;
+    this->right = cdr;
+};
+
+ParseResult ConsDeclResult::car() {
+    return this->left;
+};
+
+ParseResult ConsDeclResult::cdr() {
+    return this->right;
+};
+
+ConsDecl::ConsDecl(){
+    this->setTerminal(consDeclToken);
+    this->setLexeme ("ConsDecl");
+    this->setNext(NULL);
+};
+
+NullDeclResult::NullDeclResult() {
+    this->setErrors("");
+    this->setOK(true);
+    this->ast = new NullDecl();
+};
+
+NullDecl::NullDecl(){
+    this->setTerminal(nullDeclToken);
+    this->setLexeme ("NULLDecl");
+    this->setNext(NULL);
+};
 
 ExprResult::ExprResult(string lexeme){
     this->setTerminal(expr);
-	 this->setLexeme (lexeme);
-	 this->setNext(NULL);
+    this->setLexeme (lexeme);
+    this->setNext(NULL);
 };
 
 TrueKwd::TrueKwd(){
     this->setTerminal(trueKwd);
-	 this->setLexeme ("true");
-	 this->setNext(NULL);
+    this->setLexeme ("true");
+    this->setNext(NULL);
 };
 
 FalseKwd::FalseKwd(){
     this->setTerminal(falseKwd);
-	 this->setLexeme ("false");
-	 this->setNext(NULL);
+    this->setLexeme ("false");
+    this->setNext(NULL);
 };
 
 IntConst::IntConst(string lexeme){
     this->setTerminal(intConst);
-	 this->setLexeme (lexeme);
-	 this->setNext(NULL);
+    this->setLexeme (lexeme);
+    this->setNext(NULL);
 };
 
 FloatConst::FloatConst(string lexeme){
@@ -69,8 +117,8 @@ CharConst::CharConst(string lexeme){
 
 VariableName::VariableName(string lexeme){
     this->setTerminal(variableName);
-	 this->setLexeme (lexeme);
-	 this->setNext(NULL);
+    this->setLexeme (lexeme);
+    this->setNext(NULL);
 };
 
 LeftParen::LeftParen(){
@@ -87,8 +135,8 @@ RightParen::RightParen(){
 
 NullExprResult::NullExprResult(){
     this->setTerminal(nullExpr);
-	 this->setLexeme("0");
-	 this->setNext(NULL);
+    this->setLexeme("0");
+    this->setNext(NULL);
 };
 
 ExtendedExprResult::ExtendedExprResult(string lexeme){
@@ -123,24 +171,18 @@ Multiplication::Multiplication(){
 
 Platform::Platform (string var_name ) {
     this->setTerminal(platformKwd);
-	 this->setLexeme(var_name);
-	 this->setNext(NULL);
-};
-
-Decls::Decls(Decls* d){
-    this->setTerminal(noMatch);
-	 this->setLexeme("");
-	 this->setNext(NULL);
+    this->setLexeme(var_name);
+    this->setNext(NULL);
 };
 
 State::State(){
     this->setTerminal(stateKwd);
-	 this->setLexeme("");
-	 this->setNext(NULL);
+    this->setLexeme("");
+    this->setNext(NULL);
 };
 
-Program::Program(std::string name, Platform* p, Decls* d, State* s){
+Program::Program(std::string name, Platform* p, ConsDecl* d, State* s){
     this->setTerminal(noMatch);
-	 this->setLexeme("");
-	 this->setNext(NULL);
+    this->setLexeme("");
+    this->setNext(NULL);
 };

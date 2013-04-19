@@ -29,8 +29,6 @@
 
 using namespace std ;
 
-int i; 
-
 Parser::Parser ( ) { } 
 
 ParseResult Parser::parse (const char *text) {
@@ -119,15 +117,19 @@ ParseResult Parser::parsePlatform () {
 // Decls
 ParseResult Parser::parseDecls () {
     ParseResult pr ;
+    ParseResult car ;
+    ParseResult cdr ;
 
     if ( ! nextIs(initialKwd) && ! nextIs(stateKwd) ) {
         // Decls ::= Decl Decls
-        parseDecl() ;
-        parseDecls() ;
+        car = parseDecl() ;
+        cdr = parseDecls() ;
+	pr = ConsDeclResult(car, cdr);
     }
     else {
         // Decls ::= 
         // nothing to match.
+	pr = NullDeclResult();
     }
 
     return pr ;
@@ -138,9 +140,11 @@ ParseResult Parser::parseDecls () {
 ParseResult Parser::parseDecl () {
     ParseResult pr ;
     // Decl ::= Type variableName semiColon
-    parseType() ;
+    ParseResult type = parseType() ;
     match(variableName) ;
+    string var_name = prevToken->lexeme;
     match(semiColon) ;
+    pr = DeclResult(type.ast->getLexeme(), var_name);
     return pr ;
 }
 
@@ -400,7 +404,10 @@ ParseResult Parser::parseNestedExpr ( ) {
     ParseResult right;
     right.ast = new RightParen();
 
+    if (inside.ast == NULL) throw ( (string) "Malformed Expression: '(' must be followed by a valid expression" );
     pr.setNext(&inside);
+    while (inside.getNext() != NULL)
+    	inside = *(inside.getNext());
     inside.setNext(&right);
     return pr;
 }
@@ -476,6 +483,10 @@ ParseResult Parser::parseDivision ( ParseResult left ) {
 	
 ***********************************************************************************/ 
 
+
+/**********************************************************************************/
+/***********UNUSED HELPER FUNCTIONS FOR INCREMENTAL DEVELOPMENT********************/
+/**********************************************************************************/
 ParseResult Parser::parseExprToken () {
     match (lexicalError) ;
     ExprResult* pr = new ExprResult(prevToken->lexeme);
@@ -503,7 +514,12 @@ ParseResult Parser::parseNullExprToken (ParseResult left ) {
     left.setNext(ret);
     return left;
 }
+/**********************************************************************************/
+/**********************************************************************************/
+/**********************************************************************************/
 
+
+//Refactor To Use Iterator Design Pattern//
 ParseResult Parser::parseExtendedExprToken (ParseResult left) {
 	 //parse has already matched left expression 
     match(lexicalError) ;
