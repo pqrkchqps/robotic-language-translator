@@ -67,13 +67,17 @@ public:
 	    TS_ASSERT(p->tokens != NULL) ;
 	    p->currToken = p->tokens ;
 	    pr = p->parseExpr(0);
-	    TS_ASSERT(pr.getLexeme() == "3");
-  	    TS_ASSERT(pr.getNext()->getLexeme() == "+");
-  	    TS_ASSERT(pr.getNext()->getNext()->getLexeme() == "2");
-  	    TS_ASSERT(pr.getTerminal() == intConst);
-  	    TS_ASSERT(pr.getNext()->getTerminal() == plusSign);
-  	    TS_ASSERT(pr.getNext()->getNext()->getTerminal() == intConst);
+
+  	    TS_ASSERT(pr.getNext() != NULL);
+  	    TS_ASSERT(pr.getNext()->getNext() != NULL);
+	    TS_ASSERT(pr.ast->getLexeme() == "3");
+  	    TS_ASSERT(pr.getNext()->ast->getLexeme() == "+");
+  	    TS_ASSERT(pr.getNext()->getNext()->ast->getLexeme() == "2");
+  	    TS_ASSERT(pr.ast->getTerminal() == intConst);
+  	    TS_ASSERT(pr.getNext()->ast->getTerminal() == plusSign);
+  	    TS_ASSERT(pr.getNext()->getNext()->ast->getTerminal() == intConst);
     }
+
      
 
     /* In this file you will add 3 additional tests like the one for
