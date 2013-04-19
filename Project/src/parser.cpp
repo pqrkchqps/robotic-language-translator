@@ -426,23 +426,34 @@ ParseResult Parser::parseMultiplication ( ParseResult left ) {
 
 // Expr ::= Expr dash Expr
 ParseResult Parser::parseSubtraction ( ParseResult left ) {
-    // parser has already matched left expression 
-    ParseResult pr ;
-
+    // parser has already matched left expression
+    ParseResult pr;
+    //make and store a parseResult of type ExprToken 
     match ( dash ) ;
-    parseExpr( prevToken->lbp() ); 
+    pr.ast = new AdditionExprResult();
+    //make and store a parseResult of type ExprToken 
 
-    return pr ;
+    ParseResult right = parseExpr( prevToken->lbp() ); 
+    
+    left.setNext(&pr);
+    pr.setNext(&right);
+    return left;
 }
 
 // Expr ::= Expr forwardSlash Expr
 ParseResult Parser::parseDivision ( ParseResult left ) {
-    // parser has already matched left expression 
-    ParseResult pr ;
-
+    // parser has already matched left expression
+    ParseResult pr;
+    //make and store a parseResult of type ExprToken 
     match ( forwardSlash ) ;
-    parseExpr( prevToken->lbp() ); 
+    pr.ast = new DivisionExprResult();
+    //make and store a parseResult of type ExprToken 
 
+    ParseResult right = parseExpr( prevToken->lbp() ); 
+    
+    left.setNext(&pr);
+    pr.setNext(&right);
+    return left;
     return pr ;
 }
 
