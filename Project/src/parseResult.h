@@ -17,16 +17,16 @@
 
 class ASTNode {
 public:
-    ASTNode() ;
+    ASTNode() {};
     std::string getLexeme() {return this->lexeme;};
     void setLexeme(std::string lexeme) {this->lexeme = lexeme;};
     tokenType getTerminal()  {return this->terminal;};
     void setTerminal(tokenType terminal) {this->terminal = terminal;};
     ASTNode* getNext() {return this->next;};
     void setNext(ASTNode* next) {this->next = next;};
+    virtual ~ASTNode() {};
 
 private:    
-    virtual ~ASTNode();
     tokenType terminal;
     string lexeme;
     ASTNode* next;

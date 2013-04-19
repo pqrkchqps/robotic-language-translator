@@ -72,30 +72,34 @@ ParseResult Parser::parseProgram () {
 
     match(semiColon) ;
 
-    ParseResult prPlatform = parsePlatform() ;
-    Platform *p = NULL ;
-    if (prPlatform.ast) {
-        p = dynamic_cast<Platform *>(prPlatform.ast) ;
-        if ( ! p ) throw ( (string) "Bad cast of Platform in parseProgram" ) ;
-    }
+    //ParseResult prPlatform = 
+    parsePlatform() ;
+    //Platform *p = NULL ;
+    //if (prPlatform.ast) {
+    //    p = dynamic_cast<Platform *>(prPlatform.ast) ;
+    //    if ( ! p ) throw ( (string) "Bad cast of Platform in parseProgram" ) ;
+    //}
 
-    ParseResult prDecls = parseDecls() ;
-    Decls *d = NULL ;
-    if (prDecls.ast) {
-        d = dynamic_cast<Decls *>(prDecls.ast) ;
-        if ( ! d ) throw ( (string) "Bad cast of Decls in parseProgram" ) ;
-    }
+    //ParseResult prDecls = 
+    parseDecls() ;
+    //Decls *d = NULL ;
+    //if (prDecls.ast) {
+    //    d = dynamic_cast<Decls *>(prDecls.ast) ;
+    //    if ( ! d ) throw ( (string) "Bad cast of Decls in parseProgram" ) ;
+    //}
 
-    ParseResult prStates = parseStates() ;
-    State *s = NULL ;
-    if (prStates.ast) {
-        s = dynamic_cast<State *>(prStates.ast) ;
-        if ( ! s ) throw ( (string) "Bad cast of State in parseProgram" ) ;
-    }
+    //ParseResult prStates = 
+    parseStates() ;
+    //State *s = NULL ;
+    //if (prStates.ast) {
+    //    s = dynamic_cast<State *>(prStates.ast) ;
+    //    if ( ! s ) throw ( (string) "Bad cast of State in parseProgram" ) ;
+    //}
 
     match(endOfFile) ;
 
-    pr.ast = new Program(name, p, d, s) ;
+    //pr.ast = new Program(name, p, d, s) ;
+    //pr.setOK(true);
     return pr ;
 }
 
@@ -344,12 +348,11 @@ ParseResult Parser::parseFalseKwd ( ) {
 
 // Expr ::= intConst
 ParseResult Parser::parseIntConst ( ) {
+    ParseResult pr;
     match ( intConst ) ;
-    IntConstResult* pr = new IntConstResult(prevToken->lexeme);
+    pr.ast = new IntConstResult(prevToken->lexeme);
     //make and store a parseResult of type ExprToken 
-
-    ParseResult *ret = dynamic_cast<ParseResult*>(pr);
-    return *ret ;
+    return pr;
 }
 
 // Expr ::= floatConst
@@ -380,7 +383,6 @@ ParseResult Parser::parseVariableName ( ) {
     return pr ;
 }
 
-
 // Expr ::= leftParen Expr rightParen
 ParseResult Parser::parseNestedExpr ( ) {
     ParseResult pr ;
@@ -392,29 +394,34 @@ ParseResult Parser::parseNestedExpr ( ) {
 
 // Expr ::= Expr plusSign Expr
 ParseResult Parser::parseAddition ( ParseResult left ) {
-    // parser has already matched left expression 
-
+    // parser has already matched left expression
+    ParseResult pr;
+    //make and store a parseResult of type ExprToken 
     match ( plusSign ) ;
-    AdditionExprResult* pr = new AdditionExprResult();
+    pr.ast = new AdditionExprResult();
     //make and store a parseResult of type ExprToken 
 
     ParseResult right = parseExpr( prevToken->lbp() ); 
     
-    ParseResult* par = dynamic_cast<ParseResult*>(pr);
-    left.setNext(par);
-    par->setNext(&right);
+    left.setNext(&pr);
+    pr.setNext(&right);
     return left;
 }
 
 // Expr ::= Expr star Expr
 ParseResult Parser::parseMultiplication ( ParseResult left ) {
-    // parser has already matched left expression 
-    ParseResult pr ;
-
+    // parser has already matched left expression
+    ParseResult pr;
+    //make and store a parseResult of type ExprToken 
     match ( star ) ;
-    parseExpr( prevToken->lbp() ); 
+    pr.ast = new MultiplicationExprResult();
+    //make and store a parseResult of type ExprToken 
 
-    return pr ;
+    ParseResult right = parseExpr( prevToken->lbp() ); 
+    
+    left.setNext(&pr);
+    pr.setNext(&right);
+    return left;
 }
 
 // Expr ::= Expr dash Expr
@@ -475,7 +482,7 @@ ParseResult Parser::parseNullExprToken (ParseResult left ) {
     return left;
 }
 
-ParseResult Parser::parseExtendedExprToken (ParseResult left){
+ParseResult Parser::parseExtendedExprToken (ParseResult left) {
 	 //parse has already matched left expression 
     match(lexicalError) ;
     ExtendedExprResult* pr = new ExtendedExprResult( prevToken->lexeme ) ;

@@ -57,11 +57,15 @@ public:
     in polymophic behavoir which used for type checking the ASTNode.  
     
     
+<<<<<<< HEAD
     
     
     *************************************************************************************/
     
     
+	//test for Addition 
+    void testAddition() {
+=======
 	//test for Addition 
     void testAddition() {
             ParseResult pr ;
@@ -70,12 +74,70 @@ public:
 	    TS_ASSERT(p->tokens != NULL) ;
 	    p->currToken = p->tokens ;
 	    pr = p->parseExpr(0);
-	    TS_ASSERT(pr.getLexeme() == "3");
-  	    TS_ASSERT(pr.getNext()->getLexeme() == "+");
-  	    TS_ASSERT(pr.getNext()->getNext()->getLexeme() == "2");
-  	    TS_ASSERT(pr.getTerminal() == intConst);
-  	    TS_ASSERT(pr.getNext()->getTerminal() == plusSign);
-  	    TS_ASSERT(pr.getNext()->getNext()->getTerminal() == intConst);
+
+  	    TS_ASSERT(pr.getNext() != NULL);
+  	    TS_ASSERT(pr.getNext()->getNext() != NULL);
+	    TS_ASSERT(pr.ast->getLexeme() == "3");
+  	    TS_ASSERT(pr.getNext()->ast->getLexeme() == "+");
+  	    TS_ASSERT(pr.getNext()->getNext()->ast->getLexeme() == "2");
+  	    TS_ASSERT(pr.ast->getTerminal() == intConst);
+  	    TS_ASSERT(pr.getNext()->ast->getTerminal() == plusSign);
+  	    TS_ASSERT(pr.getNext()->getNext()->ast->getTerminal() == intConst);
+    }
+
+    void testSubtraction() {
+>>>>>>> da442db36afa71e8411d69e39397a24993ec61cf
+            ParseResult pr ;
+	    const char *text = "3-2";
+	    p->tokens = extendTokenList ( p, s->scan (text) ) ;
+	    TS_ASSERT(p->tokens != NULL) ;
+	    p->currToken = p->tokens ;
+	    pr = p->parseExpr(0);
+
+  	    TS_ASSERT(pr.getNext() != NULL);
+  	    TS_ASSERT(pr.getNext()->getNext() != NULL);
+	    TS_ASSERT(pr.ast->getLexeme() == "3");
+  	    TS_ASSERT(pr.getNext()->ast->getLexeme() == "-");
+  	    TS_ASSERT(pr.getNext()->getNext()->ast->getLexeme() == "2");
+  	    TS_ASSERT(pr.ast->getTerminal() == intConst);
+  	    TS_ASSERT(pr.getNext()->ast->getTerminal() == dash);
+  	    TS_ASSERT(pr.getNext()->getNext()->ast->getTerminal() == intConst);
+    }
+
+    void testDivision() {
+            ParseResult pr ;
+	    const char *text = "3/2";
+	    p->tokens = extendTokenList ( p, s->scan (text) ) ;
+	    TS_ASSERT(p->tokens != NULL) ;
+	    p->currToken = p->tokens ;
+	    pr = p->parseExpr(0);    
+
+  	    TS_ASSERT(pr.getNext() != NULL);
+  	    TS_ASSERT(pr.getNext()->getNext() != NULL);
+	    TS_ASSERT(pr.ast->getLexeme() == "3");
+  	    TS_ASSERT(pr.getNext()->ast->getLexeme() == "/");
+  	    TS_ASSERT(pr.getNext()->getNext()->ast->getLexeme() == "2");
+  	    TS_ASSERT(pr.ast->getTerminal() == intConst);
+  	    TS_ASSERT(pr.getNext()->ast->getTerminal() == fowardSlash);
+  	    TS_ASSERT(pr.getNext()->getNext()->ast->getTerminal() == intConst);
+    }
+
+    void testMultiplication() {
+            ParseResult pr ;
+	    const char *text = "3*2";
+	    p->tokens = extendTokenList ( p, s->scan (text) ) ;
+	    TS_ASSERT(p->tokens != NULL) ;
+	    p->currToken = p->tokens ;
+	    pr = p->parseExpr(0);    
+
+  	    TS_ASSERT(pr.getNext() != NULL);
+  	    TS_ASSERT(pr.getNext()->getNext() != NULL);
+	    TS_ASSERT(pr.ast->getLexeme() == "3");
+  	    TS_ASSERT(pr.getNext()->ast->getLexeme() == "*");
+  	    TS_ASSERT(pr.getNext()->getNext()->ast->getLexeme() == "2");
+  	    TS_ASSERT(pr.ast->getTerminal() == intConst);
+  	    TS_ASSERT(pr.getNext()->ast->getTerminal() == star);
+  	    TS_ASSERT(pr.getNext()->getNext()->ast->getTerminal() == intConst);
     }
     
     //test for Subtraction 
