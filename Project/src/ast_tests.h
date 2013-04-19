@@ -59,6 +59,20 @@ public:
     
     To test this functionality will be start with the addition testcase and precided to 
     copy this style for all the subsequence expressions.   
+
+
+/////
+
+    To test the functionality of constant expressions we opted to just check the case
+    where one constant expression was handed to the parseExpr method.
+    The reason we did this is because the parser should fail if the sequence of
+    expressions are not valid.  The case where there are more than one expression was
+    commented out because it is not usefull for testing that constant expressions
+    evaluate correctly.  The functionality that checks for bad expressions will likely
+    be tested in a one of the nonterminals higher in the AST.
+
+    Testing for trueKwd, falseKwd and variableName followed the same pattern as the 
+    other constant expressions.  These terminals experienced no problems.
     
     
     
@@ -66,7 +80,7 @@ public:
     *************************************************************************************/
     
     
-	//test for Addition 
+    //test for Addition 
     void testAddition() {
             ParseResult pr ;
 	    const char *text = "3+2";
@@ -85,6 +99,7 @@ public:
   	    TS_ASSERT(pr.getNext()->getNext()->ast->getTerminal() == intConst);
     }
 
+    //test for Subtraction
     void testSubtraction() {
             ParseResult pr ;
 	    const char *text = "3-2";
@@ -103,6 +118,7 @@ public:
   	    TS_ASSERT(pr.getNext()->getNext()->ast->getTerminal() == intConst);
     }
 
+    //test for Division 
     void testDivision() {
             ParseResult pr ;
 	    const char *text = "3/2";
@@ -121,6 +137,7 @@ public:
   	    TS_ASSERT(pr.getNext()->getNext()->ast->getTerminal() == intConst);
     }
 
+    //test for Multiplication
     void testMultiplication() {
             ParseResult pr ;
 	    const char *text = "3*2";
@@ -138,15 +155,172 @@ public:
   	    TS_ASSERT(pr.getNext()->ast->getTerminal() == star);
   	    TS_ASSERT(pr.getNext()->getNext()->ast->getTerminal() == intConst);
     }
-
-    //test for Multiplication
     
-    //test for Division 
-    
-    //test for Expression 
+    //tests for Expressions 
     	//test for constant: string, float, char, int
-    	//test for kwd: true, false
+    void testStringConstant() {
+            ParseResult pr ;
+	    const char *text = "\"3\" \"2\" \"1\"";
+	    /*
+	    p->tokens = extendTokenList ( p, s->scan (text) ) ;
+	    TS_ASSERT(p->tokens != NULL) ;
+	    p->currToken = p->tokens ;
+	    pr = p->parseExpr(0);    
+
+  	    TS_ASSERT(pr.getNext() != NULL);
+  	    TS_ASSERT(pr.getNext()->getNext() != NULL);
+	    TS_ASSERT(pr.ast->getLexeme() == "\"3\"");
+  	    TS_ASSERT(pr.getNext()->ast->getLexeme() == "\"2\"");
+  	    TS_ASSERT(pr.getNext()->getNext()->ast->getLexeme() == "\"1\"");
+  	    TS_ASSERT(pr.ast->getTerminal() == stringConst);
+  	    TS_ASSERT(pr.getNext()->ast->getTerminal() == stringConst);
+  	    TS_ASSERT(pr.getNext()->getNext()->ast->getTerminal() == stringConst);
+	    */
+
+	    //test when just one string constant
+	    text = "\"3\"";
+	    p->tokens = extendTokenList ( p, s->scan (text) ) ;
+	    TS_ASSERT(p->tokens != NULL) ;
+	    p->currToken = p->tokens ;
+	    pr = p->parseExpr(0);
+
+	    TS_ASSERT(pr.ast->getLexeme() == "\"3\"");
+  	    TS_ASSERT(pr.ast->getTerminal() == stringConst);
+  	    TS_ASSERT(pr.getNext()->getNext() == NULL);
+
+    }
+
+    void testFloatConstant() {
+            ParseResult pr ;
+	    const char *text = "3.0 2.0 1.0";
+	    /*
+	    p->tokens = extendTokenList ( p, s->scan (text) ) ;
+	    TS_ASSERT(p->tokens != NULL) ;
+	    p->currToken = p->tokens ;
+	    pr = p->parseExpr(0);    
+
+  	    TS_ASSERT(pr.getNext() != NULL);
+  	    TS_ASSERT(pr.getNext()->getNext() != NULL);
+	    TS_ASSERT(pr.ast->getLexeme() == "3.0");
+  	    TS_ASSERT(pr.getNext()->ast->getLexeme() == "2.0");
+  	    TS_ASSERT(pr.getNext()->getNext()->ast->getLexeme() == "1.0");
+  	    TS_ASSERT(pr.ast->getTerminal() == floatConst);
+  	    TS_ASSERT(pr.getNext()->ast->getTerminal() == floatConst);
+  	    TS_ASSERT(pr.getNext()->getNext()->ast->getTerminal() == floatConst);
+	    */
+
+	    //test when just one float constant
+	    text = "3.0";
+	    p->tokens = extendTokenList ( p, s->scan (text) ) ;
+	    TS_ASSERT(p->tokens != NULL) ;
+	    p->currToken = p->tokens ;
+	    pr = p->parseExpr(0);
+
+	    TS_ASSERT(pr.ast->getLexeme() == "3.0");
+  	    TS_ASSERT(pr.ast->getTerminal() == floatConst);
+  	    TS_ASSERT(pr.getNext()->getNext() == NULL);
+    }
+
+    void testCharConstant() {
+            ParseResult pr ;
+	    const char *text = "'c' 'b' 'a'";
+	    /*
+	    p->tokens = extendTokenList ( p, s->scan (text) ) ;
+	    TS_ASSERT(p->tokens != NULL) ;
+	    p->currToken = p->tokens ;
+	    pr = p->parseExpr(0);    
+
+  	    TS_ASSERT(pr.getNext() != NULL);
+  	    TS_ASSERT(pr.getNext()->getNext() != NULL);
+	    TS_ASSERT(pr.ast->getLexeme() == "'c'");
+  	    TS_ASSERT(pr.getNext()->ast->getLexeme() == "'b'");
+  	    TS_ASSERT(pr.getNext()->getNext()->ast->getLexeme() == "'a'");
+  	    TS_ASSERT(pr.ast->getTerminal() == charConst);
+  	    TS_ASSERT(pr.getNext()->ast->getTerminal() == charConst);
+  	    TS_ASSERT(pr.getNext()->getNext()->ast->getTerminal() == charConst);
+	    */
+
+	    //test when just one char constant
+	    text = "'c'";
+	    p->tokens = extendTokenList ( p, s->scan (text) ) ;
+	    TS_ASSERT(p->tokens != NULL) ;
+	    p->currToken = p->tokens ;
+	    pr = p->parseExpr(0);
+
+	    TS_ASSERT(pr.ast->getLexeme() == "'c'");
+  	    TS_ASSERT(pr.ast->getTerminal() == charConst);
+  	    TS_ASSERT(pr.getNext()->getNext() == NULL);
+    }
+
+    void testIntConstant() {
+            ParseResult pr ;
+	    const char *text = "3 2 1";
+	    /*
+	    p->tokens = extendTokenList ( p, s->scan (text) ) ;
+	    TS_ASSERT(p->tokens != NULL) ;
+	    p->currToken = p->tokens ;
+	    pr = p->parseExpr(0);    
+
+  	    TS_ASSERT(pr.getNext() != NULL);
+  	    TS_ASSERT(pr.getNext()->getNext() != NULL);
+	    TS_ASSERT(pr.ast->getLexeme() == "3");
+  	    TS_ASSERT(pr.getNext()->ast->getLexeme() == "2");
+  	    TS_ASSERT(pr.getNext()->getNext()->ast->getLexeme() == "1");
+  	    TS_ASSERT(pr.ast->getTerminal() == intConst);
+  	    TS_ASSERT(pr.getNext()->ast->getTerminal() == intConst);
+  	    TS_ASSERT(pr.getNext()->getNext()->ast->getTerminal() == intConst);
+	    */
+
+	    //test when just one int constant
+	    text = "3";
+	    p->tokens = extendTokenList ( p, s->scan (text) ) ;
+	    TS_ASSERT(p->tokens != NULL) ;
+	    p->currToken = p->tokens ;
+	    pr = p->parseExpr(0);
+
+	    TS_ASSERT(pr.ast->getLexeme() == "3");
+  	    TS_ASSERT(pr.ast->getTerminal() == intConst);
+  	    TS_ASSERT(pr.getNext()->getNext() == NULL);
+    }
+    	//test for kwd: true, false  
+    void testTrueKwd() {
+            ParseResult pr ;
+	    const char *text = "true";
+	    p->tokens = extendTokenList ( p, s->scan (text) ) ;
+	    TS_ASSERT(p->tokens != NULL) ;
+	    p->currToken = p->tokens ;
+	    pr = p->parseExpr(0);
+
+	    TS_ASSERT(pr.ast->getLexeme() == "true");
+  	    TS_ASSERT(pr.ast->getTerminal() == trueKwd);
+  	    TS_ASSERT(pr.getNext()->getNext() == NULL);
+    }
+
+    void testFalseKwd() {
+            ParseResult pr ;
+	    const char *text = "false";
+	    p->tokens = extendTokenList ( p, s->scan (text) ) ;
+	    TS_ASSERT(p->tokens != NULL) ;
+	    p->currToken = p->tokens ;
+	    pr = p->parseExpr(0);
+
+	    TS_ASSERT(pr.ast->getLexeme() == "false");
+  	    TS_ASSERT(pr.ast->getTerminal() == falseKwd);
+  	    TS_ASSERT(pr.getNext()->getNext() == NULL);
+    }
     	//test for variableName
+    void testVariableName() {
+            ParseResult pr ;
+	    const char *text = "varname";
+	    p->tokens = extendTokenList ( p, s->scan (text) ) ;
+	    TS_ASSERT(p->tokens != NULL) ;
+	    p->currToken = p->tokens ;
+	    pr = p->parseExpr(0);
+
+	    TS_ASSERT(pr.ast->getLexeme() == "varname");
+  	    TS_ASSERT(pr.ast->getTerminal() == variableName);
+  	    TS_ASSERT(pr.getNext()->getNext() == NULL);
+    }
     	
     //test for Stmt
     	//test for left stmt, and right stmt

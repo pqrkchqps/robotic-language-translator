@@ -24,15 +24,22 @@ ParseResult::ParseResult ( ) {
     this->ast = NULL ; 
 };
 
-/*this->astNode::this->astNode() {
-    this->setTerminal(noMatch);
-    this->setLexeme("");
-    this->setNext(NULL);
-};*/
 
 ExprResult::ExprResult(string lexeme){
     this->setTerminal(expr);
 	 this->setLexeme (lexeme);
+	 this->setNext(NULL);
+};
+
+TrueKwd::TrueKwd(){
+    this->setTerminal(trueKwd);
+	 this->setLexeme ("true");
+	 this->setNext(NULL);
+};
+
+FalseKwd::FalseKwd(){
+    this->setTerminal(falseKwd);
+	 this->setLexeme ("false");
 	 this->setNext(NULL);
 };
 
@@ -42,7 +49,41 @@ IntConst::IntConst(string lexeme){
 	 this->setNext(NULL);
 };
 
+FloatConst::FloatConst(string lexeme){
+    this->setTerminal(floatConst);
+	 this->setLexeme (lexeme);
+	 this->setNext(NULL);
+};
 
+StringConst::StringConst(string lexeme){
+    this->setTerminal(stringConst);
+	 this->setLexeme (lexeme);
+	 this->setNext(NULL);
+};
+
+CharConst::CharConst(string lexeme){
+    this->setTerminal(charConst);
+	 this->setLexeme (lexeme);
+	 this->setNext(NULL);
+};
+
+VariableName::VariableName(string lexeme){
+    this->setTerminal(variableName);
+	 this->setLexeme (lexeme);
+	 this->setNext(NULL);
+};
+
+LeftParen::LeftParen(){
+    this->setTerminal(leftParen);
+    this->setLexeme("(");
+    this->setNext(NULL);
+};
+
+RightParen::RightParen(){
+    this->setTerminal(rightParen);
+    this->setLexeme(")");
+    this->setNext(NULL);
+};
 NullExprResult::NullExprResult(){
     this->setTerminal(nullExpr);
 	 this->setLexeme("0");

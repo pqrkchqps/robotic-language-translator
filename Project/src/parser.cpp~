@@ -336,6 +336,7 @@ ParseResult Parser::parseExpr (int rbp) {
 ParseResult Parser::parseTrueKwd ( ) {
     ParseResult pr ;
     match ( trueKwd ) ;
+    pr.ast = new TrueKwd();
     return pr ;
 }
 
@@ -343,6 +344,7 @@ ParseResult Parser::parseTrueKwd ( ) {
 ParseResult Parser::parseFalseKwd ( ) {
     ParseResult pr ;
     match ( falseKwd ) ;
+    pr.ast = new FalseKwd();
     return pr ;
 }
 
@@ -351,7 +353,6 @@ ParseResult Parser::parseIntConst ( ) {
     ParseResult pr;
     match ( intConst ) ;
     pr.ast = new IntConst(prevToken->lexeme);
-    //make and store a parseResult of type ExprToken 
     return pr;
 }
 
@@ -359,6 +360,7 @@ ParseResult Parser::parseIntConst ( ) {
 ParseResult Parser::parseFloatConst ( ) {
     ParseResult pr ;
     match ( floatConst ) ;
+    pr.ast = new FloatConst(prevToken->lexeme);
     return pr ;
 }
 
@@ -366,6 +368,7 @@ ParseResult Parser::parseFloatConst ( ) {
 ParseResult Parser::parseStringConst ( ) {
     ParseResult pr ;
     match ( stringConst ) ;
+    pr.ast = new StringConst(prevToken->lexeme);
     return pr ;
 }
 
@@ -373,6 +376,7 @@ ParseResult Parser::parseStringConst ( ) {
 ParseResult Parser::parseCharConst ( ) {
     ParseResult pr ;
     match ( charConst ) ;
+    pr.ast = new CharConst(prevToken->lexeme);
     return pr ;
 }
 
@@ -380,26 +384,33 @@ ParseResult Parser::parseCharConst ( ) {
 ParseResult Parser::parseVariableName ( ) {
     ParseResult pr ;
     match ( variableName ) ;
+    pr.ast = new VariableName(prevToken->lexeme);
     return pr ;
 }
 
 // Expr ::= leftParen Expr rightParen
 ParseResult Parser::parseNestedExpr ( ) {
     ParseResult pr ;
+
     match ( leftParen ) ;
-    parseExpr(0) ; 
+    pr.ast = new LeftParen();
+    ParseResult inside = parseExpr(0) ; 
+
     match(rightParen) ;
-    return pr ;
+    ParseResult right;
+    right.ast = new RightParen();
+
+    pr.setNext(&inside);
+    inside.setNext(&right);
+    return pr;
 }
 
 // Expr ::= Expr plusSign Expr
 ParseResult Parser::parseAddition ( ParseResult left ) {
     // parser has already matched left expression
     ParseResult pr;
-    //make and store a parseResult of type ExprToken 
     match ( plusSign ) ;
     pr.ast = new Addition();
-    //make and store a parseResult of type ExprToken 
 
     ParseResult right = parseExpr( prevToken->lbp() ); 
     
@@ -430,7 +441,7 @@ ParseResult Parser::parseSubtraction ( ParseResult left ) {
     ParseResult pr;
     //make and store a parseResult of type ExprToken 
     match ( dash ) ;
-    pr.ast = new Addition();
+    pr.ast = new Subtraction();
     //make and store a parseResult of type ExprToken 
 
     ParseResult right = parseExpr( prevToken->lbp() ); 

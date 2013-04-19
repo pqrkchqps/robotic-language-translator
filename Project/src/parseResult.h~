@@ -37,9 +37,49 @@ public:
 	ExprResult(string lexeme);
 };
 
+class TrueKwd : public ASTNode{
+public:
+	TrueKwd();
+};
+
+class FalseKwd : public ASTNode{
+public:
+	FalseKwd();
+};
+
 class IntConst : public ASTNode{
 public:
-	IntConstResult(string lexeme);
+	IntConst(string lexeme);
+};
+
+class FloatConst : public ASTNode{
+public:
+	FloatConst(string lexeme);
+};
+
+class StringConst : public ASTNode{
+public:
+	StringConst(string lexeme);
+};
+
+class CharConst : public ASTNode{
+public:
+	CharConst(string lexeme);
+};
+
+class VariableName : public ASTNode{
+public:
+	VariableName(string lexeme);
+};
+
+class LeftParen : public ASTNode {
+public:
+	LeftParen();
+};
+
+class RightParen : public ASTNode {
+public:
+	RightParen();
 };
 
 class NullExprResult : public ASTNode{
@@ -54,7 +94,7 @@ public:
 
 class Addition : public ASTNode{
 public:
-	AdditionExprResult();
+	Addition();
 };
 
 class Subtraction : public ASTNode{
