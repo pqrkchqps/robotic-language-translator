@@ -6,7 +6,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/stat.h>
-#include <sys/types.h> 
+#include <sys/types.h>
 #include <stdexcept>
 #include <string.h>
 
@@ -46,7 +46,10 @@ enum tokenEnumType {
     // Special terminal types
     endOfFile,
     lexicalError,
-    noMatch
+    noMatch,
+    expr,
+    extendedExpr,
+    nullExpr
 };
 
 // Below you need to write your class definitions for Token and Scanner.
