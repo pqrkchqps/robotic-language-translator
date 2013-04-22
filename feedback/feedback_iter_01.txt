@@ -1,0 +1,84 @@
+
+100 / 150  possible points.
+
+Code Development Process: 80 points.
+------------------------------------
+(These points are assessed once, on the due date.)
+
+Correct use of Git (12 points).  Are each of the following
+files (or directories) in the correct place in your
+team repository?
+
+_1_ / 1:  project/lib/cxxtest
+_1_ / 1:  project/samples/bad_syntax_good_tokens.stm
+_1_ / 1:  project/samples/abstar.stm
+_1_ / 1:  project/src/Makefile
+_1_ / 1:  project/src/readInput.h
+_1_ / 1:  project/src/readInput.cpp
+_1_ / 1:  project/src/regex.h
+_1_ / 1:  project/src/regex.cpp
+_1_ / 1:  project/src/scanner.h
+_1_ / 1:  project/src/scanner.cpp
+_1_ / 1:  project/src/scanner_tests.h
+_1_ / 1:  project/src/iteration1_work.txt
+
+Division of work statement (9 points).
+
+_9__ / 9: An satisfactory  division of work statement.
+  *** comment:   ***
+
+
+Successful compilation and generation of tests cases.  (9 points)
+Each of the following command succeeds with no errors.
+
+_3_ / 3: make scanner.o
+_3_ / 3: make scanner_tests.cpp
+_3_ / 3: make scanner_tests
+
+
+There is a test case for each terminal symbol type in the enumerated
+type tokenType.  (40 points)
+
+_30_ / 40: a test case for each item in tokenType, 1 point each
+          For a terminal named X, a test case named test_terminal_X
+          must be present.  For example, for the floatConst terminal
+          symbol (a value in the tokenType enumerated type) you must
+          have a test named test_terminal_floatConst.
+
+          *** comment: naming directions not followed. if you are going to do input validation in the token constructor, don�t allow a type to be input. It is redundant and confusing ***
+
+
+Running test cases doesn't result in a segmentation fault. (10 points)
+Test cases may fail, but should not cause the testing framework to
+crash.
+
+_0_ / 10:
+
+
+
+Passing Test Cases: 70 points.
+------------------------------
+(These points are assessed at each iteration and thus if you fail to
+pass some test cases now you can get those points back on a later
+iteration.)
+
+_40_ / 40: passes a test case for each item in tokenType, 1 point each
+          For a terminal named X, a test case named test_terminal_X
+          must pass present.  For example, for the floatConst terminal
+          symbol (a value in the tokenType enumerated type) you must
+          have a test named test_terminal_floatConst that passes.
+
+          *** comment:  ***
+
+_0_ /  2: passes the test  test_scan_empty
+
+_0_ /  2: passes the test  test_scan_empty_comment
+
+_0_ /  3: passes the test  test_scan_lexicalErrors
+
+_0_ /  3: passes the test  test_scan_nums_vars
+
+_0_ / 10: passes the test  test_scan_bad_syntax_good_tokens
+
+_0_ / 10: passes the test  test_scan_sample_abstar
+    
