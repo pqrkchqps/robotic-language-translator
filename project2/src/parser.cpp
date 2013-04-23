@@ -29,8 +29,6 @@
 
 using namespace std ;
 
-int i; 
-
 Parser::Parser ( ) { } 
 
 ParseResult Parser::parse (const char *text) {
@@ -67,18 +65,12 @@ ParseResult Parser::parseProgram () {
     match(nameKwd) ;
     match(colon) ;
     match(variableName) ;
-    //Node* p = new Node(prevtoken);
-    //ParseResult var(p);
-    //ast.program.addVariableName(var);
     match(semiColon) ;
-    //ast.addNode(
-    parsePlatform();
-    //ast.addNode(
-    parseDecls();
-    //ast.addNode(
-    parseStates();
+    parsePlatform() ;
+    parseDecls() ;
+    parseStates() ;
     match(endOfFile) ;
-    //ast.addNode(NULL);
+
     return pr ;
 }
 
@@ -98,17 +90,19 @@ ParseResult Parser::parsePlatform () {
 // Decls
 ParseResult Parser::parseDecls () {
     ParseResult pr ;
+    ParseResult car ;
+    ParseResult cdr ;
 
     if ( ! nextIs(initialKwd) && ! nextIs(stateKwd) ) {
         // Decls ::= Decl Decls
-        parseDecl() ;
-        parseDecls() ;
-        //ast.addNode(parseDecls() );
-    	  //ast.addNode(parseStates() );
+        car = parseDecl() ;
+        cdr = parseDecls() ;
+	pr = ConsDeclResult(car, cdr);
     }
     else {
         // Decls ::= 
         // nothing to match.
+	pr = NullDeclResult();
     }
 
     return pr ;
@@ -119,9 +113,11 @@ ParseResult Parser::parseDecls () {
 ParseResult Parser::parseDecl () {
     ParseResult pr ;
     // Decl ::= Type variableName semiColon
-    parseType() ;
+    ParseResult type = parseType() ;
     match(variableName) ;
+    string var_name = prevToken->lexeme;
     match(semiColon) ;
+    pr = DeclResult(type.ast->getLexeme(), var_name);
     return pr ;
 }
 
@@ -296,10 +292,9 @@ ParseResult Parser::parseExpr (int rbp) {
        associated parse methods.  The ExtToken objects have 'nud' and
        'led' methods that are dispatchers that call the appropriate
        parse methods.*/
-       
     ParseResult left = currToken->nud() ;
    
-    while (rbp <= currToken->lbp() ) {
+    while (rbp < currToken->lbp() ) {
         left = currToken->led(left) ;
     }
 
@@ -368,7 +363,19 @@ ParseResult Parser::parseNestedExpr ( ) {
     match ( leftParen ) ;
     parseExpr(0) ; 
     match(rightParen) ;
+<<<<<<< HEAD:Project/src/parser.cpp
+    ParseResult right;
+    right.ast = new RightParen();
+
+    if (inside.ast == NULL) throw ( (string) "Malformed Expression: '(' must be followed by a valid expression" );
+    pr.setNext(&inside);
+    while (inside.getNext() != NULL)
+    	inside = *(inside.getNext());
+    inside.setNext(&right);
+    return pr;
+=======
     return pr ;
+>>>>>>> 9bfcceab87f70be663500b04fd844cfd343ccf7a:project2/src/parser.cpp
 }
 
 // Expr ::= Expr plusSign Expr
@@ -406,48 +413,90 @@ ParseResult Parser::parseSubtraction ( ParseResult left ) {
 
 // Expr ::= Expr forwardSlash Expr
 ParseResult Parser::parseDivision ( ParseResult left ) {
+<<<<<<< HEAD:Project/src/parser.cpp
+    // parser has already matched left expression
+    ParseResult pr;
+    //make and store a parseResult of type ExprToken 
+    match ( forwardSlash ) ;
+    pr.ast = new Division();
+    //make and store a parseResult of type ExprToken 
+
+    ParseResult right = parseExpr( prevToken->lbp() ); 
+    
+    left.setNext(&pr);
+    pr.setNext(&right);
+    return left;
+    return pr ;
+}
+
+/***********************************************************************************
+
+	New implement: New adding tests functionality of parseResult, led and nud. 
+	We want to impliment in 2 ways. One way we translate token into parseResult
+	and another way we store property of parseResult. 
+	
+***********************************************************************************/ 
+
+
+/**********************************************************************************/
+/***********UNUSED HELPER FUNCTIONS FOR INCREMENTAL DEVELOPMENT********************/
+/**********************************************************************************/
+ParseResult Parser::parseExprToken () {
+    match (lexicalError) ;
+    ExprResult* pr = new ExprResult(prevToken->lexeme);
+    //make and store a parseResult of type ExprToken 
+
+    ParseResult *ret = dynamic_cast<ParseResult*>(pr);
+    return *ret;
+}
+
+ParseResult Parser::parseNullExprToken ( ) {
+    match (endOfFile) ;
+    NullExprResult* pr = new NullExprResult();
+     //make and store a parseResult of type NullExprToken 
+    //pr = currToken->nud(); 
+    ParseResult *ret = dynamic_cast<ParseResult*>(pr);
+    return *ret;
+}
+
+ParseResult Parser::parseNullExprToken (ParseResult left ) {
+    match (endOfFile) ;
+    NullExprResult* pr = new NullExprResult();
+     //make and store a parseResult of type NullExprToken 
+    //pr = currToken->nud(); 
+    ParseResult *ret = dynamic_cast<ParseResult*>(pr);
+    left.setNext(ret);
+    return left;
+}
+/**********************************************************************************/
+/**********************************************************************************/
+/**********************************************************************************/
+
+
+//Refactor To Use Iterator Design Pattern//
+ParseResult Parser::parseExtendedExprToken (ParseResult left) {
+	 //parse has already matched left expression 
+    match(lexicalError) ;
+    ExtendedExprResult* pr = new ExtendedExprResult( prevToken->lexeme ) ;
+        
+    // just advance token, since examining it in parseExpr caused
+    // this method being called.
+    ParseResult right = parseExpr( prevToken->lbp() ); 
+    
+    ParseResult* par = dynamic_cast<ParseResult*>(pr);
+    
+    left.setNext(par);
+    par->setNext(&right);
+=======
     // parser has already matched left expression 
     ParseResult pr ;
 
     match ( forwardSlash ) ;
     parseExpr( prevToken->lbp() ); 
+>>>>>>> 9bfcceab87f70be663500b04fd844cfd343ccf7a:project2/src/parser.cpp
 
     return pr ;
 }
-
-/*
-	New impliment: New adding tests functionality of parseResult, led and nud. 
-	We want to impliment in 2 ways. One way we translate token into parseResult
-	and another way we store property of parseResult. 
-	
-*/ 
-
-ParseResult Parser::parseExprToken () {
-    ParseResult pr ;
-    match (lexicalError) ;
-    //make and store a parseResult of type ExprToken 
-    return pr ;
-}
-
-ParseResult Parser::parseNullExprToken ( ) {
-    ParseResult pr ;
-    match (endOfFile) ;
-     //make and store a parseResult of type NullExprToken 
-    return pr ;
-}
-
-ParseResult Parser::parseExtendedExprToken (ParseResult left){
-    ParseResult pr ;
-    match(lexicalError) ;
-    string name( prevToken->lexeme ) ;
-     //make and store a parseResult of type ExtendedExprToken
-    parseExpr( prevToken->lbp() ); 
-
-    return pr ;
-}
-
-
-
 
 
 // Expr ::= Expr equalEquals Expr

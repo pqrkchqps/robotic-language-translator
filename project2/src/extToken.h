@@ -178,28 +178,6 @@ public:
 } ;
 
 
-
-class ExprToken : public ExtToken {
-public:
-    ExprToken (Parser *p, Token *t) : ExtToken(p,t) { }
-    ParseResult nud () { return parser->parseExprToken (); }
-    ParseResult led (ParseResult left) {
-        return parser->parseExtendedExprToken (left) ; 
-    }
-    int lbp() { return 1; }
-    std::string description() { return "Expression Token"; }
-};
-
-class NullExprToken : public ExtToken {
-public:
-   NullExprToken (Parser *p, Token *t) : ExtToken(p,t) { }
-	ParseResult nud () { return parser->parseExprToken (); }
-    int lbp() { return -1; }
-    std::string description() { return "Null Expression Token"; }
-};
-
-
-
 /*
 
 // Left Angle

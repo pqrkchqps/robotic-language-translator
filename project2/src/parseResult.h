@@ -16,14 +16,10 @@
 class ParseResult {
 public:
     ParseResult() ;
-private:
     std::string errors ;
     std::string pp ;
-    //Token *ast ;
+    // Node *ast ;
     bool ok ;
-    tokenType terminal;
-	 string lexeme;
-	 ParseResult* next;
 } ;
 
 #endif /* PARSER_RESULT_H */

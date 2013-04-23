@@ -72,10 +72,6 @@ public:
     ParseResult parseDivision ( ParseResult left ) ;
 
     ParseResult parseRelationalExpr ( ParseResult left ) ;
-    
-    //new impliment 
-    ParseResult parseExtendedExprToken(ParseResult left); 
-    ParseResult parseExprToken(); 
 
     // Helper function used by the parser.
     void match (tokenType tt) ;
