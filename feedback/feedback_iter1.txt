@@ -1,0 +1,29 @@
+
+Here is your iteration 1 point breakdown
+
+1) 1 / 1 possible. 		Good: lib/cxxtest found
+2) 1 / 1 possible. 		Good: samples/bad_syntax_good_tokens.stm found
+3) 1 / 1 possible. 		Good: samples/abstar.stm found
+4) 1 / 1 possible. 		Good: src/iteration1_work.txt found
+5) 1 / 1 possible. 		Good: src/readInput.h found
+6) 1 / 1 possible. 		Good: src/readInput.cpp found
+7) 1 / 1 possible. 		Good: src/regex.h found
+8) 1 / 1 possible. 		Good: src/regex.cpp found
+9) 1 / 1 possible. 		Good: src/scanner.h found
+10) 1 / 1 possible. 		Good: src/scanner.cpp found
+11) 1 / 1 possible. 		Good: src/scanner_tests.h found
+12) 1 / 1 possible. 		Good- Makefile found
+13) 3 / 3 possible. 		make scanner.o succeeded
+14) 3 / 3 possible. 		make scanner_tests.cpp succeeded
+15) 3 / 3 possible. 		make scanner_tests succeeded
+16) 10 / 10 possible. 		Good: no seg faults
+17) 2 / 2 possible. 		Good: test_scan_empty passed
+18) 2 / 2 possible. 		Good: test_scan_empty_comment passed
+19) 3 / 3 possible. 		Good: test_scan_lexicalErrors passed
+20) 3 / 3 possible. 		Good: test_scan_nums_vars passed
+21) 10 / 10 possible. 		Good: test_scan_bad_syntax_good_tokens passed
+22) 10 / 10 possible. 		Good: test_scan_sample_abstar passed
+9/ 9     division_of_labor_9 : 	  
+30/ 40     token_tests_written_40 : 	naming directions not followed. if you are going to do input validation in the token constructor, don?t allow a type to be input. It is redundant and confusing 
+40/ 40     token_tests_exec_40 : 	 
+140 points earned total. 
