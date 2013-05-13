@@ -24,6 +24,7 @@
 #ifndef PARSER_H
 #define PARSER_H
 
+#include "ASTNode.h"
 #include "scanner.h"
 #include "parseResult.h"
 

@@ -1,17 +1,17 @@
+#ifndef ASTNODE_H
+#define ASTNODE_H
+
 #include "parseResult.h"
 #include "scanner.h"
-
-
-class ParseResult;
 
 class ASTNode {
 public:
     ASTNode() {};
     std::string getLexeme() {return this->lexeme;};
     void setLexeme(std::string lexeme) {this->lexeme = lexeme;};
-    tokenType getTerminal()  {return this->terminal;};
+    tokenType getTerminal() {return this->terminal;};
     void setTerminal(tokenType terminal) {this->terminal = terminal;};
-    ASTNode* getNext() {return this->next;};
+    ASTNode *getNext() {return this->next;};
     void setNext(ASTNode* next) {this->next = next;};
     virtual ~ASTNode() {};
 
@@ -131,3 +131,4 @@ public:
 	Program(std::string name, Platform* p, ConsDecl* d, State* s);
 };
 
+#endif

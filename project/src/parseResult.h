@@ -10,7 +10,6 @@
 
 #include <string>
 #include "ASTNode.h"
-//#include "extToken.h"
 
 
 class ParseResult {
@@ -25,48 +24,15 @@ public:
     ParseResult* getNext() {return this->next;};
     void setNext(ParseResult* next) {this->next = next;};
       
-    std::string errors ;
-    std::string pp ;
-    ASTNode *ast ;
-    bool ok ;
+    std::string errors;
+    std::string pp;
+    ASTNode *ast;
+    bool ok;
 
-    ParseResult() {};
+    ParseResult();
     virtual ~ParseResult() {};
 private:
     ParseResult* next;
 } ;
-
-class DeclResult : public ParseResult {
-public:
-    DeclResult(std::string type, std::string name);
-    DeclResult(std::string type, std::string name, std::string value);
-    ~DeclResult() {};
-    std::string getType() {return this->type;};
-    std::string getName() {return this->name;};
-    std::string getValue() {return this->value;};
-   
-private:
-    std::string type;
-    std::string name;
-    std::string value;
-};
-
-class ConsDeclResult : public ParseResult{
-public:
-    ConsDeclResult(ParseResult car, ParseResult cdr);
-    ~ConsDeclResult() {};
-    ParseResult car();
-    ParseResult cdr();
-private:
-    ParseResult left;
-    ParseResult right;
-};
-
-class NullDeclResult : public ParseResult{
-public:
-    NullDeclResult();
-    ~NullDeclResult() {};
-};
-
 
 #endif /* PARSER_RESULT_H */

@@ -164,19 +164,21 @@ ParseResult Parser::parseStmt () {
 	    TS_ASSERT(p->tokens != NULL) ;
 	    p->currToken = p->tokens ;
 	    pr = p->parseExpr(0);
+	    string lexemes[] = { "3", "2", "1"};
+	    //for (iterator
 
   	    TS_ASSERT(pr.getNext() != NULL);
   	    TS_ASSERT(pr.getNext()->getNext() != NULL);
 	    TS_ASSERT(pr.ast->getLexeme() == "3");
-  	    TS_ASSERT(pr.getNext()->ast->getLexeme() == "+");
+  	    /*TS_ASSERT(pr.getNext()->ast->getLexeme() == "+");
   	    TS_ASSERT(pr.getNext()->getNext()->ast->getLexeme() == "2");
   	    TS_ASSERT(pr.ast->getTerminal() == intConst);
   	    TS_ASSERT(pr.getNext()->ast->getTerminal() == plusSign);
-  	    TS_ASSERT(pr.getNext()->getNext()->ast->getTerminal() == intConst);
-    }
+  	    TS_ASSERT(pr.getNext()->getNext()->ast->getTerminal() == intConst);*/
+    }/*
 
     //test for Subtraction
-    void testSubtraction() {
+    void ttestSubtraction() {
             ParseResult pr ;
 	    const char *text = "3-2";
 	    p->tokens = extendTokenList ( p, s->scan (text) ) ;
@@ -195,7 +197,7 @@ ParseResult Parser::parseStmt () {
     }
 
     //test for Division 
-    void testDivision() {
+    void ttestDivision() {
             ParseResult pr ;
 	    const char *text = "3/2";
 	    p->tokens = extendTokenList ( p, s->scan (text) ) ;
@@ -214,7 +216,7 @@ ParseResult Parser::parseStmt () {
     }
 
     //test for Multiplication
-    void testMultiplication() {
+    void ttestMultiplication() {
             ParseResult pr ;
 	    const char *text = "3*2";
 	    p->tokens = extendTokenList ( p, s->scan (text) ) ;
@@ -234,7 +236,7 @@ ParseResult Parser::parseStmt () {
     
     //tests for Expressions 
     	//test for constant: string, float, char, int
-    void testStringConstant() {
+    void ttestStringConstant() {
             ParseResult pr ;
 	    const char *text = "\"3\"";
 	    p->tokens = extendTokenList ( p, s->scan (text) ) ;
@@ -248,7 +250,7 @@ ParseResult Parser::parseStmt () {
 
     }
 
-    void testFloatConstant() {
+    void ttestFloatConstant() {
             ParseResult pr ;
 	    const char *text = "3.0";
 	    p->tokens = extendTokenList ( p, s->scan (text) ) ;
@@ -261,7 +263,7 @@ ParseResult Parser::parseStmt () {
   	    TS_ASSERT(pr.getNext()->getNext() == NULL);
     }
 
-    void testCharConstant() {
+    void ttestCharConstant() {
             ParseResult pr ;
 	    const char *text = "'c'";
 	    p->tokens = extendTokenList ( p, s->scan (text) ) ;
@@ -274,7 +276,7 @@ ParseResult Parser::parseStmt () {
   	    TS_ASSERT(pr.getNext()->getNext() == NULL);
     }
 
-    void testIntConstant() {
+    void ttestIntConstant() {
             ParseResult pr ;
 	    const char *text = "3";
 	    p->tokens = extendTokenList ( p, s->scan (text) ) ;
@@ -287,7 +289,7 @@ ParseResult Parser::parseStmt () {
   	    TS_ASSERT(pr.getNext()->getNext() == NULL);
     }
     	//test for kwd: true, false  
-    void testTrueKwd() {
+    void ttestTrueKwd() {
             ParseResult pr ;
 	    const char *text = "true";
 	    p->tokens = extendTokenList ( p, s->scan (text) ) ;
@@ -300,7 +302,7 @@ ParseResult Parser::parseStmt () {
   	    TS_ASSERT(pr.getNext()->getNext() == NULL);
     }
 
-    void testFalseKwd() {
+    void ttestFalseKwd() {
             ParseResult pr ;
 	    const char *text = "false";
 	    p->tokens = extendTokenList ( p, s->scan (text) ) ;
@@ -313,7 +315,7 @@ ParseResult Parser::parseStmt () {
   	    TS_ASSERT(pr.getNext()->getNext() == NULL);
     }
     	//test for variableName
-    void testVariableName() {
+    void ttestVariableName() {
             ParseResult pr ;
 	    const char *text = "varname";
 	    p->tokens = extendTokenList ( p, s->scan (text) ) ;
@@ -325,6 +327,7 @@ ParseResult Parser::parseStmt () {
   	    TS_ASSERT(pr.ast->getTerminal() == variableName);
   	    TS_ASSERT(pr.getNext()->getNext() == NULL);
     }
+*/
 
 /*
     void ttestConsDecl() {

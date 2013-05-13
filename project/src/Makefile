@@ -23,6 +23,14 @@ extToken.o:	extToken.cpp extToken.h
 parseResult.o:	parseResult.cpp parseResult.h 
 	g++ $(FLAGS) -std=c++0x -c parseResult.cpp
 	
+ASTNode.o:	ASTNode.cpp ASTNode.h 
+	g++ $(FLAGS) -std=c++0x -c ASTNode.cpp
+
+Functional.o:	Functional.h 
+	g++ $(FLAGS) -std=c++0x -c Functional.h
+
+MyIterator.o:	MyIterator.h MyIterator.cpp
+	g++ $(FLAGS) -std=c++0x -c MyIterator.h
 
 # Testing files and targets.
 run-tests:	regex_tests scanner_tests parser_tests ast_tests
@@ -51,8 +59,8 @@ parser_tests:	parser_tests.cpp parser.o readInput.o extToken.o regex.o scanner.o
 parser_tests.cpp:	parser.o parser_tests.h
 	$(CXXTEST) $(CXXFLAGS) -o parser_tests.cpp parser_tests.h
 
-ast_tests:	ast_tests.cpp readInput.o extToken.o regex.o scanner.o parseResult.o parser.o
-	g++ $(FLAGS) -I$(CXX_DIR) -o ast_tests extToken.o regex.o scanner.o parseResult.o readInput.o parser.o ast_tests.cpp
+ast_tests:	ast_tests.cpp readInput.o extToken.o regex.o scanner.o parseResult.o parser.o Functional.o MyIterator.o ASTNode.o
+	g++ $(FLAGS) -I$(CXX_DIR) -o ast_tests extToken.o regex.o scanner.o parseResult.o readInput.o parser.o ASTNode.o Functional.o MyIterator.o ast_tests.cpp
 
 ast_tests.cpp:	ast_tests.h
 	$(CXXTEST) $(CXXFLAGS) -o ast_tests.cpp ast_tests.h

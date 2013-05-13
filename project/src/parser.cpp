@@ -21,6 +21,7 @@
    Last modified: March 5, 2013.
 */
 
+#include "ASTNode.h"
 #include "parser.h"
 #include "scanner.h"
 #include "extToken.h"
@@ -550,9 +551,7 @@ ParseResult Parser::parseRelationalExpr ( ParseResult left ) {
     return pr ;
 }
 
-
 // Helper function used by the parser.
-
 void Parser::match (tokenType tt) {
     if (! attemptMatch(tt)) {
         throw ( makeErrorMsgExpected ( tt ) ) ;
