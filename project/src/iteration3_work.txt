@@ -1,9 +1,0 @@
-Division of Work.
-
-Work was done as a pair.
-
-Commenting was done by Thuy and primary programming was done by John.
-Thuy jointly did work on test cases and contributed to the design of the program.
-Thuy helped program the parser and the additional dummy methods to test expressions
-Thuy helped write test cases for the AdditionExpr
-Thuy clean code and test cases.
