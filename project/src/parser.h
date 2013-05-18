@@ -24,7 +24,6 @@
 #ifndef PARSER_H
 #define PARSER_H
 
-#include "ASTNode.h"
 #include "scanner.h"
 #include "parseResult.h"
 
@@ -73,18 +72,6 @@ public:
     ParseResult parseDivision ( ParseResult left ) ;
 
     ParseResult parseRelationalExpr ( ParseResult left ) ;
-    
-    /***************************************************************************
-    
-     		Function declaration for ExprToken, NullExprToken, ExtendedExprToken, 
-     		and NullExprToken 
-     	
-    ****************************************************************************/
-    
-    ParseResult parseExtendedExprToken(ParseResult left); 
-    ParseResult parseExprToken();
-    ParseResult parseNullExprToken(); 
-    ParseResult parseNullExprToken(ParseResult left);
 
     // Helper function used by the parser.
     void match (tokenType tt) ;

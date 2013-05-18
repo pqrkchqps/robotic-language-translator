@@ -8,31 +8,18 @@
 #ifndef PARSER_RESULT_H
 #define PARSER_RESULT_H
 
+// #include "AST.h"
+
 #include <string>
-#include "ASTNode.h"
 
 
 class ParseResult {
 public:
-    std::string getErrors() {return this->errors;};
-    void setErrors(std::string errors) {this->errors = errors;};
-    std::string getPP() {return this->pp;};
-    void setPP(std::string pp) {this->pp = pp;};
-    
-    bool getOK() {return this->ok;};
-    void setOK(bool ok) {this->ok = ok;};
-    ParseResult* getNext() {return this->next;};
-    void setNext(ParseResult* next) {this->next = next;};
-      
-    std::string errors;
-    std::string pp;
-    ASTNode *ast;
-    bool ok;
-
-    ParseResult();
-    virtual ~ParseResult() {};
-private:
-    ParseResult* next;
+    ParseResult() ;
+    std::string errors ;
+    std::string pp ;
+    // Node *ast ;
+    bool ok ;
 } ;
 
 #endif /* PARSER_RESULT_H */

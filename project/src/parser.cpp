@@ -21,7 +21,6 @@
    Last modified: March 5, 2013.
 */
 
-#include "ASTNode.h"
 #include "parser.h"
 #include "scanner.h"
 #include "extToken.h"
@@ -29,8 +28,6 @@
 #include <assert.h>
 
 using namespace std ;
-
-int i; 
 
 Parser::Parser ( ) { } 
 
@@ -47,9 +44,9 @@ ParseResult Parser::parse (const char *text) {
         pr = parseProgram( ) ;
     }
     catch (string errMsg) {
-        pr.setOK(false);
-        pr.setErrors(errMsg);
-        pr.ast = NULL ;
+        pr.ok = false ;
+        pr.errors = errMsg ;
+        // pr.ast = NULL ;
     }
     return pr ;
 }
@@ -67,40 +64,13 @@ ParseResult Parser::parseProgram () {
     // Program ::= nameKwd colon variableName semiColon Platform Decls States
     match(nameKwd) ;
     match(colon) ;
-
     match(variableName) ;
-    string name( prevToken->lexeme ) ;
-
     match(semiColon) ;
-
-    //ParseResult prPlatform = 
     parsePlatform() ;
-    //Platform *p = NULL ;
-    //if (prPlatform.ast) {
-    //    p = dynamic_cast<Platform *>(prPlatform.ast) ;
-    //    if ( ! p ) throw ( (string) "Bad cast of Platform in parseProgram" ) ;
-    //}
-
-    //ParseResult prDecls = 
     parseDecls() ;
-    //Decls *d = NULL ;
-    //if (prDecls.ast) {
-    //    d = dynamic_cast<Decls *>(prDecls.ast) ;
-    //    if ( ! d ) throw ( (string) "Bad cast of Decls in parseProgram" ) ;
-    //}
-
-    //ParseResult prStates = 
     parseStates() ;
-    //State *s = NULL ;
-    //if (prStates.ast) {
-    //    s = dynamic_cast<State *>(prStates.ast) ;
-    //    if ( ! s ) throw ( (string) "Bad cast of State in parseProgram" ) ;
-    //}
-
     match(endOfFile) ;
 
-    //pr.ast = new Program(name, p, d, s) ;
-    //pr.setOK(true);
     return pr ;
 }
 
@@ -316,10 +286,8 @@ ParseResult Parser::parseExpr (int rbp) {
        associated parse methods.  The ExtToken objects have 'nud' and
        'led' methods that are dispatchers that call the appropriate
        parse methods.*/
-       
     ParseResult left = currToken->nud() ;
-    //if (prevToken->terminal == extendedExpr)
-    //	  left = currToken->led(left) ;
+   
     while (rbp < currToken->lbp() ) {
         left = currToken->led(left) ;
     }
@@ -337,7 +305,6 @@ ParseResult Parser::parseExpr (int rbp) {
 ParseResult Parser::parseTrueKwd ( ) {
     ParseResult pr ;
     match ( trueKwd ) ;
-    pr.ast = new TrueKwd();
     return pr ;
 }
 
@@ -345,23 +312,20 @@ ParseResult Parser::parseTrueKwd ( ) {
 ParseResult Parser::parseFalseKwd ( ) {
     ParseResult pr ;
     match ( falseKwd ) ;
-    pr.ast = new FalseKwd();
     return pr ;
 }
 
 // Expr ::= intConst
 ParseResult Parser::parseIntConst ( ) {
-    ParseResult pr;
+    ParseResult pr ;
     match ( intConst ) ;
-    pr.ast = new IntConst(prevToken->lexeme);
-    return pr;
+    return pr ;
 }
 
 // Expr ::= floatConst
 ParseResult Parser::parseFloatConst ( ) {
     ParseResult pr ;
     match ( floatConst ) ;
-    pr.ast = new FloatConst(prevToken->lexeme);
     return pr ;
 }
 
@@ -369,7 +333,6 @@ ParseResult Parser::parseFloatConst ( ) {
 ParseResult Parser::parseStringConst ( ) {
     ParseResult pr ;
     match ( stringConst ) ;
-    pr.ast = new StringConst(prevToken->lexeme);
     return pr ;
 }
 
@@ -377,7 +340,6 @@ ParseResult Parser::parseStringConst ( ) {
 ParseResult Parser::parseCharConst ( ) {
     ParseResult pr ;
     match ( charConst ) ;
-    pr.ast = new CharConst(prevToken->lexeme);
     return pr ;
 }
 
@@ -385,145 +347,62 @@ ParseResult Parser::parseCharConst ( ) {
 ParseResult Parser::parseVariableName ( ) {
     ParseResult pr ;
     match ( variableName ) ;
-    pr.ast = new VariableName(prevToken->lexeme);
     return pr ;
 }
+
 
 // Expr ::= leftParen Expr rightParen
 ParseResult Parser::parseNestedExpr ( ) {
     ParseResult pr ;
-
     match ( leftParen ) ;
-    pr.ast = new LeftParen();
-    ParseResult inside = parseExpr(0) ; 
-
+    parseExpr(0) ; 
     match(rightParen) ;
-    ParseResult right;
-    right.ast = new RightParen();
-
-    pr.setNext(&inside);
-    inside.setNext(&right);
-    return pr;
+    return pr ;
 }
 
 // Expr ::= Expr plusSign Expr
 ParseResult Parser::parseAddition ( ParseResult left ) {
-    // parser has already matched left expression
-    ParseResult pr;
-    match ( plusSign ) ;
-    pr.ast = new Addition();
+    // parser has already matched left expression 
+    ParseResult pr ;
 
-    ParseResult right = parseExpr( prevToken->lbp() ); 
-    
-    left.setNext(&pr);
-    pr.setNext(&right);
-    return left;
+    match ( plusSign ) ;
+    parseExpr( prevToken->lbp() ); 
+
+    return pr ;
 }
 
 // Expr ::= Expr star Expr
 ParseResult Parser::parseMultiplication ( ParseResult left ) {
-    // parser has already matched left expression
-    ParseResult pr;
-    //make and store a parseResult of type ExprToken 
-    match ( star ) ;
-    pr.ast = new Multiplication();
-    //make and store a parseResult of type ExprToken 
+    // parser has already matched left expression 
+    ParseResult pr ;
 
-    ParseResult right = parseExpr( prevToken->lbp() ); 
-    
-    left.setNext(&pr);
-    pr.setNext(&right);
-    return left;
+    match ( star ) ;
+    parseExpr( prevToken->lbp() ); 
+
+    return pr ;
 }
 
 // Expr ::= Expr dash Expr
 ParseResult Parser::parseSubtraction ( ParseResult left ) {
-    // parser has already matched left expression
-    ParseResult pr;
-    //make and store a parseResult of type ExprToken 
-    match ( dash ) ;
-    pr.ast = new Subtraction();
-    //make and store a parseResult of type ExprToken 
+    // parser has already matched left expression 
+    ParseResult pr ;
 
-    ParseResult right = parseExpr( prevToken->lbp() ); 
-    
-    left.setNext(&pr);
-    pr.setNext(&right);
-    return left;
+    match ( dash ) ;
+    parseExpr( prevToken->lbp() ); 
+
+    return pr ;
 }
 
 // Expr ::= Expr forwardSlash Expr
 ParseResult Parser::parseDivision ( ParseResult left ) {
-    // parser has already matched left expression
-    ParseResult pr;
-    //make and store a parseResult of type ExprToken 
-    match ( forwardSlash ) ;
-    pr.ast = new Division();
-    //make and store a parseResult of type ExprToken 
+    // parser has already matched left expression 
+    ParseResult pr ;
 
-    ParseResult right = parseExpr( prevToken->lbp() ); 
-    
-    left.setNext(&pr);
-    pr.setNext(&right);
-    return left;
+    match ( forwardSlash ) ;
+    parseExpr( prevToken->lbp() ); 
+
     return pr ;
 }
-
-/***********************************************************************************
-
-	New implement: New adding tests functionality of parseResult, led and nud. 
-	We want to implement in 2 ways. One way we translate token into parseResult
-	and another way we store property of parseResult. 
-	
-***********************************************************************************/ 
-
-ParseResult Parser::parseExprToken () {
-    match (lexicalError) ;
-    ExprResult* pr = new ExprResult(prevToken->lexeme);
-    //make and store a parseResult of type ExprToken 
-
-    ParseResult *ret = dynamic_cast<ParseResult*>(pr);
-    return *ret;
-}
-
-ParseResult Parser::parseNullExprToken ( ) {
-    match (endOfFile) ;
-    NullExprResult* pr = new NullExprResult();
-     //make and store a parseResult of type NullExprToken 
-    //pr = currToken->nud(); 
-    ParseResult *ret = dynamic_cast<ParseResult*>(pr);
-    return *ret;
-}
-
-ParseResult Parser::parseNullExprToken (ParseResult left ) {
-    match (endOfFile) ;
-    NullExprResult* pr = new NullExprResult();
-     //make and store a parseResult of type NullExprToken 
-    //pr = currToken->nud(); 
-    ParseResult *ret = dynamic_cast<ParseResult*>(pr);
-    left.setNext(ret);
-    return left;
-}
-
-ParseResult Parser::parseExtendedExprToken (ParseResult left) {
-	 //parse has already matched left expression 
-    match(lexicalError) ;
-    ExtendedExprResult* pr = new ExtendedExprResult( prevToken->lexeme ) ;
-        
-    // just advance token, since examining it in parseExpr caused
-    // this method being called.
-    ParseResult right = parseExpr( prevToken->lbp() ); 
-    
-    ParseResult* par = dynamic_cast<ParseResult*>(pr);
-    
-    left.setNext(par);
-    par->setNext(&right);
-
-    return left;
-}
-
-
-
 
 
 // Expr ::= Expr equalEquals Expr
@@ -551,7 +430,9 @@ ParseResult Parser::parseRelationalExpr ( ParseResult left ) {
     return pr ;
 }
 
+
 // Helper function used by the parser.
+
 void Parser::match (tokenType tt) {
     if (! attemptMatch(tt)) {
         throw ( makeErrorMsgExpected ( tt ) ) ;
