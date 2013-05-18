@@ -10,17 +10,17 @@
 
 #include "parser.h"
 
+#include <string>
+
+class ASTNode;
 
 class ParseResult {
 public:
-
-    std::string errors;
-    std::string pp;
-    ASTNode *ast;
-    //bool ok;
-
-    ParseResult();
-
+    ParseResult() ;
+    std::string errors ;
+    std::string pp ;
+    ASTNode *ast = NULL ;
+    bool ok ;
 } ;
 
 #endif /* PARSER_RESULT_H */

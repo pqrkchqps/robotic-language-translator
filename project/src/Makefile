@@ -25,10 +25,11 @@ parseResult.o:	parseResult.cpp parseResult.h
 
 
 # Testing files and targets.
-run-tests:	regex_tests scanner_tests parser_tests
+run-tests:	regex_tests scanner_tests parser_tests ast_tests
 	./regex_tests
 	./scanner_tests
 	./parser_tests
+	./ast_tests
 
 regex_tests:	regex_tests.cpp regex.o
 	g++ $(FLAGS) -I$(CXX_DIR) -o regex_tests regex.o regex_tests.cpp
@@ -48,6 +49,12 @@ parser_tests:	parser_tests.cpp parser.o readInput.o scanner.o extToken.o parseRe
 
 parser_tests.cpp:	parser.o parser_tests.h readInput.h
 	$(CXXTEST) $(CXXFLAGS) -o parser_tests.cpp parser_tests.h
+
+ast_tests:	ast_tests.cpp parser.o readInput.o scanner.o extToken.o parseResult.o regex.o
+	g++ $(FLAGS) -I$(CXX_DIR) -o ast_tests parser.o extToken.o regex.o scanner.o parseResult.o readInput.o ast_tests.cpp
+
+ast_tests.cpp:	parser.h ast_tests.h parseResult.h
+	$(CXXTEST) $(CXXFLAGS) -o ast_tests.cpp ast_tests.h scanner.h parseResult.h
 
 
 clean:

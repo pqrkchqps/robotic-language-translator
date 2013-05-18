@@ -34,6 +34,7 @@ class ParseResult ;
 
 class ASTNode {
 public:
+    tokenType terminal;
     string lexeme;
     ASTNode* next;
     string name;
