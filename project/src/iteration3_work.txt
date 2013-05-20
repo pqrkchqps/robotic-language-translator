@@ -1,1 +1,4 @@
-I work alone. 
+Thuy has done Building Abstract syntax tree
+Thuy has done Modifying ast tree for parser.cpp
+Thuy has done creating test cases for sample files
+John will work on Iteration 4
