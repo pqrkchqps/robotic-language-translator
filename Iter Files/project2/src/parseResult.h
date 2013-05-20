@@ -8,18 +8,17 @@
 #ifndef PARSER_RESULT_H
 #define PARSER_RESULT_H
 
-#include "parser.h"
+// #include "AST.h"
 
 #include <string>
 
-class ASTNode;
 
 class ParseResult {
 public:
     ParseResult() ;
     std::string errors ;
     std::string pp ;
-    ASTNode *ast ;
+    // Node *ast ;
     bool ok ;
 } ;
 

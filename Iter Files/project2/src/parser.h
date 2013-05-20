@@ -28,102 +28,8 @@
 #include "parseResult.h"
 
 #include <string>
-#include <sstream>
+
 class ExtToken ;
-class ParseResult ;
-
-class ASTNode {
-public:
-    string lexeme;
-    ASTNode* next;
-    string name;
-    virtual string cppCode_h(){return 0;}
-    virtual string cppCode_cpp(){return 0;}
-};
-
-class Expr : public ASTNode{};
-
-class SingleExpr : public ASTNode{};
-
-class NestedExpr : public ASTNode{
-	public:
-		Expr *expr;
-};
-
-class OpExpr : public ASTNode{
-	public:
-		string op;
-		Expr *left;
-		Expr *right;
-};
-
-class Stmt : public ASTNode{
-	public:
-		Expr *expr;
-};
-
-class Transition : public ASTNode{
-	public:
-		bool isGoto;//destination state stored in lexeme
-		Expr *conditional;
-		Stmt *statement;
-
-};
-
-class Platform : public ASTNode{};
-
-class Type : public ASTNode{};
-
-class Decl : public ASTNode{
-public:
-	Type *type;
-};
-
-class State : public ASTNode{
-	public:
-		bool initialState;
-		Transition *transition;
-};
-
-class Program : public ASTNode{
-	public:
-		Platform *platform;
-		Decl *decl;
-		State *state;
-		string getName();
-		int getNumStates();
-		int getNumVarDecls();
-		int getNumVarUses();
-		int varUse;
-		string cppCode_h(){
-		stringstream h;
-		h << "//Generated Machine.h for " << name << "\n\n";
-		h << "#include \"runtime.h\"\n\n";
-		h << "//declarations of the state classes\n";
-			
-		State *currentState = state;
-		while(currentState != NULL) {	
-			h << "class State_" << currentState->name <<";\n\n"; //dereference of currentState
-			currentState = dynamic_cast<State*>(currentState->next);	
-		}
-		
-		h << "class " << name << "_Machine {\n";
-		h << "\t public: \n"; 
-		h << "\t" << name << "_Machine";
-		 
-		
-	
-		
-		
-		
-		return h.str();
-
-		}
-		string cppCode_cpp(){
-		return "Generated .cpp code";
-
-		}
-};
 
 class Parser {
 
@@ -166,7 +72,7 @@ public:
     ParseResult parseDivision ( ParseResult left ) ;
 
     ParseResult parseRelationalExpr ( ParseResult left ) ;
-	int varUse;
+
     // Helper function used by the parser.
     void match (tokenType tt) ;
     bool attemptMatch (tokenType tt) ;
