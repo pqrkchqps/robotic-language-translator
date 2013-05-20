@@ -1,8 +1,0 @@
-Thuy (nguy1638) removed 20 warnings for the T-case (t-assert)
-Thuy (nguy1638) assisted in organizing the file structure of the github repo.
-Thuy (nguy1638) is excused from working due to needing surgery.
-
-creps002 implemented modifications needed to Makefile.
-creps002 implemented modifications needed to iteration1 work to ensure tests cases passed. (e.g. Added constructor to allow next pointer and match signiture required for parser code).
-
-Please check iteration 1 for updates.  Many of the changes documented as part of iteration1 were actually implemented in the iteration2 phase.

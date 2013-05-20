@@ -23,6 +23,11 @@ extToken.o:	extToken.cpp extToken.h
 parseResult.o:	parseResult.cpp parseResult.h 
 	g++ $(FLAGS) -std=c++0x -c parseResult.cpp
 
+cffc.o:		cffc.cpp parser.h readInput.h
+	g++ $(FLAGS) -c cffc.cpp
+
+cffc:	cffc.o extToken.o parseResult.o parser.o scanner.o regex.o readInput.o
+	g++ $(FLAGS) cffc.cpp extToken.o parseResult.o parser.o scanner.o regex.o readInput.o -o cffc
 
 # Testing files and targets.
 run-tests:	regex_tests scanner_tests parser_tests ast_tests
@@ -62,3 +67,5 @@ clean:
 		regex_tests regex_tests.cpp \
 		scanner_tests scanner_tests.cpp \
 		parser_tests parser_tests.cpp \
+		ast_tests ast_tests.cpp \
+		cffc \

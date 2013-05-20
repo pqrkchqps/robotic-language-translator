@@ -53,6 +53,11 @@ ParseResult Parser::parse (const char *text) {
     return pr ;
 }
 
+//code generation methods
+
+
+
+
 /* 
  * parse methods for non-terminal symbols
  * --------------------------------------
@@ -318,7 +323,7 @@ ParseResult Parser::parseTransition () {
 
 // Stmts
 ParseResult Parser::parseStmts () {
-    ParseResult pr ;ASTNode* next;
+    ParseResult pr ;
 	Stmt *stmt = new Stmt();
     if ( ! nextIs(rightCurly) ) {
         // Stmts ::= Stmt Stmts
