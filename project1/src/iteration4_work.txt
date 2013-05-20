@@ -1,2 +1,0 @@
-John: Done implement iter4.  
-Thuy: Done tagging, maintain files, fixed testcase errors in iter3. 

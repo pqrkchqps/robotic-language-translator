@@ -144,7 +144,7 @@ void test_ast_box ( ) {
         // 7. Verify that the correct number variable uses.
         TSM_ASSERT_EQUALS ( "file \"" + file + 
                             "\" returned wrong number of variable uses" ,
-                            p->getNumVarUses(), 18 ) ;
+                            p->getNumVarUses(), 3 ) ;
     }
 void test_ast_sumOfSquares ( ) {
         string file = "../samples/sumOfSquares.cff" ;
@@ -183,7 +183,7 @@ void test_ast_sumOfSquares ( ) {
         // 7. Verify that the correct number variable uses.
         TSM_ASSERT_EQUALS ( "file \"" + file + 
                             "\" returned wrong number of variable uses" ,
-                            p->getNumVarUses(), 12 ) ;
+                            p->getNumVarUses(), 2 ) ;
     }
 
 } ;

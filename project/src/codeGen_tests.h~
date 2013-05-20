@@ -50,7 +50,7 @@ public:
         string returned_cppCode_h = p->cppCode_h() ;
         const char *generated_h = returned_cppCode_h.c_str() ;
 
-        int length_to_test_h = 12 ; // for initial testing
+        int length_to_test_h = 5 ; // for initial testing
         // int length_to_test_h = strlen (expected_h) ; // for final testing
         TSM_ASSERT_EQUALS ( "Comparing h code generated for " + program,
                             0, strncmp ( expected_h, generated_h,
