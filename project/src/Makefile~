@@ -44,7 +44,7 @@ scanner_tests.cpp:	scanner.o scanner_tests.h readInput.h
 	$(CXXTEST) $(CXXFLAGS) -o scanner_tests.cpp scanner_tests.h
 
 parser_tests:	parser_tests.cpp parser.o readInput.o scanner.o extToken.o parseResult.o
-	g++ $(FLAGS) -I$(CXX_DIR) -o parser_tests parser.o extToken.o regex.o scanner.o parseResult.o readInput.o parser_tests.cpp
+	g++ $(FLAGS) -I$(CXX_DIR) -o parser_tests parser.o regex.o scanner.o readInput.o parser_tests.cpp
 
 parser_tests.cpp:	parser.o parser_tests.h readInput.h
 	$(CXXTEST) $(CXXFLAGS) -o parser_tests.cpp parser_tests.h
