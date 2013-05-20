@@ -1,0 +1,4 @@
+Joinly we has done Building Abstract syntax tree for parser.h
+Joinly we has done Modifying ast tree for parser.cpp
+Thuy has done creating test cases for sample files
+

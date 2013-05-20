@@ -50,7 +50,7 @@ public:
         string returned_cppCode_h = p->cppCode_h() ;
         const char *generated_h = returned_cppCode_h.c_str() ;
 
-        int length_to_test_h = 5 ; // for initial testing
+        int length_to_test_h = 12 ; // for initial testing
         // int length_to_test_h = strlen (expected_h) ; // for final testing
         TSM_ASSERT_EQUALS ( "Comparing h code generated for " + program,
                             0, strncmp ( expected_h, generated_h,
@@ -64,7 +64,7 @@ public:
         string returned_cppCode_cpp = p->cppCode_cpp() ;
         const char *generated_cpp = returned_cppCode_cpp.c_str() ;
 
-        int length_to_test_cpp = 5 ; // for initial testing
+        int length_to_test_cpp = 12 ; // for initial testing
         // int length_to_test_cpp = strlen (expected_cpp) ; // for final testing
         TSM_ASSERT_EQUALS ( "Comparing cpp code generated for " + program,
                             0, strncmp ( expected_cpp, generated_cpp,
@@ -85,10 +85,10 @@ public:
 
        When ready, remove the "a_" to activate the test.
      */
-    void test_codeGen_sumOfSquares ( ) {
+    void a_test_codeGen_sumOfSquares ( ) {
         helper_test_codeGen ( "sumOfSquares" ) ;
     }
-    void test_codeGen_box ( ) {
+    void a_test_codeGen_box ( ) {
         helper_test_codeGen ( "box" ) ;
     }
 } ;

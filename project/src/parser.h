@@ -34,25 +34,20 @@ class ParseResult ;
 
 class ASTNode {
 public:
-    string lexeme; //lexeme : a sequence of characters
+    string lexeme;
     ASTNode* next;
     string name;
-    string type;
-    ASTNode* current;
     virtual string cppCode_h(){return 0;}
     virtual string cppCode_cpp(){return 0;}
 };
 
 class Expr : public ASTNode{};
 
-class SingleExpr : public ASTNode{
-	string cppCode_cpp() {return lexeme;}
-	};
+class SingleExpr : public ASTNode{};
 
 class NestedExpr : public ASTNode{
-	public:		
+	public:
 		Expr *expr;
-		string cppCode_cpp() {return "(" + expr->cppCode_cpp() + ")";}
 };
 
 class OpExpr : public ASTNode{
@@ -60,11 +55,6 @@ class OpExpr : public ASTNode{
 		string op;
 		Expr *left;
 		Expr *right;
-		string cppCode_cpp() {
-			stringstream s;
-			s << left->cppCode_cpp() << op << right->cppCode_cpp();
-			return s.str();
-		}
 };
 
 class Stmt : public ASTNode{
@@ -95,7 +85,6 @@ class State : public ASTNode{
 		Transition *transition;
 };
 
-
 class Program : public ASTNode{
 	public:
 		Platform *platform;
@@ -105,130 +94,34 @@ class Program : public ASTNode{
 		int getNumStates();
 		int getNumVarDecls();
 		int getNumVarUses();
-		int varUse;		
-					
+		int varUse;
 		string cppCode_h(){
 		stringstream h;
 		h << "//Generated Machine.h for " << name << "\n\n";
-		h << "#include \"RunTime.h\"\n\n";
+		h << "#include \"runtime.h\"\n\n";
+		h << "//declarations of the state classes\n";
 			
 		State *currentState = state;
-		h << "//Declaration of the State classes\n\n" ; 
-		
 		while(currentState != NULL) {	
-			h << "class State_" << currentState->name <<";" <<"\n"; //dereference of currentState
+			h << "class State_" << currentState->name <<";\n\n"; //dereference of currentState
 			currentState = dynamic_cast<State*>(currentState->next);	
 		}
 		
+		h << "class " << name << "_Machine {\n";
+		h << "\t public: \n"; 
+		h << "\t" << name << "_Machine";
+		 
 		
-		h << "\nclass " << name << "_Machine {\n";
-		h << "\tpublic: \n"; 
-		h << "\t" << name << "_Machine ( int argc, char **argv ) ; \n";		
-		h << "\tvoid go () ; \n"; 
-		h << "\t" << platform->name << " *runTime ;\n\n" ; 		 
-		h << "\t// Machine states\n";
-		
-		State *curState = state; 
-		while(curState != NULL) {	
-			h << "\tState_" << curState->name << "* state_" << curState->name << ";\n"; 
-			curState = dynamic_cast<State*>(curState->next);	
-		}		
-		h << "\n";
 	
-		Decl * curDecl = decl; 
-		while(curDecl != NULL) {
-			h << "\n\t" << curDecl->type << curDecl->name << "; \n";
-			curDecl = dynamic_cast<Decl*>(curDecl->next);	
-		}
 		
 		
-	    h << "} ;\n\n";
-	    
-	    h << "class " << name << "State : public MachineState {\n";
-	    h << "\tpublic:\n"; 
-	    h << "\t" << name << "_Machine *stateMachine ;\n";
-        h << "} ;\n\n";
-		
-		
-		h << "//Concrete machine states\n"; 
-		
-		State *concreteState = state;
-		while(concreteState != NULL) {
-			h << "class State_" <<concreteState->name << " : public" << name << "State {\n";
-			h << "\tpublic:\n";
-			h << "\t" << name << "State *enter () ;\n" ; 
-			h << "\tState_" << concreteState->name << " ( " << name << "_Machine *m ) ; \n"; 
-			h << "} ;\n\n";
-			concreteState = dynamic_cast<State*>(concreteState->next);	
-		}	
-			
 		
 		return h.str();
-		}
-		
-		
 
+		}
 		string cppCode_cpp(){
-		stringstream cpp; 
-		cpp << "//Generated Machine.cpp for " << name << "\n\n";
-		cpp << "#include \"Machine.h\"\n\n";
-		cpp << "using namespace std ;\n\n";
-		cpp << name << "_Machine::" << name << "_Machine ( int argc, char **argv ) { \n";
-		cpp << "\trunTime = new " << platform->name << " ( argc, argv ); \n"; 
+		return "Generated .cpp code";
 
-		State *currentState = state;
-		cpp << "\t//Creating state objects \n"; 
-		while(currentState != NULL) {	
-			cpp << "\tstate_" << currentState->name << " = new State_" 
-				<< currentState->name << "(this)" << ";\n"; 
-			currentState = dynamic_cast<State*>(currentState->next);	
-		}
-		cpp << "} \n\n"; 
-		cpp << "void " << name << "_Machine::go() {\n"; 
-		State *getIntialState = state;
-		while (getIntialState != NULL) {
-		 	cpp << "\trunTime->run( state_"<<getIntialState->name << " ); \n";
-		 	getIntialState = dynamic_cast<State*>(getIntialState->current);	
-		 }
-	    cpp << "} \n\n";
-	    
-	 
-	    
-		cpp << "// Concrete machine states \n";	
-		State *currState = state; 
-		while (currState != NULL) {
-			int i = 0.0; 
-			cpp << "MachineState *State_" << currState->name << "::enter() {\n";
-			
-			
-			cpp << "\t if (" <<"conditions" <<") {\n";
-			cpp << "\t\tstateMachine->\n" ;
-			cpp << "\t\treturn " << "stateMachine->state_" << "Tests\n";
-			cpp << "} \n";	
-			
-			cpp << "\t if ( true ) {" ;
-			cpp << "stateMachine->" <<"AAAAAAAAAA" << " = (stateMachine->" << "AAAAAA"
-				<< "->" << "actuators"<< " + " << i;
-					
-			cpp << "\n\t\tState_" << currState->name << "::State_" << currState->name 
-				<< " ( " << name << "_Machine *m ) {\n";
-			cpp << "\t\tstateMachine = m ;\n";
-			cpp << "} \n\n";
-			currState = dynamic_cast<State*>(currState->next);
-		}
-		
-		
-		
-		cpp << "//A 'main' program to run the state machine.\n"; 
-		cpp << "int main ( int argc, char **argv ) {\n" ;
-		cpp << "\t" << name << "_Machine *" << name << " = new " << name 
-			<< "_Machine (argc, argv) ;\n";
-		cpp << "\t" << name << "->go() ;\n";
-		cpp << "} \n\n";
-		
-		
-		return cpp.str();
-	
 		}
 };
 

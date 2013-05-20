@@ -56,6 +56,8 @@ ParseResult Parser::parse (const char *text) {
 //code generation methods
 
 
+
+
 /* 
  * parse methods for non-terminal symbols
  * --------------------------------------
@@ -544,6 +546,7 @@ ParseResult Parser::parseRelationalExpr ( ParseResult left ) {
 	pr.ast = dynamic_cast<ASTNode*>(expr);
     return pr ;
 }
+
 
 // Helper function used by the parser.
 
