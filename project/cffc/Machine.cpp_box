@@ -19,8 +19,8 @@ void Box_Machine::go() {
 // Concrete machine states
 MachineState *State_Init::enter() {
    if ( true ) { 
-      stateMachine->Var_timesAround = 0 ;
-      stateMachine->runTime->xPos = 0.0 ;
+      stateMachine->Var_timesAround = 0 ; 
+      stateMachine->runTime->xPos = 0.0 ; //actuators
       stateMachine->runTime->yPos = 0.0 ;
 
       return stateMachine->state_MoveNorth ; 
