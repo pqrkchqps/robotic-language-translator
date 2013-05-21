@@ -36,6 +36,12 @@ run-tests:	regex_tests scanner_tests parser_tests ast_tests
 	./parser_tests
 	./ast_tests
 
+codeGen_tests:	codeGen_tests.cpp readInput.o scanner.o extToken.o parser.o parseResult.o regex.o
+	g++ $(FLAGS) -I$(CXX_DIR) -o codeGen_tests codeGen_tests.cpp readInput.o scanner.o extToken.o parser.o parseResult.o regex.o
+
+codeGen_tests.cpp:	codeGen_tests.h 
+	$(CXXTEST) $(CXXFLAGS) -o codeGen_tests.cpp codeGen_tests.h
+
 regex_tests:	regex_tests.cpp regex.o
 	g++ $(FLAGS) -I$(CXX_DIR) -o regex_tests regex.o regex_tests.cpp
 
