@@ -36,7 +36,8 @@ State_Init::State_Init ( Box_Machine *m ) {
 MachineState *State_MoveNorth::enter() {
    if ( (stateMachine->Var_timesAround == 4) ) { 
 
-      return NULL ;   } 
+      return NULL ;   
+   } 
 
    if ( (stateMachine->runTime->yPos >= 100) ) { 
 

@@ -139,7 +139,7 @@ void test_ast_box ( ) {
         // 6. Verify that the correct number variable declarations.
         TSM_ASSERT_EQUALS ( "file \"" + file + 
                             "\" returned wrong number of variable declarations" ,
-                            p->getNumVarDecls(), 0 ) ;
+                            p->getNumVarDecls(), 1 ) ;
 
         // 7. Verify that the correct number variable uses.
         TSM_ASSERT_EQUALS ( "file \"" + file + 
@@ -178,7 +178,7 @@ void test_ast_sumOfSquares ( ) {
         // 6. Verify that the correct number variable declarations.
         TSM_ASSERT_EQUALS ( "file \"" + file + 
                             "\" returned wrong number of variable declarations" ,
-                            p->getNumVarDecls(), 0 ) ;
+                            p->getNumVarDecls(), 2 ) ;
 
         // 7. Verify that the correct number variable uses.
         TSM_ASSERT_EQUALS ( "file \"" + file + 

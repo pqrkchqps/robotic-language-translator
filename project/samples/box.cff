@@ -19,7 +19,7 @@ state: MoveNorth {
 
 state: MoveEast {
   goto MoveSouth when xPos >= 100 performing { } ;
-  goto MoveEast  when true performing { xPos := xPos + 1.0 ; } ;
+  goto MoveEast when true performing { xPos := xPos + 1.0 ; } ;
 }
 
 state: MoveSouth {

@@ -75,7 +75,7 @@ class SingleExpr : public Expr {
 			if (!isRuntime(d))
 				s << "Var_"+this->lexeme;
 			else
-				s << "runtime->"+this->lexeme;
+				s << "runTime->"+this->lexeme;
 		} else 
 			s << this->lexeme;
 		return s.str();
@@ -116,7 +116,7 @@ class Stmt : public ASTNode {
 			if (!isRuntime(d))
 				s << "Var_"+this->lexeme+" = " ;
 			else
-				s << "runtime->"+this->lexeme+" = " ;
+				s << "runTime->"+this->lexeme+" = " ;
 
 			if (expr->etype == sExpr) {
 				SingleExpr *exp=dynamic_cast<SingleExpr*>(expr);
@@ -189,23 +189,64 @@ class Program : public ASTNode {
 	int getNumVarDecls();
 	int getNumVarUses();
 	int varUse;
-	string cppCode_h() {
-		stringstream h;
-		h << "//Generated Machine.h for " << lexeme << "\n\n";
-		h << "#include \"runtime.h\"\n\n";
-		h << "//declarations of the state classes\n";	
-		State *currentState = state;
-		while (currentState != NULL) {
-			h << "class State_" << currentState->lexeme <<";\n\n";
-			currentState = dynamic_cast<State*>(currentState->next);	
-		}
-		
-		h << "class " << lexeme << "_Machine {\n";
-		h << "\t public: \n"; 
-		h << "\t" << lexeme << "_Machine";
-		
-		return h.str();
-	};
+	string cppCode_h(){
+        stringstream h;
+        h << "//Generated Machine.h for " << lexeme << "\n\n";
+        h << "#include \"RunTime.h\"\n\n";
+           
+        State *currentState = state;
+        h << "//Declaration of the State classes\n\n" ;
+       
+        while(currentState != NULL) {   
+            h << "class State_" << currentState->lexeme <<";" <<"\n"; //dereference of currentState
+            currentState = dynamic_cast<State*>(currentState->next);   
+        }
+       
+        h << "\nclass " << lexeme << "_Machine {\n";
+        h << "\tpublic: \n";
+        h << "\t" << lexeme << "_Machine ( int argc, char **argv ) ; \n";       
+        h << "\tvoid go () ; \n";
+        h << "\t" << platform->lexeme << " *runTime ;\n\n" ;          
+        h << "\t// Machine states\n";
+       
+        State *curState = state;
+        while(curState != NULL) {   
+            h << "\tState_" << curState->lexeme << "* state_" << curState->lexeme << ";\n";
+            curState = dynamic_cast<State*>(curState->next);   
+        }       
+        h << "\n";
+   
+        //Phase 2
+        /*Stmt * curStmt = stmt;
+        while(curStmt != NULL) {
+            h << "\n\t" << curStmt->expr->lexeme;
+            curStmt = dynamic_cast<Stmt*>(curStmt->next);
+        }*/      
+ 
+       
+        h << "} ;\n\n";
+       
+        h << "class " << lexeme << "State : public MachineState {\n";
+        h << "\tpublic:\n";
+        h << "\t" << lexeme << "_Machine *stateMachine ;\n";
+        h << "} ;\n\n";
+       
+       
+        h << "//Concrete machine states\n";
+       
+        State *concreteState = state;
+        while(concreteState != NULL) {
+            h << "class State_" <<concreteState->lexeme << " : public " << lexeme << "State {\n";
+            h << "\tpublic: \n";
+            h << "\tMachine" << "State *enter () ;\n" ;
+            h << "\tState_" << concreteState->lexeme << " ( " << lexeme << "_Machine *m ) ; \n";
+            h << "} ;\n\n";
+            concreteState = dynamic_cast<State*>(concreteState->next);   
+        }   
+           
+       
+        return h.str();
+        }
 
 	string cppCode_cpp() {
 		stringstream cpp;
@@ -213,14 +254,14 @@ class Program : public ASTNode {
 		cpp << "\n#include \"Machine.h\"\n";
 		cpp << "using namespace std ;\n";
 		cpp << getName()+"_Machine::"+getName()+"_Machine (int argc, char **argv) {";
-		cpp << "\n\truntime = new "+platform->lexeme+"(argc, argv) ;\n";
+		cpp << "\n\trunTime = new "+platform->lexeme+"(argc, argv) ;\n";
 		State *currState = state;
 		while (currState != NULL) {
 			cpp << "\tstate_"+currState->lexeme+" = new State_"+currState->lexeme+"(this) ;\n";
 			currState = dynamic_cast<State*>(currState->next);
 		}
 		cpp << "}\n\n";
-		cpp << "void " + getName()+"_Machine::go() {\n\trunTime->run( state_Init ); \n}\n\n";
+		cpp << "void " + getName()+"_Machine::go() {\n\trunTime->run( state_"+state->lexeme+" ); \n}\n\n";
 		currState = state;
 		while (currState != NULL) {
 			cpp << "MachineState *State_"+currState->lexeme+"::enter() {";
@@ -230,7 +271,7 @@ class Program : public ASTNode {
 				currTransition = dynamic_cast<Transition *>(currTransition->next);
 			}
 			cpp << "}\n\nState_"+currState->lexeme+"::State_"+currState->lexeme;
-			cpp << " ( "+getName()+"_Machine *m ) {\n\tstatemachine = m ;\n}\n\n";
+			cpp << " ( "+getName()+"_Machine *m ) {\n\tstateMachine = m ;\n}\n\n";
 			currState = dynamic_cast<State*>(currState->next);
 		}
 
