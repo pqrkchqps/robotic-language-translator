@@ -29,6 +29,31 @@
 
 using namespace std ;
 
+bool SingleExpr::isRuntime(Decl *d){
+	Decl *dd = d;
+	while (d != NULL){
+		if (d->lexeme.compare(this->lexeme)==0){
+			d = dd;
+			return false;
+		}
+		d = dynamic_cast<Decl *>(d->next);
+	}
+	d = dd;
+	return true;
+}
+
+bool Stmt::isRuntime(Decl *d){
+	Decl *dd = d;
+	while (d != NULL){
+		if (d->lexeme.compare(this->lexeme)==0){
+			d = dd;
+			return false;
+		}
+		d = dynamic_cast<Decl *>(d->next);
+	}
+	d = dd;
+	return true;
+}
 Parser::Parser ( ) { } 
 
 ParseResult Parser::parse (const char *text) {
@@ -64,7 +89,7 @@ ParseResult Parser::parse (const char *text) {
  */
 ASTNode* next;
 string Program::getName () {
-	return name;
+	return lexeme;
 }
 int Program::getNumStates () {
 	int count = 0;
@@ -90,16 +115,16 @@ int Program::getNumVarUses () {
 // Program
 ParseResult Parser::parseProgram () {
     ParseResult pr ;
-	Program *p = new Program();//make new program
+    Program *p = new Program();//make new program
     // Program ::= nameKwd colon variableName semiColon Platform Decls States
     match(nameKwd) ;
     match(colon) ;
     match(variableName) ;
-    p->name = prevToken->lexeme;//get program name
+    p->lexeme = prevToken->lexeme ; //get program name
     match(semiColon) ;
     
-    pr = parsePlatform() ;//temporary pr
-    if(pr.ast != NULL) {p->platform = dynamic_cast<Platform*>(pr.ast);}//assign pr.ast to platform
+    pr = parsePlatform() ; //temporary pr
+    if(pr.ast != NULL) {p->platform = dynamic_cast<Platform*>(pr.ast);} //assign pr.ast to platform
     
     pr = parseDecls() ;
     if(pr.ast != NULL) {p->decl = dynamic_cast<Decl*>(pr.ast);}
@@ -108,21 +133,21 @@ ParseResult Parser::parseProgram () {
     if(pr.ast != NULL) {p->state = dynamic_cast<State*>(pr.ast);}
     
     match(endOfFile) ;
-	pr.ast = dynamic_cast<ASTNode*>(p);
+		pr.ast = dynamic_cast<ASTNode*>(p);
     return pr ;
 }
 
 // Platform
 ParseResult Parser::parsePlatform () {
     ParseResult pr ;
-	Platform *platform = new Platform();
+		Platform *platform = new Platform();
     // Platform ::= platformKwd colon variableName semiColon
     match(platformKwd) ;
     match(colon) ;
     match(variableName) ;
-    platform->name = prevToken->lexeme;
+    platform->lexeme = prevToken->lexeme;
     match(semiColon) ;
-	pr.ast = dynamic_cast<ASTNode*>(platform);
+		pr.ast = dynamic_cast<ASTNode*>(platform);
     return pr ;
 }
 
@@ -137,15 +162,15 @@ ParseResult Parser::parseDecls () {
         if (temp.ast != NULL){decl = dynamic_cast<Decl*>(temp.ast);}
         
         temp = parseDecls() ;
-        if (temp.ast != NULL){decl->next = (temp.ast);}
+        if (temp.ast != NULL){decl->next = dynamic_cast<Decl*>(temp.ast);}
         
         pr.ast = dynamic_cast<ASTNode*>(decl);
     }
     else {
         // Decls ::= 
         // nothing to match.
+        pr.ast = NULL;
     }
-	pr.ast = NULL;
     return pr ;
 }
 
@@ -234,7 +259,7 @@ ParseResult Parser::parseState () {
     match(stateKwd) ;
     match(colon) ;
     match(variableName) ;
-    state->name = prevToken->lexeme;
+    state->lexeme = prevToken->lexeme;
     match(leftCurly) ;
     pr = parseTransitions() ;
     if (pr.ast != NULL){state->transition = dynamic_cast<Transition*>(pr.ast);}
@@ -246,7 +271,7 @@ ParseResult Parser::parseState () {
        parsed by both are similar in that they differ only in the
        parts that begin the right hand side.  That is, the productions
        parsed by each have common suffixes.  But parseState handles
-       the differing initial part (the optional 'initiial' keyword)
+       the differing initial part (the optional 'initial' keyword)
        and the uses the same code to parse the common suffix.  The
        parseTransition function has duplicated code for parsing the
        common suffix.  Neither approach is always better than the
@@ -290,7 +315,7 @@ ParseResult Parser::parseTransition () {
         transition->isGoto = true;
         match(gotoKwd) ;
         match(variableName) ;
-        transition->name = prevToken->lexeme;
+        transition->lexeme = prevToken->lexeme;
         match(whenKwd) ;
         pr = parseExpr(0) ;
         if (pr.ast != NULL){transition->conditional = dynamic_cast<Expr*>(pr.ast);}
@@ -325,12 +350,13 @@ ParseResult Parser::parseTransition () {
 ParseResult Parser::parseStmts () {
     ParseResult pr ;
 	Stmt *stmt = new Stmt();
-    if ( ! nextIs(rightCurly) ) {
+    if (! nextIs(rightCurly) ) {
         // Stmts ::= Stmt Stmts
         pr = parseStmt() ;
         if (pr.ast != NULL){stmt = dynamic_cast<Stmt*>(pr.ast);}
         pr = parseStmts() ;
         if (pr.ast != NULL){stmt->next = dynamic_cast<Stmt*>(pr.ast);}
+	pr.ast = dynamic_cast<ASTNode*>(stmt);
    }
     else {
         // Stmts ::= 
@@ -344,16 +370,16 @@ ParseResult Parser::parseStmts () {
 // Stmt
 ParseResult Parser::parseStmt () {
     ParseResult pr ;
-	Stmt *stmt = new Stmt();
+    Stmt *stmt = new Stmt();
     // Stmt ::= variableName assign Expr semiColon
     match(variableName) ;
     stmt->lexeme = prevToken->lexeme;
     varUse++;
-    match(assign) ;
-    pr = parseExpr(0) ;
+    match(assign);
+    pr = parseExpr(0);
     if (pr.ast != NULL){stmt->expr = dynamic_cast<Expr*>(pr.ast);}
-    match(semiColon) ;
-	pr.ast = dynamic_cast<ASTNode*>(stmt);
+    match(semiColon);
+    pr.ast = dynamic_cast<ASTNode*>(stmt);
     return pr ;
 }
 
@@ -444,6 +470,7 @@ ParseResult Parser::parseVariableName ( ) {
     SingleExpr *expr = new SingleExpr();
     match ( variableName ) ;
     varUse++;
+		expr->isvar = true;
     expr->lexeme = prevToken->lexeme;
     pr.ast = dynamic_cast<ASTNode*>(expr);
     return pr ;

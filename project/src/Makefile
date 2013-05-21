@@ -61,7 +61,6 @@ ast_tests:	ast_tests.cpp parser.o readInput.o scanner.o extToken.o parseResult.o
 ast_tests.cpp:	parser.h ast_tests.h parseResult.h
 	$(CXXTEST) $(CXXFLAGS) -o ast_tests.cpp ast_tests.h scanner.h parseResult.h
 
-
 clean:
 	rm -Rf *.o \
 		regex_tests regex_tests.cpp \
@@ -69,3 +68,4 @@ clean:
 		parser_tests parser_tests.cpp \
 		ast_tests ast_tests.cpp \
 		cffc \
+
