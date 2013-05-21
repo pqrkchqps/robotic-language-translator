@@ -1,0 +1,5 @@
+John has done generated code for machine.cpp and fix bugs
+John has done pharse 2. 
+Thuy has done generated code for machine.h, modified make file, and tagging
+
+

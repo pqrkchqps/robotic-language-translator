@@ -1,43 +1,65 @@
-//Generated Machine.h for SumOfSquares
+//Generated Machine.h for Box
 
 #include "RunTime.h"
 
 //Declaration of the State classes
 
-class State_Start;
-class State_Compute;
+class State_Init;
+class State_MoveNorth;
+class State_MoveEast;
+class State_MoveSouth;
+class State_MoveWest;
 
-class SumOfSquares_Machine {
+class Box_Machine {
 	public: 
-	SumOfSquares_Machine ( int argc, char **argv ) ; 
+	Box_Machine ( int argc, char **argv ) ; 
 	void go () ; 
-	IntegerComputer *runTime ;
+	PositionalRobot *runTime ;
 
 	// Machine states
-	State_Start* state_Start;
-	State_Compute* state_Compute;
+	State_Init* state_Init;
+	State_MoveNorth* state_MoveNorth;
+	State_MoveEast* state_MoveEast;
+	State_MoveSouth* state_MoveSouth;
+	State_MoveWest* state_MoveWest;
 
 
-	int Var_i ;
-
-	int Var_s ;
+	int Var_timesAround ;
 } ;
 
-class SumOfSquaresState : public MachineState {
+class BoxState : public MachineState {
 	public:
-	SumOfSquares_Machine *stateMachine ;
+	Box_Machine *stateMachine ;
 } ;
 
 //Concrete machine states
-class State_Start : public SumOfSquaresState {
+class State_Init : public BoxState {
 	public: 
 	MachineState *enter () ;
-	State_Start ( SumOfSquares_Machine *m ) ; 
+	State_Init ( Box_Machine *m ) ; 
 } ;
 
-class State_Compute : public SumOfSquaresState {
+class State_MoveNorth : public BoxState {
 	public: 
 	MachineState *enter () ;
-	State_Compute ( SumOfSquares_Machine *m ) ; 
+	State_MoveNorth ( Box_Machine *m ) ; 
+} ;
+
+class State_MoveEast : public BoxState {
+	public: 
+	MachineState *enter () ;
+	State_MoveEast ( Box_Machine *m ) ; 
+} ;
+
+class State_MoveSouth : public BoxState {
+	public: 
+	MachineState *enter () ;
+	State_MoveSouth ( Box_Machine *m ) ; 
+} ;
+
+class State_MoveWest : public BoxState {
+	public: 
+	MachineState *enter () ;
+	State_MoveWest ( Box_Machine *m ) ; 
 } ;
 
