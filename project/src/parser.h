@@ -55,6 +55,11 @@ class Type : public ASTNode{};
 class Decl : public ASTNode{
 public:
 	Type *type;
+	string cppCode_h(){
+		stringstream s;
+		s << type->lexeme + " Var_" + this->lexeme + " ;\n";
+		return s.str();
+	}
 };
 
 class Expr : public ASTNode{ 
@@ -217,11 +222,11 @@ class Program : public ASTNode {
         h << "\n";
    
         //Phase 2
-        /*Stmt * curStmt = stmt;
-        while(curStmt != NULL) {
-            h << "\n\t" << curStmt->expr->lexeme;
-            curStmt = dynamic_cast<Stmt*>(curStmt->next);
-        }*/      
+        Decl * curDecl = decl;
+        while(curDecl != NULL) {
+            h << "\n\t" << curDecl->cppCode_h();
+            curDecl = dynamic_cast<Decl*>(curDecl->next);
+        }      
  
        
         h << "} ;\n\n";
