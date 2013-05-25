@@ -6,7 +6,7 @@ project/src/make cffc
 project/src/make run-tests
 
 To run compile a cffc program
-mv src/cffc cffc/cffc
+mv project/src/cffc project/cffc/cffc
 project/cffc/cffc project/samples/'input program'
 
 
