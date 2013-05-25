@@ -1,2 +1,0 @@
-Thuy modifed make file
-Join cleaned up and maintained files
